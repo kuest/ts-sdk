@@ -1,0 +1,31 @@
+# `@market-sdk/{{PACKAGE_NAME}}`
+
+The `@market-sdk/{{PACKAGE_NAME}}` package is {{PACKAGE_DESCRIPTION}}.
+
+## Status
+
+This package is currently scaffolded and does not yet expose a public API beyond the base entrypoint.
+
+## Installation
+
+```bash
+pnpm add @market-sdk/{{PACKAGE_NAME}}
+```
+
+## Usage
+
+```ts
+import {} from '@market-sdk/{{PACKAGE_NAME}}';
+```
+
+## Development
+
+From the monorepo root:
+
+```bash
+pnpm --filter @market-sdk/{{PACKAGE_NAME}} build
+```
+
+## License
+
+MIT

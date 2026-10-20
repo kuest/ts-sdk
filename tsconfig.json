@@ -1,0 +1,31 @@
+{
+  "$schema": "https://json.schemastore.org/tsconfig",
+  "compilerOptions": {
+    "rootDir": ".",
+    "skipLibCheck": true,
+    "types": ["node"],
+    "jsx": "react-jsx",
+    "paths": {
+      "@market-sdk/bindings": ["./packages/bindings/src"],
+      "@market-sdk/bindings/clob": ["./packages/bindings/src/clob"],
+      "@market-sdk/bindings/combos": ["./packages/bindings/src/combos"],
+      "@market-sdk/bindings/data": ["./packages/bindings/src/data"],
+      "@market-sdk/bindings/gamma": ["./packages/bindings/src/gamma"],
+      "@market-sdk/bindings/perps": ["./packages/bindings/src/perps"],
+      "@market-sdk/bindings/relayer": ["./packages/bindings/src/relayer"],
+      "@market-sdk/bindings/subscriptions": [
+        "./packages/bindings/src/subscriptions"
+      ],
+      "@market-sdk/client": ["./packages/client/src"],
+      "@market-sdk/client/node": ["./packages/client/src/node.ts"],
+      "@market-sdk/client/actions": ["./packages/client/src/actions"],
+      "@market-sdk/client/decorators": ["./packages/client/src/decorators"],
+      "@market-sdk/client/ethers-v5": ["./packages/client/src/ethers-v5.ts"],
+      "@market-sdk/client/privy": ["./packages/client/src/privy.ts"],
+      "@market-sdk/client/viem": ["./packages/client/src/viem.ts"],
+      "@market-sdk/types": ["./packages/types/src"]
+    }
+  },
+  "include": ["**/*.ts", "**/*.tsx"],
+  "exclude": ["dist", "node_modules"]
+}
