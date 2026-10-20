@@ -60,6 +60,18 @@ describe('personalized SDK site configuration', () => {
     });
   });
 
+  it('preserves the inherited zero-code override when builder mode is off', () => {
+    const zeroCode = `0x${'0'.repeat(64)}`;
+    const perOrderCode = BuilderCodeSchema.parse(`0x${'cd'.repeat(32)}`);
+    const config = parseSiteConfig({
+      builder_mode: false,
+      builder_code: zeroCode,
+    });
+    expect(resolveSiteOrderContext(config, perOrderCode).builderCode).toBe(
+      zeroCode,
+    );
+  });
+
   it('rejects malformed operator configuration before any signing', () => {
     expect(() =>
       parseSiteConfig({ builder_mode: true, builder_code: '' }),

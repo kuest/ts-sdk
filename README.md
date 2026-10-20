@@ -38,7 +38,7 @@ const environment = forkEnvironmentConfig({
 const client = createPublicClient({ environment, siteConfig });
 ```
 
-Pass the same `siteConfig` to `createSecureClient` for trading. If it contains a nonzero `builder_code`, that public bytes32 code overrides a per-order `builderCode` before signing, as in the older CLOB bundles. `order_metadata` also enters the signed order. `site_url` scopes market listings to that site's `/api/events`; `geoblock` checks the established geoblock service before posting orders. If the overlay is absent, callers may provide builder attribution per order. Endpoints always require explicit configuration. Keep API credentials and private keys outside `.sdk` and source control.
+Pass the same `siteConfig` to `createSecureClient` for trading. A nonempty `builder_code` overrides a per-order `builderCode` before signing, even when it is the zero bytes32 value, as in the older CLOB bundles. Zero means no builder attribution. `builder_mode=true` requires a nonzero code. `order_metadata` also enters the signed order. `site_url` scopes market listings to that site's `/api/events`; `geoblock` checks the established geoblock service before posting orders. If the overlay is absent, callers may provide builder attribution per order. Endpoints always require explicit configuration. Keep API credentials and private keys outside `.sdk` and source control.
 
 ## Read-only example
 
