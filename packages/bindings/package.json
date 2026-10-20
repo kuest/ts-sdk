@@ -2,6 +2,11 @@
   "name": "@kuest/bindings",
   "version": "0.13.0",
   "description": "Internal API bindings for the unified SDK",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/kuest/ts-sdk.git",
+    "directory": "packages/bindings"
+  },
   "type": "module",
   "engines": {
     "node": ">=24"
