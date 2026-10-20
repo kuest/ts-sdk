@@ -1,5 +1,5 @@
-import { PaginationCursorSchema } from '@market-sdk/bindings';
-import { ListTeamsResponseSchema, type Team } from '@market-sdk/bindings/gamma';
+import { PaginationCursorSchema } from '@kuest/bindings';
+import { ListTeamsResponseSchema, type Team } from '@kuest/bindings/gamma';
 import { z } from 'zod';
 import type { BaseClient } from '../clients';
 import {

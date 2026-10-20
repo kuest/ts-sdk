@@ -1,5 +1,5 @@
-import { EvmAddressSchema } from '@market-sdk/bindings';
-import { PerpsRegistrationResponseSchema } from '@market-sdk/bindings/perps';
+import { EvmAddressSchema } from '@kuest/bindings';
+import { PerpsRegistrationResponseSchema } from '@kuest/bindings/perps';
 import { z } from 'zod';
 import type { BaseClient } from '../../clients';
 import {

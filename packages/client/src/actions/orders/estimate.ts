@@ -4,9 +4,9 @@ import {
   OrderType,
   PositiveDecimalNumberSchema,
   type TickSizeValue,
-} from '@market-sdk/bindings';
-import type { OrderBook, OrderBookLevel } from '@market-sdk/bindings/clob';
-import { invariant } from '@market-sdk/types';
+} from '@kuest/bindings';
+import type { OrderBook, OrderBookLevel } from '@kuest/bindings/clob';
+import { invariant } from '@kuest/types';
 import { z } from 'zod';
 import type { BaseClient } from '../../clients';
 import {

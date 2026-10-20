@@ -29,7 +29,7 @@ describe('client metadata', () => {
         process: { versions: { node: '24.1.2' } },
         navigator: { userAgent: 'Node.js/24 Chrome/140.0.0.0' },
       }),
-    ).toBe(`@market-sdk/client@${version}:nodejs@24.1.2`);
+    ).toBe(`@kuest/sdk@${version}:nodejs@24.1.2`);
   });
 
   it.each([
@@ -44,7 +44,7 @@ describe('client metadata', () => {
         process: { versions: { node: '24.1.2' } },
         ...globals,
       }),
-    ).toBe(`@market-sdk/client@${version}:${runtime}`);
+    ).toBe(`@kuest/sdk@${version}:${runtime}`);
   });
 
   it.each([
@@ -73,7 +73,7 @@ describe('client metadata', () => {
     ['Mozilla/5.0 Safari/605.1.15', 'safari@unknown'],
   ])('reports browser family and version without overlapping UA tokens: %s', (userAgent, runtime) => {
     expect(metadataWithGlobals({ navigator: { userAgent }, window: {} })).toBe(
-      `@market-sdk/client@${version}:${runtime}`,
+      `@kuest/sdk@${version}:${runtime}`,
     );
   });
 
@@ -90,7 +90,7 @@ describe('client metadata', () => {
     [{ process: { versions: { node: '24.0.0\r\nSECRET' } } }, 'nodejs@unknown'],
   ])('uses safe unknown values where runtime details are unavailable', (globals, runtime) => {
     expect(metadataWithGlobals(globals)).toBe(
-      `@market-sdk/client@${version}:${runtime}`,
+      `@kuest/sdk@${version}:${runtime}`,
     );
   });
 
@@ -106,7 +106,7 @@ describe('client metadata', () => {
           userAgentData: { getHighEntropyValues },
         },
       }),
-    ).toBe(`@market-sdk/client@${version}:chrome@140.0.0.0`);
+    ).toBe(`@kuest/sdk@${version}:chrome@140.0.0.0`);
     expect(getHighEntropyValues).not.toHaveBeenCalled();
   });
 
@@ -119,6 +119,6 @@ describe('client metadata', () => {
           },
         },
       }),
-    ).toBe(`@market-sdk/client@${version}:unknown@unknown`);
+    ).toBe(`@kuest/sdk@${version}:unknown@unknown`);
   });
 });

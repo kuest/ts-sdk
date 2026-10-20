@@ -27,7 +27,7 @@ Creates a new action in `packages/client/src/actions` for the unified client sur
 - Create a new module only when the action does not have a natural existing home
 - If the module grouping or singular/plural module name is unclear, ask the user
 - Re-export the action from `packages/client/src/actions/index.ts`
-- Do not re-export actions from `packages/client/src/index.ts`; actions are consumed from `@market-sdk/client/actions`
+- Do not re-export actions from `packages/client/src/index.ts`; actions are consumed from `@kuest/sdk/actions`
 - Add or update an integration-style test in `packages/client/src/actions/<module>.test.ts`
 - Reuse `packages/client/src/testing.ts` for the shared test client when tests need a client instance
 - If the action needs bindings that do not exist yet, use `/new-resource` first to add the missing schemas and types in `packages/bindings`
@@ -38,10 +38,10 @@ Creates a new action in `packages/client/src/actions` for the unified client sur
 - Accept `PolymarketClient` as the first parameter
 - Prefer verb-led names for action functions; use `list<Resource>` for collection reads unless the user asks otherwise
 - Use the docs navigation (for example `docs/docs.json`) to cross-reference what is public; use docs OpenAPI YAML files only as a secondary aid for locating paths or coverage; the implementation is the source of truth
-- Avoid composing response schemas inside action code; parse responses with schemas exported from `@market-sdk/bindings`
-- Use the exported resource schema directly for 1:1 responses, and add a dedicated `...ResponseSchema` in `@market-sdk/bindings` only when the transport shape differs from the resource shape, such as wrappers, pagination envelopes, or extra metadata
-- Do not hand-roll missing response models in the client package; add them to `@market-sdk/bindings` first
-- Reuse types re-exported by `@market-sdk/client` instead of creating redundant local type aliases for bindings types
+- Avoid composing response schemas inside action code; parse responses with schemas exported from `@kuest/bindings`
+- Use the exported resource schema directly for 1:1 responses, and add a dedicated `...ResponseSchema` in `@kuest/bindings` only when the transport shape differs from the resource shape, such as wrappers, pagination envelopes, or extra metadata
+- Do not hand-roll missing response models in the client package; add them to `@kuest/bindings` first
+- Reuse types re-exported by `@kuest/sdk` instead of creating redundant local type aliases for bindings types
 - If request input benefits from runtime validation or normalization, use Zod in the action module
 - Prefer inline Zod transforms with well-named helpers such as `.transform(toISODateString)`
 - Keep helpers small and local; do not add a new helper or abstraction unless it is really necessary and materially improves reuse, safety, or readability
@@ -60,8 +60,8 @@ Creates a new action in `packages/client/src/actions` for the unified client sur
 
 ## Validation
 
-- If action work changes a workspace dependency used by `@market-sdk/client`, build that dependency first. If multiple workspace packages changed or the dependency chain is unclear, prefer `pnpm build` from the repo root before the steps below.
-- Run `pnpm --filter @market-sdk/client build`
-- Run `pnpm --filter @market-sdk/client typecheck`
+- If action work changes a workspace dependency used by `@kuest/sdk`, build that dependency first. If multiple workspace packages changed or the dependency chain is unclear, prefer `pnpm build` from the repo root before the steps below.
+- Run `pnpm --filter @kuest/sdk build`
+- Run `pnpm --filter @kuest/sdk typecheck`
 - Run `pnpm test:client`
 - Run `pnpm lint:fix`

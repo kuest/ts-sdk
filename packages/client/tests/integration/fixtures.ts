@@ -1,4 +1,4 @@
-import { type BuilderCode, BuilderCodeSchema } from '@market-sdk/bindings';
+import { type BuilderCode, BuilderCodeSchema } from '@kuest/bindings';
 import {
   type ApiKeyAuthorization,
   createPublicClient,
@@ -11,12 +11,12 @@ import {
   relayerApiKey,
   type SecureClient,
   type Signer,
-} from '@market-sdk/client';
-import type { BuilderApiKeyCreds } from '@market-sdk/client/node';
-import { builderApiKey } from '@market-sdk/client/node';
-import { signerFrom } from '@market-sdk/client/viem';
-import type { EvmAddress, PrivateKey } from '@market-sdk/types';
-import { expectEvmAddress, expectPrivateKey } from '@market-sdk/types';
+} from '@kuest/sdk';
+import type { BuilderApiKeyCreds } from '@kuest/sdk/node';
+import { builderApiKey } from '@kuest/sdk/node';
+import { signerFrom } from '@kuest/sdk/viem';
+import type { EvmAddress, PrivateKey } from '@kuest/types';
+import { expectEvmAddress, expectPrivateKey } from '@kuest/types';
 import { createWalletClient, http } from 'viem';
 import { generatePrivateKey, privateKeyToAccount } from 'viem/accounts';
 import { polygon } from 'viem/chains';

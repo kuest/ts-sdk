@@ -3,7 +3,7 @@ import {
   OrderSide,
   OrderType,
   toOrderId,
-} from '@market-sdk/bindings';
+} from '@kuest/bindings';
 import {
   createSecureClient,
   InsufficientLiquidityError,
@@ -12,8 +12,8 @@ import {
   type RateLimitUpdate,
   type SecureClient,
   UserInputError,
-} from '@market-sdk/client';
-import { expectPresent } from '@market-sdk/types';
+} from '@kuest/sdk';
+import { expectPresent } from '@kuest/types';
 import { afterAll, type MockInstance, vi } from 'vitest';
 import {
   describe,

@@ -1,5 +1,5 @@
 import process from 'node:process';
-import { invariant } from '@market-sdk/types';
+import { invariant } from '@kuest/types';
 
 import { SigningError } from './errors';
 import { buildHmacSignature } from './hmac';
@@ -7,11 +7,11 @@ import type { ApiKeyAuthorization, ApiKeyAuthorizationRequest } from './types';
 
 invariant(
   process.release.name === 'node',
-  'The @market-sdk/client/node entrypoint requires a Node.js runtime.',
+  'The @kuest/sdk/node entrypoint requires a Node.js runtime.',
 );
 invariant(
   typeof window === 'undefined' && typeof document === 'undefined',
-  'The @market-sdk/client/node entrypoint cannot be imported in a browser-like runtime.',
+  'The @kuest/sdk/node entrypoint cannot be imported in a browser-like runtime.',
 );
 
 export { loadSiteConfig } from './node-site-config';

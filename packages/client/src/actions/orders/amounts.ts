@@ -1,4 +1,4 @@
-import { OrderSide, type TickSizeValue } from '@market-sdk/bindings';
+import { OrderSide, type TickSizeValue } from '@kuest/bindings';
 import { resolveRoundingConfig } from './context';
 import {
   FIXED_SCALE,

@@ -6,8 +6,8 @@ import {
   toComboConditionId,
   toConditionId,
   toPositionId,
-} from '@market-sdk/bindings';
-import type { Tagged } from '@market-sdk/types';
+} from '@kuest/bindings';
+import type { Tagged } from '@kuest/types';
 import { AbiParameters, Hash } from 'ox';
 import { UserInputError } from './errors';
 

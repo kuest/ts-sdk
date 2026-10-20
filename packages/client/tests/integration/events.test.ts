@@ -1,10 +1,10 @@
-import { toPaginationCursor } from '@market-sdk/bindings';
+import { toPaginationCursor } from '@kuest/bindings';
 import {
   createPublicClient,
   ProtocolVersion,
   UserInputError,
-} from '@market-sdk/client';
-import { expectPresent } from '@market-sdk/types';
+} from '@kuest/sdk';
+import { expectPresent } from '@kuest/types';
 import { afterEach, beforeEach, type TestContext, vi } from 'vitest';
 import { describe, environment, expect, it, publicClient } from './fixtures';
 import { expectNonEmptyPage, expectPageWindow } from './helpers';

@@ -1,6 +1,6 @@
-import type { ClobAssetId, TickSizeValue } from '@market-sdk/bindings';
-import type { EvmAddress } from '@market-sdk/types';
-import { invariant } from '@market-sdk/types';
+import type { ClobAssetId, TickSizeValue } from '@kuest/bindings';
+import type { EvmAddress } from '@kuest/types';
+import { invariant } from '@kuest/types';
 import type { BaseSecureClient } from '../../clients';
 import { UserInputError } from '../../errors';
 import { isV2PositionId } from '../../protocol';

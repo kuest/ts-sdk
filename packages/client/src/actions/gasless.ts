@@ -2,8 +2,8 @@ import {
   EvmAddressSchema,
   type TransactionId,
   TransactionIdSchema,
-} from '@market-sdk/bindings';
-import { WalletType } from '@market-sdk/bindings/gamma';
+} from '@kuest/bindings';
+import { WalletType } from '@kuest/bindings/gamma';
 import {
   type GaslessTransaction,
   GaslessTransactionSchema,
@@ -16,7 +16,7 @@ import {
   type RelayerLegacyExecuteRequest,
   RelayerTransactionState,
   RelayerTransactionType,
-} from '@market-sdk/bindings/relayer';
+} from '@kuest/bindings/relayer';
 import {
   delay,
   type EvmAddress,
@@ -31,7 +31,7 @@ import {
   type NonEmptyArray,
   type TxHash,
   ZERO_ADDRESS,
-} from '@market-sdk/types';
+} from '@kuest/types';
 import { Bytes, Hash, TypedData as OxTypedData } from 'ox';
 import { z } from 'zod';
 import { encodeProxyCall, encodeSafeMultisendCall } from '../abis';

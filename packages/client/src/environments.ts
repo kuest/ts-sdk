@@ -1,4 +1,4 @@
-import { type EvmAddress, expectEvmAddress } from '@market-sdk/types';
+import { type EvmAddress, expectEvmAddress } from '@kuest/types';
 import type { Hex } from 'ox';
 
 export type WalletDerivationConfig = {

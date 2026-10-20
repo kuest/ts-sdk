@@ -3,8 +3,8 @@ import type {
   ConditionId,
   PositionId,
   TokenId,
-} from '@market-sdk/bindings';
-import { type EvmAddress, type HexString, invariant } from '@market-sdk/types';
+} from '@kuest/bindings';
+import { type EvmAddress, type HexString, invariant } from '@kuest/types';
 import { AbiFunction, AbiParameters } from 'ox';
 import { makeErrorGuard, UserInputError } from './errors';
 import { parseUserInput } from './input';

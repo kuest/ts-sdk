@@ -1,4 +1,4 @@
-import { expectHexString, type HexString } from '@market-sdk/types';
+import { expectHexString, type HexString } from '@kuest/types';
 import { z } from 'zod';
 import type {
   ComboConditionId,

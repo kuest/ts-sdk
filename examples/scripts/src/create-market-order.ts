@@ -1,5 +1,5 @@
-import { createSecureClient, OrderSide, OrderType } from '@market-sdk/client';
-import { privateKey } from '@market-sdk/client/viem';
+import { createSecureClient, OrderSide, OrderType } from '@kuest/sdk';
+import { privateKey } from '@kuest/sdk/viem';
 import { never } from './lib/assert';
 import { requireEnv } from './lib/env';
 import {

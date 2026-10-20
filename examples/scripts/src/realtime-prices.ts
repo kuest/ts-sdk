@@ -1,5 +1,5 @@
-import { createSecureClient, PriceProvider } from '@market-sdk/client';
-import { privateKey } from '@market-sdk/client/viem';
+import { createSecureClient, PriceProvider } from '@kuest/sdk';
+import { privateKey } from '@kuest/sdk/viem';
 import { requireEnv } from './lib/env';
 
 const signer = privateKey(requireEnv('SDK_PRIVATE_KEY'));

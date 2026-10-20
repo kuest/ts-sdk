@@ -1,8 +1,4 @@
-import type {
-  Erc1271Signature,
-  EvmSignature,
-  HexString,
-} from '@market-sdk/types';
+import type { Erc1271Signature, EvmSignature, HexString } from '@kuest/types';
 import { z } from 'zod';
 import {
   type SignatureType,

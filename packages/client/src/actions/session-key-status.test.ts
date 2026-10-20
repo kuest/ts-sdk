@@ -1,7 +1,7 @@
 import {
   RelayerAuthorizeSessionSignerStatus,
   RelayerRevokeSessionSignerStatus,
-} from '@market-sdk/bindings/relayer';
+} from '@kuest/bindings/relayer';
 import { describe, expect, it } from 'vitest';
 import { TransactionFailedError } from '../errors';
 import { assertSessionSignerOperationAccepted } from './session-key-status';

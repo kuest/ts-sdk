@@ -1,11 +1,11 @@
-import { PaginationCursorSchema } from '@market-sdk/bindings';
+import { PaginationCursorSchema } from '@kuest/bindings';
 import {
   type Event,
   type Profile,
   type PublicSearchResponse,
   PublicSearchResponseSchema,
   type SearchTag,
-} from '@market-sdk/bindings/gamma';
+} from '@kuest/bindings/gamma';
 import { z } from 'zod';
 import type { BaseClient } from '../clients';
 import {

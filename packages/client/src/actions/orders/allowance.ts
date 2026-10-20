@@ -1,6 +1,6 @@
-import { type ClobAssetId, OrderSide } from '@market-sdk/bindings';
-import { AssetType } from '@market-sdk/bindings/clob';
-import { type EvmAddress, isSameEvmAddress } from '@market-sdk/types';
+import { type ClobAssetId, OrderSide } from '@kuest/bindings';
+import { AssetType } from '@kuest/bindings/clob';
+import { type EvmAddress, isSameEvmAddress } from '@kuest/types';
 import type { BaseSecureClient } from '../../clients';
 import { isV2PositionId } from '../../protocol';
 import { fetchBalanceAllowance } from '../account';

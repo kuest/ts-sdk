@@ -2,8 +2,8 @@ import {
   type ApprovalContract,
   ApprovalStandard,
   type ApprovalsSnapshot,
-} from '@market-sdk/bindings/data';
-import type { EvmAddress } from '@market-sdk/types';
+} from '@kuest/bindings/data';
+import type { EvmAddress } from '@kuest/types';
 import { UnexpectedResponseError } from '../errors';
 import type { TradingApprovalRequirements } from './approvals';
 

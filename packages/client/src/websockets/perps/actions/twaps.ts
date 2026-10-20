@@ -1,4 +1,4 @@
-import { OrderSide, OrderSideSchema } from '@market-sdk/bindings';
+import { OrderSide, OrderSideSchema } from '@kuest/bindings';
 import {
   CreatePerpsTwapResponseSchema,
   FetchPerpsTwapsResponseSchema,
@@ -9,7 +9,7 @@ import {
   type PerpsTwap,
   type PerpsTwapAccepted,
   PerpsTwapIdSchema,
-} from '@market-sdk/bindings/perps';
+} from '@kuest/bindings/perps';
 import { z } from 'zod';
 import {
   makeErrorGuard,

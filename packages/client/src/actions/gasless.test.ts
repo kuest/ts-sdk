@@ -1,5 +1,5 @@
-import { WalletType } from '@market-sdk/bindings/gamma';
-import { expectEvmAddress, expectHexString } from '@market-sdk/types';
+import { WalletType } from '@kuest/bindings/gamma';
+import { expectEvmAddress, expectHexString } from '@kuest/types';
 import { describe, expect, it, type MockInstance, vi } from 'vitest';
 import type { BaseSecureClient } from '../clients';
 import { forkEnvironmentConfig } from '../environments';

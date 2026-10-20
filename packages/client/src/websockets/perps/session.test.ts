@@ -3,7 +3,7 @@ import {
   toDecimalString,
   toEpochMilliseconds,
   toPaginationCursor,
-} from '@market-sdk/bindings';
+} from '@kuest/bindings';
 import {
   type PerpsBuilderApproval,
   type PerpsCredentials,
@@ -11,8 +11,8 @@ import {
   PerpsPnlInterval,
   PerpsSortDirection,
   PerpsTimeInForce,
-} from '@market-sdk/bindings/perps';
-import { expectEvmAddress, expectPrivateKey } from '@market-sdk/types';
+} from '@kuest/bindings/perps';
+import { expectEvmAddress, expectPrivateKey } from '@kuest/types';
 import { HttpResponse, http, ws } from 'msw';
 import { setupServer } from 'msw/node';
 import {

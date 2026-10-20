@@ -1,11 +1,11 @@
-import { EvmAddressSchema } from '@market-sdk/bindings';
+import { EvmAddressSchema } from '@kuest/bindings';
 import {
   type PerpsBuilderApproval,
   PerpsBuilderApprovalSchema,
   type PerpsBuilderStatus,
   PerpsBuilderStatusSchema,
-} from '@market-sdk/bindings/perps';
-import type { EvmSignature } from '@market-sdk/types';
+} from '@kuest/bindings/perps';
+import type { EvmSignature } from '@kuest/types';
 import { z } from 'zod';
 import type { BaseClient, BaseSecureClient } from '../../clients';
 import {

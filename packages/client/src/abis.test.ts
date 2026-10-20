@@ -2,8 +2,8 @@ import {
   type ComboConditionId,
   toComboConditionId,
   toConditionId,
-} from '@market-sdk/bindings';
-import { expectEvmAddress } from '@market-sdk/types';
+} from '@kuest/bindings';
+import { expectEvmAddress } from '@kuest/types';
 import { AbiFunction } from 'ox';
 import { describe, expect, it } from 'vitest';
 import {

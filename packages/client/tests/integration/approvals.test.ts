@@ -1,9 +1,5 @@
-import {
-  createSecureClient,
-  SigningError,
-  WalletType,
-} from '@market-sdk/client';
-import { ZERO_ADDRESS } from '@market-sdk/types';
+import { createSecureClient, SigningError, WalletType } from '@kuest/sdk';
+import { ZERO_ADDRESS } from '@kuest/types';
 import { vi } from 'vitest';
 import { describe, expect, it, runMeteredTests } from './fixtures';
 

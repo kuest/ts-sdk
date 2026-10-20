@@ -1,10 +1,10 @@
-import { OrderSide, type TokenId } from '@market-sdk/bindings';
+import { OrderSide, type TokenId } from '@kuest/bindings';
 import {
   type PublicClient,
   RewardMarketSort,
   UserInputError,
-} from '@market-sdk/client';
-import { expectPresent } from '@market-sdk/types';
+} from '@kuest/sdk';
+import { expectPresent } from '@kuest/types';
 import { vi } from 'vitest';
 import { describe, expect, it } from './fixtures';
 import { expectPageWindow } from './helpers';

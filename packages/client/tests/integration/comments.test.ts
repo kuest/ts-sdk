@@ -2,15 +2,15 @@ import {
   CommentParentEntityType,
   toEventId,
   toPaginationCursor,
-} from '@market-sdk/bindings';
-import type { Comment } from '@market-sdk/bindings/gamma';
+} from '@kuest/bindings';
+import type { Comment } from '@kuest/bindings/gamma';
 import {
   createPublicClient,
   type Page,
   PaginationLimitError,
   UserInputError,
-} from '@market-sdk/client';
-import { expectPresent } from '@market-sdk/types';
+} from '@kuest/sdk';
+import { expectPresent } from '@kuest/types';
 import { afterEach, vi } from 'vitest';
 import { describe, environment, expect, it } from './fixtures';
 import { expectNonEmptyPage } from './helpers';

@@ -1,5 +1,5 @@
-import { OrderSide } from '@market-sdk/bindings';
-import type { OrderResponse } from '@market-sdk/bindings/clob';
+import { OrderSide } from '@kuest/bindings';
+import type { OrderResponse } from '@kuest/bindings/clob';
 import type { BaseSecureClient } from '../../clients';
 import {
   CancelledSigningError,

@@ -16,7 +16,7 @@ body:
     attributes:
       label: SDK package and version
       description: Include the package name and version from your package manager.
-      placeholder: "@market-sdk/client@0.1.0"
+      placeholder: "@kuest/sdk@0.1.0"
     validations:
       required: true
   - type: input

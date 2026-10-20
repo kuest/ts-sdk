@@ -1,7 +1,7 @@
-import { type EvmAddress, EvmAddressSchema } from '@market-sdk/bindings';
-import { FetchApprovalsResponseSchema } from '@market-sdk/bindings/data';
-import { WalletType } from '@market-sdk/bindings/gamma';
-import type { EvmSignature, HexString } from '@market-sdk/types';
+import { type EvmAddress, EvmAddressSchema } from '@kuest/bindings';
+import { FetchApprovalsResponseSchema } from '@kuest/bindings/data';
+import { WalletType } from '@kuest/bindings/gamma';
+import type { EvmSignature, HexString } from '@kuest/types';
 import { z } from 'zod';
 import {
   decodeErc20AllowanceResult,

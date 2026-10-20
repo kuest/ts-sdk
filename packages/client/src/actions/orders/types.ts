@@ -5,15 +5,15 @@ import type {
   OrderType,
   PositionId,
   TokenId,
-} from '@market-sdk/bindings';
-import type { OrderResponse, SignatureType } from '@market-sdk/bindings/clob';
+} from '@kuest/bindings';
+import type { OrderResponse, SignatureType } from '@kuest/bindings/clob';
 import type {
   Erc1271Signature,
   EvmAddress,
   EvmSignature,
   HexString,
   SessionSignerSignature,
-} from '@market-sdk/types';
+} from '@kuest/types';
 import type { ExchangeOrderProtocolVersion } from '../../exchange';
 import type { TypedDataPayload } from '../../types';
 import type { SignOrderRequest } from '../../workflow';

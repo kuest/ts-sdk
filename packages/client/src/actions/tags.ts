@@ -1,4 +1,4 @@
-import { PaginationCursorSchema } from '@market-sdk/bindings';
+import { PaginationCursorSchema } from '@kuest/bindings';
 import {
   ListRelatedTagResourcesResponseSchema,
   ListRelatedTagsResponseSchema,
@@ -6,7 +6,7 @@ import {
   type RelatedTag,
   type Tag,
   TagSchema,
-} from '@market-sdk/bindings/gamma';
+} from '@kuest/bindings/gamma';
 import { z } from 'zod';
 import type { BaseClient } from '../clients';
 import {

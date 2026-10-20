@@ -1,4 +1,4 @@
-import type { PrivateKey } from '@market-sdk/types';
+import type { PrivateKey } from '@kuest/types';
 import { z } from 'zod';
 import {
   type BaseUnits,

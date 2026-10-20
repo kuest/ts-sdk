@@ -1,4 +1,4 @@
-import type { EvmAddress } from '@market-sdk/types';
+import type { EvmAddress } from '@kuest/types';
 import { z } from 'zod';
 import {
   ClobAssetIdSchema,

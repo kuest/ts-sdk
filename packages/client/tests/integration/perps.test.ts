@@ -5,15 +5,15 @@ import type {
   PerpsSession,
   TxHash,
   UpdatePerpsLeverageRequest,
-} from '@market-sdk/client';
+} from '@kuest/sdk';
 import {
   OrderSide,
   PerpsTimeInForce,
   RequestRejectedError,
   TransferPerpsCollateralError,
   UserInputError,
-} from '@market-sdk/client';
-import { expectNonEmptyArray } from '@market-sdk/types';
+} from '@kuest/sdk';
+import { expectNonEmptyArray } from '@kuest/types';
 import { vi } from 'vitest';
 import {
   describe,

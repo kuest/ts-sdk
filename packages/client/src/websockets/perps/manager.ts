@@ -1,4 +1,4 @@
-import type { PerpsCredentials } from '@market-sdk/bindings/perps';
+import type { PerpsCredentials } from '@kuest/bindings/perps';
 import type { PerpsBuilderFeeApprover } from '../../actions/perps/builders';
 import { TransportError } from '../../errors';
 import type { Fetch } from '../../request-options';

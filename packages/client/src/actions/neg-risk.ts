@@ -1,5 +1,5 @@
-import { WalletType } from '@market-sdk/bindings/gamma';
-import type { EvmAddress, EvmSignature } from '@market-sdk/types';
+import { WalletType } from '@kuest/bindings/gamma';
+import type { EvmAddress, EvmSignature } from '@kuest/types';
 import {
   routerConvertCall,
   routerHorizontalMergeCall,

@@ -1,8 +1,5 @@
-import type { ApiKeyCreds } from '@market-sdk/bindings/clob';
-import type {
-  MarketEvent,
-  UserEvent,
-} from '@market-sdk/bindings/subscriptions';
+import type { ApiKeyCreds } from '@kuest/bindings/clob';
+import type { MarketEvent, UserEvent } from '@kuest/bindings/subscriptions';
 import type {
   MarketSubscription,
   UserSubscription,

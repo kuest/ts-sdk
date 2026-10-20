@@ -6,7 +6,7 @@ import {
   type TokenId,
   toPositionId,
   toTokenId,
-} from '@market-sdk/bindings';
+} from '@kuest/bindings';
 import type {
   LastTradePrice,
   Midpoints,
@@ -14,7 +14,7 @@ import type {
   Prices,
   Spreads,
   TotalUserEarning,
-} from '@market-sdk/bindings/clob';
+} from '@kuest/bindings/clob';
 import { describe, expectTypeOf, it } from 'vitest';
 import type { SecureClient } from '../clients';
 import type { DataActions } from '../decorators';
@@ -152,9 +152,9 @@ describe('order heartbeat public types', () => {
     expectTypeOf<typeof import('../index')>().not.toHaveProperty(
       'SendLegacyOrderHeartbeatError',
     );
-    expectTypeOf<
-      typeof import('@market-sdk/bindings/clob')
-    >().not.toHaveProperty('LegacyOrderHeartbeatSchema');
+    expectTypeOf<typeof import('@kuest/bindings/clob')>().not.toHaveProperty(
+      'LegacyOrderHeartbeatSchema',
+    );
     expectTypeOf<import('../index').PublicClient>().not.toHaveProperty(
       'sendOrderHeartbeat',
     );

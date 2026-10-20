@@ -1,5 +1,5 @@
 {
-  "name": "@market-sdk/types",
+  "name": "@kuest/types",
   "version": "0.2.0",
   "description": "Shared TypeScript types for the unified SDK",
   "type": "module",

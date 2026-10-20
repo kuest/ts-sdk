@@ -1,4 +1,4 @@
-import type { PositionId, TokenId } from '@market-sdk/bindings';
+import type { PositionId, TokenId } from '@kuest/bindings';
 import { z } from 'zod';
 
 const ExchangeAssetIdSchema = z

@@ -2,13 +2,9 @@ import {
   type ApprovalContract,
   ApprovalStandard,
   type ApprovalsSnapshot,
-} from '@market-sdk/bindings/data';
-import { WalletType } from '@market-sdk/bindings/gamma';
-import {
-  expectEvmAddress,
-  expectTxHash,
-  type HexString,
-} from '@market-sdk/types';
+} from '@kuest/bindings/data';
+import { WalletType } from '@kuest/bindings/gamma';
+import { expectEvmAddress, expectTxHash, type HexString } from '@kuest/types';
 import { describe, expect, it, vi } from 'vitest';
 import {
   erc20ApprovalCall,

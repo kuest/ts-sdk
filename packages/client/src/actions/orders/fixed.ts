@@ -1,4 +1,4 @@
-import { invariant, type Tagged } from '@market-sdk/types';
+import { invariant, type Tagged } from '@kuest/types';
 import { UserInputError } from '../../errors';
 
 export const FIXED_SCALE = 1_000_000n;

@@ -1,4 +1,4 @@
-import { setNonBlockingInterval } from '@market-sdk/types';
+import { setNonBlockingInterval } from '@kuest/types';
 import type { WebSocketHeartbeat } from './lifecycle';
 
 const CLOB_HEARTBEAT_INTERVAL_MS = 10_000;

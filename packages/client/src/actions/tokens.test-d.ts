@@ -6,7 +6,7 @@ import {
   type SecureClient,
   type TokenModule,
   type TokenReference,
-} from '@market-sdk/client';
+} from '@kuest/sdk';
 import { describe, expectTypeOf, it } from 'vitest';
 
 describe('token lookup public methods', () => {

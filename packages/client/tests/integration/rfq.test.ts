@@ -5,7 +5,7 @@ import {
   SignatureType,
   TimeoutError,
   UserInputError,
-} from '@market-sdk/client';
+} from '@kuest/sdk';
 import { ws } from 'msw';
 import { setupServer } from 'msw/node';
 import { afterAll, afterEach, beforeAll, beforeEach, vi } from 'vitest';

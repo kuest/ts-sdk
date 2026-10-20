@@ -1,13 +1,10 @@
-import type {
-  CollateralReturnPlanResponse,
-  SecureClient,
-} from '@market-sdk/client';
+import type { CollateralReturnPlanResponse, SecureClient } from '@kuest/sdk';
 import {
   createSecureClient,
   RequestRejectedError,
   WalletType,
-} from '@market-sdk/client';
-import { expectHexString } from '@market-sdk/types';
+} from '@kuest/sdk';
+import { expectHexString } from '@kuest/types';
 import { type TestContext, vi } from 'vitest';
 import { describe, expect, it, runMeteredTests } from './fixtures';
 

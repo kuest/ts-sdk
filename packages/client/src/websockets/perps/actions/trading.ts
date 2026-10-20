@@ -1,8 +1,4 @@
-import {
-  OrderSide,
-  OrderSideSchema,
-  toDecimalString,
-} from '@market-sdk/bindings';
+import { OrderSide, OrderSideSchema, toDecimalString } from '@kuest/bindings';
 import {
   PerpsAutoCancelResponseSchema,
   PerpsCancelAllOrdersResponseSchema,
@@ -29,16 +25,12 @@ import {
   PerpsUpdateLeverageBatchResultSchema,
   type PerpsUpdateLeverageResult,
   PerpsUpdateLeverageResultSchema,
-} from '@market-sdk/bindings/perps';
+} from '@kuest/bindings/perps';
 import type {
   PerpsOrderUpdateEvent,
   PerpsSessionEvent,
-} from '@market-sdk/bindings/subscriptions';
-import {
-  expectPresent,
-  invariant,
-  setNonBlockingTimeout,
-} from '@market-sdk/types';
+} from '@kuest/bindings/subscriptions';
+import { expectPresent, invariant, setNonBlockingTimeout } from '@kuest/types';
 import { z } from 'zod';
 import {
   AutoCancelDailyLimitError,

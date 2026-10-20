@@ -1,18 +1,18 @@
-import type { GatewayErrorCode } from '@market-sdk/bindings';
+import type { GatewayErrorCode } from '@kuest/bindings';
 
 export {
   type GatewayErrorCode,
   GatewayKnownErrorCode,
-} from '@market-sdk/bindings';
+} from '@kuest/bindings';
 
-import type { PerpsCancelOrderResult } from '@market-sdk/bindings/perps';
+import type { PerpsCancelOrderResult } from '@kuest/bindings/perps';
 
 export {
   type RealtimeErrorCode,
   RealtimeKnownErrorCode,
-} from '@market-sdk/bindings/subscriptions';
+} from '@kuest/bindings/subscriptions';
 
-import { MarketSdkError } from '@market-sdk/types';
+import { MarketSdkError } from '@kuest/types';
 import type { ZodError } from 'zod';
 import type { RateLimitUpdate } from './rate-limit';
 import {

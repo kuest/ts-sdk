@@ -1,4 +1,4 @@
-import { UserInputError } from '@market-sdk/client';
+import { UserInputError } from '@kuest/sdk';
 import { afterEach, vi } from 'vitest';
 import { describe, expect, it } from './fixtures';
 

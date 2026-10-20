@@ -1,8 +1,5 @@
-import {
-  FetchPerpsRegistrationError,
-  UserInputError,
-} from '@market-sdk/client';
-import { expectNonEmptyArray } from '@market-sdk/types';
+import { FetchPerpsRegistrationError, UserInputError } from '@kuest/sdk';
+import { expectNonEmptyArray } from '@kuest/types';
 import { vi } from 'vitest';
 import { describe, expect, it } from './fixtures';
 

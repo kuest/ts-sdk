@@ -1,4 +1,4 @@
-import type { Erc1271Signature, EvmSignature } from '@market-sdk/types';
+import type { Erc1271Signature, EvmSignature } from '@kuest/types';
 import {
   createExchangeOrderSignature,
   createExchangeOrderTypedDataPayload,

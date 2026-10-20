@@ -2,14 +2,14 @@ import {
   OrderSide,
   toDecimalString,
   toEpochMilliseconds,
-} from '@market-sdk/bindings';
+} from '@kuest/bindings';
 import {
   PerpsCancelOrderResultSchema,
   PerpsInstrumentIdSchema,
   PerpsKnownCancelOrderErrorCode,
   type PerpsPortfolio,
   PerpsTimeInForce,
-} from '@market-sdk/bindings/perps';
+} from '@kuest/bindings/perps';
 import { TypedData } from 'ox';
 import { afterEach, describe, expect, it, vi } from 'vitest';
 import {

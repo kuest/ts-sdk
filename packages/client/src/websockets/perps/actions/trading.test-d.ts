@@ -1,5 +1,5 @@
-import { OrderSide } from '@market-sdk/bindings';
-import { PerpsTimeInForce } from '@market-sdk/bindings/perps';
+import { OrderSide } from '@kuest/bindings';
+import { PerpsTimeInForce } from '@kuest/bindings/perps';
 import { describe, it } from 'vitest';
 import type { PerpsSession } from '../session';
 import type {

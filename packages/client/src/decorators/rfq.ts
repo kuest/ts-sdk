@@ -298,7 +298,7 @@ export type SecureRfqActions = {
    * `FAILED`, `EXPIRED`, or `CANCELED`. Terminal failure is a normal outcome
    * and is returned, not thrown. A `TimeoutError` does not mean the trade
    * failed; resume with the `fetchRfqStatus` action from
-   * `@market-sdk/client/actions`.
+   * `@kuest/sdk/actions`.
    *
    * @throws {@link WaitForComboFillError}
    * Thrown on failure.

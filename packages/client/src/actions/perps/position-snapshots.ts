@@ -1,9 +1,9 @@
-import { EvmAddressSchema } from '@market-sdk/bindings';
+import { EvmAddressSchema } from '@kuest/bindings';
 import {
   PerpsCredentialsResponseSchema,
   type PerpsPositionSnapshots,
   PerpsPositionSnapshotsSchema,
-} from '@market-sdk/bindings/perps';
+} from '@kuest/bindings/perps';
 import { z } from 'zod';
 import type { BaseClient } from '../../clients';
 import {

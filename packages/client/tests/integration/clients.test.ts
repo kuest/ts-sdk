@@ -1,10 +1,6 @@
-import {
-  createSecureClient,
-  UserInputError,
-  WalletType,
-} from '@market-sdk/client';
-import { fetchApiKeys, isWalletDeployed } from '@market-sdk/client/actions';
-import { InvariantError, ZERO_ADDRESS } from '@market-sdk/types';
+import { createSecureClient, UserInputError, WalletType } from '@kuest/sdk';
+import { fetchApiKeys, isWalletDeployed } from '@kuest/sdk/actions';
+import { InvariantError, ZERO_ADDRESS } from '@kuest/types';
 import { describe, expect, it, runMeteredTests } from './fixtures';
 
 describe('clients', () => {

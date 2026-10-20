@@ -1,4 +1,4 @@
-import { ApiKeyCredsSchema } from '@market-sdk/bindings/clob';
+import { ApiKeyCredsSchema } from '@kuest/bindings/clob';
 import { ws } from 'msw';
 import { setupServer } from 'msw/node';
 import {

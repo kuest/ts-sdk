@@ -3,7 +3,7 @@ import {
   type SportsMarketTypesResponse,
   SportsMarketTypesResponseSchema,
   type SportsMetadata,
-} from '@market-sdk/bindings/gamma';
+} from '@kuest/bindings/gamma';
 import type { BaseClient } from '../clients';
 import {
   makeErrorGuard,

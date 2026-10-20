@@ -4,8 +4,8 @@ import {
   type CryptoPricesEvent,
   type EquityPricesEvent,
   RealtimeEventSchema,
-} from '@market-sdk/bindings/subscriptions';
-import { invariant } from '@market-sdk/types';
+} from '@kuest/bindings/subscriptions';
+import { invariant } from '@kuest/types';
 import type {
   CommentsSubscription,
   CryptoPricesChainlinkTwapSubscription,

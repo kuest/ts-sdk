@@ -8,8 +8,8 @@ import type {
   TotalUserEarning,
   UserEarning,
   UserRewardsEarning,
-} from '@market-sdk/bindings/clob';
-import type { Prettify } from '@market-sdk/types';
+} from '@kuest/bindings/clob';
+import type { Prettify } from '@kuest/types';
 import {
   type FetchCurrentRebatesRequest,
   type FetchOrderScoringRequest,

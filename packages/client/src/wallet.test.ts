@@ -1,10 +1,10 @@
-import { SignatureType } from '@market-sdk/bindings/clob';
-import { WalletType } from '@market-sdk/bindings/gamma';
+import { SignatureType } from '@kuest/bindings/clob';
+import { WalletType } from '@kuest/bindings/gamma';
 import {
   expectEvmAddress,
   expectEvmSignature,
   ZERO_ADDRESS,
-} from '@market-sdk/types';
+} from '@kuest/types';
 import { HttpResponse, http } from 'msw';
 import { setupServer } from 'msw/node';
 import { afterAll, afterEach, beforeAll, describe, expect, it } from 'vitest';

@@ -1,7 +1,7 @@
 import {
   type PerpsCredentials,
   PerpsInstrumentCategory,
-} from '@market-sdk/bindings/perps';
+} from '@kuest/bindings/perps';
 import { describe, expectTypeOf, it } from 'vitest';
 import type {
   ApprovePerpsBuilderFeeRequest,

@@ -4,19 +4,19 @@ import {
   SessionSignerKnownScope as SessionKeyKnownScope,
   type SessionSignerScope as SessionKeyScope,
   SessionSignerScopeSchema,
-} from '@market-sdk/bindings';
-import { ActiveSessionSignersResponseSchema } from '@market-sdk/bindings/clob';
-import { WalletType } from '@market-sdk/bindings/gamma';
+} from '@kuest/bindings';
+import { ActiveSessionSignersResponseSchema } from '@kuest/bindings/clob';
+import { WalletType } from '@kuest/bindings/gamma';
 import {
   RelayerAuthorizeSessionSignerResponseSchema,
   RelayerRevokeSessionSignerResponseSchema,
-} from '@market-sdk/bindings/relayer';
+} from '@kuest/bindings/relayer';
 import {
   delay,
   expectEvmAddress,
   isSameEvmAddress,
   ZERO_ADDRESS,
-} from '@market-sdk/types';
+} from '@kuest/types';
 import { z } from 'zod';
 import { authorizeSessionSignerCall, revokeSessionSignerCall } from '../abis';
 import type { BaseSecureClient } from '../clients';

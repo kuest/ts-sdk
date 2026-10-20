@@ -3,7 +3,7 @@ import {
   PaginationCursorSchema,
   TxHashSchema,
   toPaginationCursor,
-} from '@market-sdk/bindings';
+} from '@kuest/bindings';
 import {
   FetchPerpsAccountConfigResponseSchema,
   FetchPerpsAccountStatsResponseSchema,
@@ -48,8 +48,8 @@ import {
   type PerpsWithdrawal,
   type PerpsWithdrawalStatus,
   PerpsWithdrawalStatusSchema,
-} from '@market-sdk/bindings/perps';
-import { invariant } from '@market-sdk/types';
+} from '@kuest/bindings/perps';
+import { invariant } from '@kuest/types';
 import { z } from 'zod';
 import { snakeCase, toSearchParams } from '../../../actions/params';
 import { RequestRejectedError } from '../../../errors';

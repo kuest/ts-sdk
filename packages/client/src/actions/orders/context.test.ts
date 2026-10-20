@@ -1,4 +1,4 @@
-import type { TickSizeValue } from '@market-sdk/bindings';
+import type { TickSizeValue } from '@kuest/bindings';
 import { describe, expect, it } from 'vitest';
 import { UserInputError } from '../../errors';
 import { resolveRoundingConfig, validatePriceOnTickGrid } from './context';

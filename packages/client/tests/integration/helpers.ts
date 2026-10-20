@@ -1,9 +1,9 @@
 import type {
   AcceptedOrderResponse,
   OrderResponse,
-} from '@market-sdk/bindings/clob';
-import type { Page, Paginated } from '@market-sdk/client';
-import { expectNonEmptyArray, type NonEmptyArray } from '@market-sdk/types';
+} from '@kuest/bindings/clob';
+import type { Page, Paginated } from '@kuest/sdk';
+import { expectNonEmptyArray, type NonEmptyArray } from '@kuest/types';
 import { expect } from 'vitest';
 
 export function expectAcceptedOrderResponse(

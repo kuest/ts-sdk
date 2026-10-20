@@ -4,18 +4,14 @@ import type {
   MarketId,
   PositionId,
   TokenId,
-} from '@market-sdk/bindings';
+} from '@kuest/bindings';
 import {
   ConditionIdSchema,
   MarketIdSchema,
   PositionIdSchema,
-} from '@market-sdk/bindings';
-import { WalletType } from '@market-sdk/bindings/gamma';
-import {
-  type EvmAddress,
-  type EvmSignature,
-  invariant,
-} from '@market-sdk/types';
+} from '@kuest/bindings';
+import { WalletType } from '@kuest/bindings/gamma';
+import { type EvmAddress, type EvmSignature, invariant } from '@kuest/types';
 import { z } from 'zod';
 import {
   combinatorialPrepareConditionCall,

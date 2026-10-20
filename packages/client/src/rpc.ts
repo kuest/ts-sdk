@@ -1,4 +1,4 @@
-import type { EvmAddress, HexString } from '@market-sdk/types';
+import type { EvmAddress, HexString } from '@kuest/types';
 import ky from 'ky';
 import {
   RequestAbortedError,

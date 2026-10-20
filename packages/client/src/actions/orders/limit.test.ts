@@ -1,4 +1,4 @@
-import { OrderSide } from '@market-sdk/bindings';
+import { OrderSide } from '@kuest/bindings';
 import { afterEach, describe, expect, it, vi } from 'vitest';
 import { validatePriceOnTickGrid } from './context';
 import { PrepareLimitOrderParamsSchema } from './limit';

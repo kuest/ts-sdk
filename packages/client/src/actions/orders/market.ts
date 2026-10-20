@@ -6,8 +6,8 @@ import {
   OrderType,
   PositiveDecimalNumberSchema,
   type TickSizeValue,
-} from '@market-sdk/bindings';
-import { type EvmAddress, invariant } from '@market-sdk/types';
+} from '@kuest/bindings';
+import { type EvmAddress, invariant } from '@kuest/types';
 import { z } from 'zod';
 import type { BaseSecureClient } from '../../clients';
 import { UnexpectedResponseError, UserInputError } from '../../errors';

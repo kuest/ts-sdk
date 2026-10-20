@@ -1,5 +1,5 @@
-import { OrderSide } from '@market-sdk/bindings';
-import { createPublicClient, RequestAbortedError } from '@market-sdk/client';
+import { OrderSide } from '@kuest/bindings';
+import { createPublicClient, RequestAbortedError } from '@kuest/sdk';
 import { describe, expect, it } from './fixtures';
 
 describe('Data pagination', () => {

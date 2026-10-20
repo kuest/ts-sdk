@@ -1,6 +1,6 @@
-import { OrderSide, OrderType, toTokenId } from '@market-sdk/bindings';
-import { SignatureType } from '@market-sdk/bindings/clob';
-import type { EvmAddress, EvmSignature, HexString } from '@market-sdk/types';
+import { OrderSide, OrderType, toTokenId } from '@kuest/bindings';
+import { SignatureType } from '@kuest/bindings/clob';
+import type { EvmAddress, EvmSignature, HexString } from '@kuest/types';
 import { TypedData } from 'ox';
 import { describe, expect, it } from 'vitest';
 import { ExchangeOrderProtocolVersion } from '../../exchange';

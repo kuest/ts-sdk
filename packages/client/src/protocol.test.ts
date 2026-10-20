@@ -5,7 +5,7 @@ import {
   toConditionId,
   toPositionId,
   toTokenId,
-} from '@market-sdk/bindings';
+} from '@kuest/bindings';
 import { describe, expect, it } from 'vitest';
 import {
   type CanonicalComboLegs,

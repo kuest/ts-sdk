@@ -4,10 +4,10 @@ import {
   OrderType,
   toPositionId,
   toTokenId,
-} from '@market-sdk/bindings';
-import { AssetTypeSchema, SignatureType } from '@market-sdk/bindings/clob';
-import { WalletType } from '@market-sdk/bindings/gamma';
-import type { EvmAddress } from '@market-sdk/types';
+} from '@kuest/bindings';
+import { AssetTypeSchema, SignatureType } from '@kuest/bindings/clob';
+import { WalletType } from '@kuest/bindings/gamma';
+import type { EvmAddress } from '@kuest/types';
 import { afterEach, describe, expect, it, vi } from 'vitest';
 import { AssetType } from '../../index';
 import { SignerType } from '../../wallet';

@@ -8,7 +8,7 @@ import {
   invariant,
   never,
   type TxHash,
-} from '@market-sdk/types';
+} from '@kuest/types';
 import type { AuthorizationContext, PrivyClient } from '@privy-io/node';
 import { Hex } from 'ox';
 import {
@@ -36,11 +36,11 @@ import type {
 
 invariant(
   process.release.name === 'node',
-  'The @market-sdk/client/privy entrypoint requires a Node.js runtime.',
+  'The @kuest/sdk/privy entrypoint requires a Node.js runtime.',
 );
 invariant(
   typeof window === 'undefined' && typeof document === 'undefined',
-  'The @market-sdk/client/privy entrypoint cannot be imported in a browser-like runtime.',
+  'The @kuest/sdk/privy entrypoint cannot be imported in a browser-like runtime.',
 );
 
 export type PrivyWalletConfig = {

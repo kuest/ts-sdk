@@ -1,4 +1,4 @@
-import { expectEvmSignature } from '@market-sdk/types';
+import { expectEvmSignature } from '@kuest/types';
 import type { BaseSecureClient } from '../../clients';
 import {
   InsufficientLiquidityError,

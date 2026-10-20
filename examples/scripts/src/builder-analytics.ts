@@ -2,7 +2,7 @@ import {
   BuilderVolumeInterval,
   createPublicClient,
   LeaderboardWindow,
-} from '@market-sdk/client';
+} from '@kuest/sdk';
 
 const client = createPublicClient();
 

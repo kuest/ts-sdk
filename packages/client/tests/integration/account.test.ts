@@ -1,6 +1,6 @@
-import { AssetType } from '@market-sdk/bindings/clob';
-import type { SecureClient } from '@market-sdk/client';
-import { fetchBalanceAllowance } from '@market-sdk/client/actions';
+import { AssetType } from '@kuest/bindings/clob';
+import type { SecureClient } from '@kuest/sdk';
+import { fetchBalanceAllowance } from '@kuest/sdk/actions';
 import { describe, expect, it } from './fixtures';
 
 describe('Account', () => {

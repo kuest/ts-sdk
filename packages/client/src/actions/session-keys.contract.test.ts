@@ -1,4 +1,4 @@
-import { WalletType } from '@market-sdk/bindings/gamma';
+import { WalletType } from '@kuest/bindings/gamma';
 import { describe, expect, it, vi } from 'vitest';
 import type { BaseSecureClient } from '../clients';
 import { UserInputError } from '../errors';

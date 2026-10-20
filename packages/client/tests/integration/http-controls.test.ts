@@ -4,8 +4,8 @@ import {
   FetchPerpsPositionSnapshotsError,
   FetchPerpsRegistrationError,
   RequestAbortedError,
-} from '@market-sdk/client';
-import { fetchTag } from '@market-sdk/client/actions';
+} from '@kuest/sdk';
+import { fetchTag } from '@kuest/sdk/actions';
 import { describe, expect, it } from './fixtures';
 
 describe('HTTP request controls', () => {

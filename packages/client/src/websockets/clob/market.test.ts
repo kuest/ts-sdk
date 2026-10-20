@@ -1,4 +1,4 @@
-import { toTokenId } from '@market-sdk/bindings';
+import { toTokenId } from '@kuest/bindings';
 import { ws } from 'msw';
 import { setupServer } from 'msw/node';
 import {

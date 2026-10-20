@@ -1,7 +1,7 @@
 import {
   FetchTokenReferencesResponseSchema,
   type TokenReference,
-} from '@market-sdk/bindings/data';
+} from '@kuest/bindings/data';
 import { z } from 'zod';
 import type { BaseClient } from '../clients';
 import {

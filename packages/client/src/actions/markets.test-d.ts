@@ -2,8 +2,8 @@ import {
   type MetaHolder,
   PriceHistoryInterval,
   type PriceHistoryPoint,
-} from '@market-sdk/bindings/data';
-import type { Market } from '@market-sdk/bindings/gamma';
+} from '@kuest/bindings/data';
+import type { Market } from '@kuest/bindings/gamma';
 import { describe, expectTypeOf, it } from 'vitest';
 import type { DataActions, DiscoveryActions } from '../decorators';
 import {

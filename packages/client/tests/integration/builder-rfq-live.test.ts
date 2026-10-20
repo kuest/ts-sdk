@@ -1,15 +1,15 @@
-import { OrderSide } from '@market-sdk/bindings';
+import { OrderSide } from '@kuest/bindings';
 import {
   ComboAcceptFailureReason,
   type ComboMarket,
-} from '@market-sdk/bindings/combos';
+} from '@kuest/bindings/combos';
 import {
   createSecureClient,
   FetchRfqStatusError,
   type PublicClient,
   RfqStatus,
-} from '@market-sdk/client';
-import { fetchRfqStatus } from '@market-sdk/client/actions';
+} from '@kuest/sdk';
+import { fetchRfqStatus } from '@kuest/sdk/actions';
 import { describe, expect, it, runMeteredTests } from './fixtures';
 
 function loadComboLegPositionIds(): string[] | undefined {

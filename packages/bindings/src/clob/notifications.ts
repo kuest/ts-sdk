@@ -1,4 +1,4 @@
-import type { TxHash } from '@market-sdk/types';
+import type { TxHash } from '@kuest/types';
 import { z } from 'zod';
 import { CommentProfileSchema } from '../gamma/comment';
 import {

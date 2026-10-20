@@ -1,4 +1,4 @@
-import { EvmAddressSchema } from '@market-sdk/bindings';
+import { EvmAddressSchema } from '@kuest/bindings';
 import { z } from 'zod';
 
 /**

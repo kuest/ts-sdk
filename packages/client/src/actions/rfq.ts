@@ -4,7 +4,7 @@ import type {
   EpochMilliseconds,
   PositionId,
   TxHash,
-} from '@market-sdk/bindings';
+} from '@kuest/bindings';
 import {
   OrderSide,
   OrderSideSchema,
@@ -13,7 +13,7 @@ import {
   toPositionId,
   toRfqId,
   toRfqQuoteId,
-} from '@market-sdk/bindings';
+} from '@kuest/bindings';
 import type {
   RfqConfirmationAck as BindingRfqConfirmationAck,
   RfqQuoteAck as BindingRfqQuoteAck,
@@ -33,7 +33,7 @@ import type {
   RfqRequestedSize,
   RfqRequestorPublicId,
   RfqSignedOrder,
-} from '@market-sdk/bindings/combos';
+} from '@kuest/bindings/combos';
 import {
   BuilderRfqCreateResponseSchema,
   BuilderRfqStatusResponseSchema,
@@ -47,9 +47,9 @@ import {
   RfqSide,
   RfqStatus,
   type RfqTrade,
-} from '@market-sdk/bindings/combos';
-import type { EvmSignature } from '@market-sdk/types';
-import { delay, MarketSdkError } from '@market-sdk/types';
+} from '@kuest/bindings/combos';
+import type { EvmSignature } from '@kuest/types';
+import { delay, MarketSdkError } from '@kuest/types';
 import { z } from 'zod';
 import type { BaseSecureClient } from '../clients';
 import {
@@ -87,7 +87,7 @@ export {
   RfqRequestedSizeUnit,
   RfqSide,
   RfqStatus,
-} from '@market-sdk/bindings/combos';
+} from '@kuest/bindings/combos';
 export type {
   BuilderRfqError,
   RfqConfirmationRequest,

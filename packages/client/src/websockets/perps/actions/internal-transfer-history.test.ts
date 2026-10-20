@@ -1,10 +1,10 @@
-import { toDecimalString, toEpochMilliseconds } from '@market-sdk/bindings';
+import { toDecimalString, toEpochMilliseconds } from '@kuest/bindings';
 import {
   type PerpsInternalTransfer,
   PerpsInternalTransferDirection,
   type PerpsInternalTransferId,
-} from '@market-sdk/bindings/perps';
-import { expectEvmAddress, expectPresent } from '@market-sdk/types';
+} from '@kuest/bindings/perps';
+import { expectEvmAddress, expectPresent } from '@kuest/types';
 import { describe, expect, it } from 'vitest';
 import { UnexpectedResponseError } from '../../../errors';
 import type { Page } from '../../../pagination';

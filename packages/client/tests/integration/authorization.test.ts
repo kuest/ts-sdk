@@ -1,13 +1,13 @@
 // biome-ignore-all lint/style/noRestrictedImports: msw's Node test server lives at this entrypoint.
 
-import { RelayerTransactionType } from '@market-sdk/bindings/relayer';
+import { RelayerTransactionType } from '@kuest/bindings/relayer';
 import {
   buildHmacSignature,
   createPublicClient,
   remoteBuilderSigning,
   SigningError,
-} from '@market-sdk/client';
-import { fetchExecuteParams } from '@market-sdk/client/actions';
+} from '@kuest/sdk';
+import { fetchExecuteParams } from '@kuest/sdk/actions';
 import { HttpResponse, http } from 'msw';
 import { setupServer } from 'msw/node';
 import { afterAll, afterEach, beforeAll } from 'vitest';

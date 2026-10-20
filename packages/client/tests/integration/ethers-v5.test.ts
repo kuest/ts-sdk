@@ -1,8 +1,8 @@
-import { OrderSide } from '@market-sdk/bindings';
-import { createSecureClient } from '@market-sdk/client';
-import { cancelOrder, fetchApiKeys } from '@market-sdk/client/actions';
-import { signerFrom } from '@market-sdk/client/ethers-v5';
-import { expectPresent } from '@market-sdk/types';
+import { OrderSide } from '@kuest/bindings';
+import { createSecureClient } from '@kuest/sdk';
+import { cancelOrder, fetchApiKeys } from '@kuest/sdk/actions';
+import { signerFrom } from '@kuest/sdk/ethers-v5';
+import { expectPresent } from '@kuest/types';
 import { ethers } from 'ethers-v5';
 import { polygon } from 'viem/chains';
 import { describe, environment, expect, it, runMeteredTests } from './fixtures';

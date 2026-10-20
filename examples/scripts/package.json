@@ -19,7 +19,7 @@
     "typecheck": "tsc -p tsconfig.json --noEmit"
   },
   "dependencies": {
-    "@market-sdk/client": "workspace:*",
+    "@kuest/sdk": "workspace:*",
     "viem": "^2.46.3"
   },
   "devDependencies": {

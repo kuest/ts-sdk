@@ -1,4 +1,4 @@
-import { createPublicClient } from '@market-sdk/client';
+import { createPublicClient } from '@kuest/sdk';
 import { requireEnv } from './lib/env';
 
 const client = createPublicClient();

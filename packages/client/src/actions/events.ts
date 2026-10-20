@@ -4,14 +4,14 @@ import {
   type PaginationCursor,
   PaginationCursorSchema,
   QuestionIdSchema,
-} from '@market-sdk/bindings';
+} from '@kuest/bindings';
 import {
   CanonicalMarketConditionIdSchema,
   FetchEventLiveVolumeResponseSchema,
   FetchResolutionsResponseSchema,
   type LiveVolume,
   type Resolution,
-} from '@market-sdk/bindings/data';
+} from '@kuest/bindings/data';
 import {
   type Event,
   EventSchema,
@@ -19,7 +19,7 @@ import {
   ListEventsKeysetResponseSchema,
   ProtocolVersion,
   type TagReference,
-} from '@market-sdk/bindings/gamma';
+} from '@kuest/bindings/gamma';
 import { z } from 'zod';
 import type { BaseClient } from '../clients';
 import {
@@ -56,7 +56,7 @@ export {
   ResolutionSettlementTimeBasis,
   ResolutionSource,
   ResolutionStatus,
-} from '@market-sdk/bindings/data';
+} from '@kuest/bindings/data';
 
 const ListEventsRequestSchema = z.object({
   ascending: z.boolean().optional(),

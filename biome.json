@@ -85,7 +85,7 @@
               "options": {
                 "patterns": [
                   {
-                    "group": ["./node", "./node.ts", "@market-sdk/client/node"],
+                    "group": ["./node", "./node.ts", "@kuest/sdk/node"],
                     "message": "Import shared client modules directly instead of routing through the Node-only entrypoint."
                   }
                 ]

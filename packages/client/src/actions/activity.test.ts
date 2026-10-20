@@ -1,4 +1,4 @@
-import { ActivityType } from '@market-sdk/bindings/data';
+import { ActivityType } from '@kuest/bindings/data';
 import { HttpResponse, http } from 'msw';
 import { setupServer } from 'msw/node';
 import { afterAll, afterEach, beforeAll, describe, expect, it } from 'vitest';

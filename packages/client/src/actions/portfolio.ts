@@ -3,7 +3,7 @@ import {
   EventIdSchema,
   EvmAddressSchema,
   PaginationCursorSchema,
-} from '@market-sdk/bindings';
+} from '@kuest/bindings';
 import {
   CanonicalMarketConditionIdSchema,
   type ComboPosition,
@@ -28,7 +28,7 @@ import {
   type UserPnlSeries,
   type UserStats,
   type UserVolume,
-} from '@market-sdk/bindings/data';
+} from '@kuest/bindings/data';
 import { z } from 'zod';
 import type { BaseClient } from '../clients';
 import {
@@ -59,7 +59,7 @@ export {
   PositionStatus,
   UserPnlFidelity,
   UserPnlInterval,
-} from '@market-sdk/bindings/data';
+} from '@kuest/bindings/data';
 
 const ListPositionsRequestSchema = z
   .object({

@@ -1,5 +1,5 @@
-import { ErrorResponseSchema } from '@market-sdk/bindings';
-import { OrderHeartbeatMismatchResponseSchema } from '@market-sdk/bindings/clob';
+import { ErrorResponseSchema } from '@kuest/bindings';
+import { OrderHeartbeatMismatchResponseSchema } from '@kuest/bindings/clob';
 import ky, { type KyInstance } from 'ky';
 import { z } from 'zod';
 import {

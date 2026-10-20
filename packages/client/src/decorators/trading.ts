@@ -5,8 +5,8 @@ import type {
   OrderHeartbeat,
   OrderResponse,
   OrderResponses,
-} from '@market-sdk/bindings/clob';
-import type { TxHash } from '@market-sdk/types';
+} from '@kuest/bindings/clob';
+import type { TxHash } from '@kuest/types';
 import {
   type CancelMarketOrdersRequest,
   type CancelOrderRequest,

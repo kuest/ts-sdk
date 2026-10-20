@@ -1,4 +1,4 @@
-import { setNonBlockingTimeout } from '@market-sdk/types';
+import { setNonBlockingTimeout } from '@kuest/types';
 import { TimeoutError } from '../../errors';
 
 type PendingResponse<T> = {

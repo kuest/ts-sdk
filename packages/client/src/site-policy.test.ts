@@ -1,4 +1,4 @@
-import type { Market } from '@market-sdk/bindings/gamma';
+import type { Market } from '@kuest/bindings/gamma';
 import { afterEach, describe, expect, it, vi } from 'vitest';
 import { DEFAULT_SITE_CONFIG } from './site-config';
 import { ensureSiteTradingAllowed } from './site-policy';

@@ -1,4 +1,4 @@
-import { PerpsKlineInterval } from '@market-sdk/bindings/perps';
+import { PerpsKlineInterval } from '@kuest/bindings/perps';
 import { ws } from 'msw';
 import { setupServer } from 'msw/node';
 import {

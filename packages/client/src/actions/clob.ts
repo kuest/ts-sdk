@@ -11,7 +11,7 @@ import {
   type TickSizeValue,
   type TokenId,
   toPaginationCursor,
-} from '@market-sdk/bindings';
+} from '@kuest/bindings';
 import {
   type BuilderFeeRates,
   type CurrentReward,
@@ -46,8 +46,8 @@ import {
   SpreadSchema,
   type Spreads,
   SpreadsSchema,
-} from '@market-sdk/bindings/clob';
-import { SortDirectionSchema } from '@market-sdk/bindings/data';
+} from '@kuest/bindings/clob';
+import { SortDirectionSchema } from '@kuest/bindings/data';
 import { z } from 'zod';
 import type { BaseClient } from '../clients';
 import {

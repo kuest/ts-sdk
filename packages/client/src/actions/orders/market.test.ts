@@ -1,4 +1,4 @@
-import { OrderSide, OrderType } from '@market-sdk/bindings';
+import { OrderSide, OrderType } from '@kuest/bindings';
 import { describe, expect, it } from 'vitest';
 import {
   adjustBuyAmountForFees,

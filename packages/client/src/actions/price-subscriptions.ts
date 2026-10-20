@@ -1,4 +1,4 @@
-import { PriceProvider } from '@market-sdk/bindings/subscriptions';
+import { PriceProvider } from '@kuest/bindings/subscriptions';
 import { z } from 'zod';
 import { parseUserInput } from '../input';
 import type {

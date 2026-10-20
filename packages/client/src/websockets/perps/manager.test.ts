@@ -1,5 +1,5 @@
-import type { PerpsCredentials } from '@market-sdk/bindings/perps';
-import { expectEvmAddress, expectPrivateKey } from '@market-sdk/types';
+import type { PerpsCredentials } from '@kuest/bindings/perps';
+import { expectEvmAddress, expectPrivateKey } from '@kuest/types';
 import { ws } from 'msw';
 import { setupServer } from 'msw/node';
 import {

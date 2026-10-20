@@ -1,19 +1,19 @@
-import { OrderSide } from '@market-sdk/bindings';
-import { AssetType } from '@market-sdk/bindings/clob';
+import { OrderSide } from '@kuest/bindings';
+import { AssetType } from '@kuest/bindings/clob';
 import {
   type ApiKeyAuthorization,
   createSecureClient,
   type EnvironmentConfig,
   type EvmAddress,
   WalletType,
-} from '@market-sdk/client';
+} from '@kuest/sdk';
 import {
   cancelOrder,
   fetchApiKeys,
   fetchBalanceAllowance,
-} from '@market-sdk/client/actions';
-import { type PrivyWalletConfig, signerFrom } from '@market-sdk/client/privy';
-import { expectPresent } from '@market-sdk/types';
+} from '@kuest/sdk/actions';
+import { type PrivyWalletConfig, signerFrom } from '@kuest/sdk/privy';
+import { expectPresent } from '@kuest/types';
 import { PrivyClient } from '@privy-io/node';
 import type { TestContext } from 'vitest';
 import { describe, expect, it, runMeteredTests } from './fixtures';

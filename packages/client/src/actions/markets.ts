@@ -5,11 +5,11 @@ import {
   type PaginationCursor,
   PaginationCursorSchema,
   PositionIdSchema,
-} from '@market-sdk/bindings';
+} from '@kuest/bindings';
 import {
   type ComboMarket,
   ListComboMarketsResponseSchema,
-} from '@market-sdk/bindings/combos';
+} from '@kuest/bindings/combos';
 import {
   CanonicalMarketConditionIdSchema,
   FetchOpenInterestResponseSchema,
@@ -20,7 +20,7 @@ import {
   PriceHistoryInterval,
   PriceHistoryIntervalSchema,
   type PriceHistoryPoint,
-} from '@market-sdk/bindings/data';
+} from '@kuest/bindings/data';
 import {
   FetchMarketTagsResponseSchema,
   ListMarketsKeysetResponseSchema,
@@ -29,7 +29,7 @@ import {
   MarketSchema,
   ProtocolVersion,
   type TagReference,
-} from '@market-sdk/bindings/gamma';
+} from '@kuest/bindings/gamma';
 import { z } from 'zod';
 import type { BaseClient } from '../clients';
 import {

@@ -1,7 +1,7 @@
 import { mkdtempSync, rmSync, writeFileSync } from 'node:fs';
 import { tmpdir } from 'node:os';
 import { join } from 'node:path';
-import { BuilderCodeSchema } from '@market-sdk/bindings';
+import { BuilderCodeSchema } from '@kuest/bindings';
 import { describe, expect, it } from 'vitest';
 import { loadSiteConfig } from './node-site-config';
 import {

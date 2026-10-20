@@ -3,9 +3,9 @@ import type {
   MarketId,
   PositionId,
   TokenId,
-} from '@market-sdk/bindings';
-import { type Market, ProtocolVersion } from '@market-sdk/bindings/gamma';
-import { isPresent } from '@market-sdk/types';
+} from '@kuest/bindings';
+import { type Market, ProtocolVersion } from '@kuest/bindings/gamma';
+import { isPresent } from '@kuest/types';
 import { UnexpectedResponseError } from '../errors';
 
 export enum PositionProtocol {

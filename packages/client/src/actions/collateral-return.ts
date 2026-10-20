@@ -1,16 +1,16 @@
-import type { EvmAddress } from '@market-sdk/bindings';
+import type { EvmAddress } from '@kuest/bindings';
 import {
   type CollateralReturnPlanResponse,
   CollateralReturnPlanResponseSchema,
   CollateralReturnPlanSchema,
-} from '@market-sdk/bindings/combos';
-import { WalletType } from '@market-sdk/bindings/gamma';
+} from '@kuest/bindings/combos';
+import { WalletType } from '@kuest/bindings/gamma';
 import {
   type RelayerDepositWalletExecuteRequest,
   RelayerExecuteResponseSchema,
   type RelayerLegacyExecuteRequest,
   RelayerTransactionType,
-} from '@market-sdk/bindings/relayer';
+} from '@kuest/bindings/relayer';
 import {
   delay,
   type EvmSignature,
@@ -18,7 +18,7 @@ import {
   invariant,
   isSameEvmAddress,
   type NonEmptyArray,
-} from '@market-sdk/types';
+} from '@kuest/types';
 import { z } from 'zod';
 import type { BaseSecureClient } from '../clients';
 import {
@@ -53,7 +53,7 @@ export {
   type CollateralReturnPositionAmount,
   type CollateralReturnPositionSummary,
   type CollateralReturnRouterCall,
-} from '@market-sdk/bindings/combos';
+} from '@kuest/bindings/combos';
 
 // Planning and submit re-validation both recompute wallet state server-side
 // and can take well beyond the transport's standard timeout.

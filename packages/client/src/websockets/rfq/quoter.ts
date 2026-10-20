@@ -1,4 +1,4 @@
-import type { ApiKeyCreds } from '@market-sdk/bindings/clob';
+import type { ApiKeyCreds } from '@kuest/bindings/clob';
 import {
   type RfqConfirmationDecision,
   type RfqErrorMessage,
@@ -7,8 +7,8 @@ import {
   type RfqQuoteRequest,
   RfqQuoterInboundMessageSchema,
   type RfqQuoterOutboundMessage,
-} from '@market-sdk/bindings/combos';
-import { type EvmAddress, setNonBlockingTimeout } from '@market-sdk/types';
+} from '@kuest/bindings/combos';
+import { type EvmAddress, setNonBlockingTimeout } from '@kuest/types';
 import { type Pushable, pushable } from 'it-pushable';
 import type {
   RfqCancelQuoteAck,

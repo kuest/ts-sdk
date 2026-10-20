@@ -17,7 +17,7 @@
   - `pnpm typecheck`
 - If `pnpm lint` reports fixable issues, run `pnpm lint:fix`, review the resulting edits, and rerun `pnpm lint`.
 - For cross-package changes, build changed dependencies before targeted verification because workspace packages are often consumed through built `dist` outputs.
-- Example: if `packages/bindings` changes and you are validating `packages/client`, run `pnpm --filter @market-sdk/bindings build` before `pnpm test:client`.
+- Example: if `packages/bindings` changes and you are validating `packages/client`, run `pnpm --filter @kuest/bindings build` before `pnpm test:client`.
 - If multiple packages changed or the dependency chain is unclear, prefer root-level verification such as `pnpm build` and `pnpm test`.
 
 ## Review Method
@@ -37,7 +37,7 @@
 ## Product and API guardrails
 
 - This repository adapts the upstream unified TypeScript SDK for the verified contracts and services described in `COMPATIBILITY.md`. Package and runtime names remain neutral for operator bundles.
-- `@market-sdk/client` presents CLOB, market discovery, data, and Deposit Wallet relayer workflows through one client interface. Consult `COMPATIBILITY.md` for supported and rejected operations.
+- `@kuest/sdk` presents CLOB, market discovery, data, and Deposit Wallet relayer workflows through one client interface. Consult `COMPATIBILITY.md` for supported and rejected operations.
 - The SDK should present one cohesive consumer interface, follow developer workflows, and hide service boundaries where possible. Do not cargo-cult the shape of underlying APIs, older SDKs, migration notes, or ticket wording when a better public SDK shape exists.
 - API boundary schemas, raw response schemas, websocket payload schemas, field normalization, branded IDs, and generated-contract-adjacent types belong in `packages/bindings`, not `packages/client`.
 - `packages/client` may compose bindings into workflows, actions, decorators, clients, auth, pagination, transactions, and higher-level SDK ergonomics.
@@ -53,7 +53,7 @@
 - Each action in `packages/client/src/actions/` has a corresponding bound method in a decorator under `packages/client/src/decorators/`. When you change an action — its signature, parameter types, TSDoc, or examples — verify the matching decorator method is also updated. The decorator method is the public surface most consumers see.
 - Client actions should use flat signatures with the client as the first parameter, such as `action(client, request)`, and decorators should bind them with `action.bind(null, client)`. Do not curry an action only to bind it into a decorator. Curry only when partial application is a concrete implementation requirement, such as reusing or passing the partially applied function; keep that exception local and evident at its call sites.
 - HTTP read actions accept an optional trailing `options: RequestOptions` (`signal`, `retries`, and per-request `timeout`), such as `action(client, request, options)`. Reads without a request take options as their only argument after the client, such as `action(client, options)`. Adding a request parameter to such a read later is a breaking change, so decide whether a read needs filters before releasing it.
-- The `@market-sdk/client` root entry point exports decorators, so new public client additions must be re-exported by the corresponding decorator module.
+- The `@kuest/sdk` root entry point exports decorators, so new public client additions must be re-exported by the corresponding decorator module.
 - Perps is experimental. Every public Perps surface—including actions, decorator methods, websocket classes and methods, request and response types, bindings, subscription types, and re-exports—must carry an `@experimental` TSDoc tag stating that the API may change in a breaking way in any release, including patch releases. Apply the tag at the original declaration and verify that generated `.d.ts` output retains it.
 - Do not leak `ky` details outside of `ServiceClient`. Keep `ky` instances, types, and option shapes internal, and expose SDK abstractions instead.
 - Wallet-library integrations must stay isolated to their entry points and optional peer dependencies. If `viem` is an optional peer tied to the `viem` entry point, non-`viem` code paths must not import `viem`. Apply the same rule to future entry points for other wallet libraries such as Ethers, Privy, Safe SDK, or Turnkey.

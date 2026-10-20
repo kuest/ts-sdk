@@ -22,7 +22,7 @@ How this file works (guidance for editors — safe to keep or delete):
 ## What this repo is
 
 Polymarket's TypeScript SDK monorepo (pnpm workspaces). The main package is
-`@market-sdk/client`, which presents one cohesive consumer interface over
+`@kuest/sdk`, which presents one cohesive consumer interface over
 Polymarket's API surfaces (CLOB, Gamma, Data, relayer) plus experimental
 Perps; more SDKs are planned, starting with `@market-sdk/react`. Breaking
 these packages breaks external integrators, so public API shape and semver

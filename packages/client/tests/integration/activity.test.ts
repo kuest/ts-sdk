@@ -1,5 +1,5 @@
-import { ActivityType, ComboActivityType } from '@market-sdk/client';
-import { expectPresent, isSameEvmAddress } from '@market-sdk/types';
+import { ActivityType, ComboActivityType } from '@kuest/sdk';
+import { expectPresent, isSameEvmAddress } from '@kuest/types';
 import { describe, expect, it } from './fixtures';
 import { expectNonEmptyPage, expectPageWindow } from './helpers';
 

@@ -1,11 +1,11 @@
-import type { TransactionId } from '@market-sdk/bindings';
+import type { TransactionId } from '@kuest/bindings';
 import {
   type EvmAddress,
   type EvmSignature,
   type HexString,
   invariant,
   type TxHash,
-} from '@market-sdk/types';
+} from '@kuest/types';
 import type { WaitForGaslessTransactionError } from './actions';
 import {
   makeErrorGuard,

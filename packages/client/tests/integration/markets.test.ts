@@ -4,8 +4,8 @@ import {
   ProtocolVersion,
   UnexpectedResponseError,
   UserInputError,
-} from '@market-sdk/client';
-import { expectPresent } from '@market-sdk/types';
+} from '@kuest/sdk';
+import { expectPresent } from '@kuest/types';
 import { afterEach, vi } from 'vitest';
 import { describe, environment, expect, it } from './fixtures';
 import { expectNonEmptyPage, expectPageWindow } from './helpers';

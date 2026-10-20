@@ -3,8 +3,8 @@ import type {
   ClobAssetId,
   ConditionId,
   TickSizeValue,
-} from '@market-sdk/bindings';
-import type { MarketFeeInfo, MarketInfo } from '@market-sdk/bindings/clob';
+} from '@kuest/bindings';
+import type { MarketFeeInfo, MarketInfo } from '@kuest/bindings/clob';
 import type { BaseClient } from '../../clients';
 import { UnexpectedResponseError } from '../../errors';
 import {

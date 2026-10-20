@@ -1,9 +1,9 @@
 # Shared SDK types
 
-`@market-sdk/types` contains shared TypeScript types for this workspace.
+`@kuest/types` contains shared TypeScript types for this workspace.
 
 ```ts
-import type { MarketId } from '@market-sdk/types';
+import type { MarketId } from '@kuest/types';
 ```
 
-Build locally with `pnpm --filter @market-sdk/types build`. See [UPSTREAM.md](../../UPSTREAM.md) and [LICENSE](../../LICENSE) for source attribution and MIT terms.
+Build locally with `pnpm --filter @kuest/types build`. See [UPSTREAM.md](../../UPSTREAM.md) and [LICENSE](../../LICENSE) for source attribution and MIT terms.

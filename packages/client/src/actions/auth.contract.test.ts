@@ -1,4 +1,4 @@
-import { expectEvmAddress, expectEvmSignature } from '@market-sdk/types';
+import { expectEvmAddress, expectEvmSignature } from '@kuest/types';
 import { expect, it, vi } from 'vitest';
 import type { BaseSecureClient } from '../clients';
 import { ServiceClient } from '../ServiceClient';

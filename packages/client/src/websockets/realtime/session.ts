@@ -1,8 +1,8 @@
 import {
   type PriceEvent,
   RealtimeKnownErrorCode,
-} from '@market-sdk/bindings/subscriptions';
-import { setNonBlockingTimeout } from '@market-sdk/types';
+} from '@kuest/bindings/subscriptions';
+import { setNonBlockingTimeout } from '@kuest/types';
 import type { PriceSubscriptionConfirmation } from '../../actions/subscriptions';
 import {
   ConnectionLostError,

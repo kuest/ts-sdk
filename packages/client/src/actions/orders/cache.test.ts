@@ -2,8 +2,8 @@ import {
   BuilderCodeSchema,
   ConditionIdSchema,
   TokenIdSchema,
-} from '@market-sdk/bindings';
-import type { MarketInfo } from '@market-sdk/bindings/clob';
+} from '@kuest/bindings';
+import type { MarketInfo } from '@kuest/bindings/clob';
 import { afterEach, describe, expect, it, vi } from 'vitest';
 import { UnexpectedResponseError } from '../../errors';
 import { OrderMetadataCache } from './cache';

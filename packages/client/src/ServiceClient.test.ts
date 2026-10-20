@@ -2098,4 +2098,4 @@ describe('ServiceClient', () => {
   });
 });
 
-import { PaginationCursorSchema } from '@market-sdk/bindings';
+import { PaginationCursorSchema } from '@kuest/bindings';

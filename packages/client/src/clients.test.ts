@@ -1,11 +1,11 @@
-import { ApiKeySchema } from '@market-sdk/bindings';
-import type { ApiKeyCreds } from '@market-sdk/bindings/clob';
-import { WalletType } from '@market-sdk/bindings/gamma';
+import { ApiKeySchema } from '@kuest/bindings';
+import type { ApiKeyCreds } from '@kuest/bindings/clob';
+import { WalletType } from '@kuest/bindings/gamma';
 import {
   type EvmAddress,
   expectEvmAddress,
   expectEvmSignature,
-} from '@market-sdk/types';
+} from '@kuest/types';
 import { HttpResponse, http } from 'msw';
 import { setupServer } from 'msw/node';
 import {
@@ -119,7 +119,7 @@ describe('predictions gateway service', () => {
     expect(fetch).toHaveBeenCalledTimes(2);
   });
   it('generates metadata once per client and overrides only prediction headers', async () => {
-    const expected = `@market-sdk/client@${version}:nodejs@${process.versions.node}`;
+    const expected = `@kuest/sdk@${version}:nodejs@${process.versions.node}`;
     const failure = new Error('request headers observed');
     const requests: Request[] = [];
     const fetch = vi.fn<typeof globalThis.fetch>(async (input) => {
@@ -643,7 +643,7 @@ describe('secure client gasless wallet setup', () => {
     expect(gatewayRequests).toHaveLength(2);
     for (const request of gatewayRequests) {
       expect(request.headers.get('KUEST_CLIENT')).toBe(
-        `@market-sdk/client@${version}:nodejs@${process.versions.node}`,
+        `@kuest/sdk@${version}:nodejs@${process.versions.node}`,
       );
       expect(request.url).toBe(`${environment.predictions.rest}/cancel-all`);
       expect(request.headers.has('KUEST_API_KEY')).toBe(false);

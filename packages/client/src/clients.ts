@@ -1,13 +1,13 @@
-import { ApiKeySchema, EvmAddressSchema } from '@market-sdk/bindings';
-import type { ApiKeyCreds } from '@market-sdk/bindings/clob';
-import { WalletType } from '@market-sdk/bindings/gamma';
+import { ApiKeySchema, EvmAddressSchema } from '@kuest/bindings';
+import type { ApiKeyCreds } from '@kuest/bindings/clob';
+import { WalletType } from '@kuest/bindings/gamma';
 import {
   expectEvmAddress,
   expectEvmSignature,
   invariant,
   isSameEvmAddress,
   type Prettify,
-} from '@market-sdk/types';
+} from '@kuest/types';
 import { z } from 'zod';
 import {
   createOrDeriveApiKey,

@@ -1,4 +1,4 @@
-import type { ComboMarket } from '@market-sdk/bindings/combos';
+import type { ComboMarket } from '@kuest/bindings/combos';
 import type {
   Comment,
   Event,
@@ -12,7 +12,7 @@ import type {
   Tag,
   TagReference,
   Team,
-} from '@market-sdk/bindings/gamma';
+} from '@kuest/bindings/gamma';
 import {
   type FetchCommentsByIdRequest,
   type FetchEventRequest,

@@ -5,7 +5,7 @@ import {
   EvmAddressSchema,
   OrderSideSchema,
   PaginationCursorSchema,
-} from '@market-sdk/bindings';
+} from '@kuest/bindings';
 import {
   type Activity,
   ActivityTypeSchema,
@@ -16,7 +16,7 @@ import {
   SortDirectionSchema,
   type Trade,
   TradeFilterTypeSchema,
-} from '@market-sdk/bindings/data';
+} from '@kuest/bindings/data';
 import { z } from 'zod';
 import type { BaseClient } from '../clients';
 import {
@@ -38,7 +38,7 @@ export {
   SortDirection,
   TipSide,
   TradeFilterType,
-} from '@market-sdk/bindings/data';
+} from '@kuest/bindings/data';
 
 const ListTradesRequestSchema = z
   .object({

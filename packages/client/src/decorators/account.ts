@@ -1,7 +1,4 @@
-import type {
-  ClobTrade,
-  NotificationsResponse,
-} from '@market-sdk/bindings/clob';
+import type { ClobTrade, NotificationsResponse } from '@kuest/bindings/clob';
 import type {
   Activity,
   ComboActivity,
@@ -12,8 +9,8 @@ import type {
   UserPnlSeries,
   UserStats,
   UserVolume,
-} from '@market-sdk/bindings/data';
-import type { Prettify } from '@market-sdk/types';
+} from '@kuest/bindings/data';
+import type { Prettify } from '@kuest/types';
 import {
   type DownloadAccountingSnapshotRequest,
   type DropNotificationsRequest,

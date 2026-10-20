@@ -1,7 +1,4 @@
-import {
-  PaginationCursorSchema,
-  toPaginationCursor,
-} from '@market-sdk/bindings';
+import { PaginationCursorSchema, toPaginationCursor } from '@kuest/bindings';
 import {
   type AssetType,
   AssetTypeSchema,
@@ -27,7 +24,7 @@ import {
   UserEarningsPageSchema,
   type UserRewardsEarning,
   UserRewardsEarningsPageSchema,
-} from '@market-sdk/bindings/clob';
+} from '@kuest/bindings/clob';
 import { z } from 'zod';
 import type { BaseSecureClient } from '../clients';
 import {

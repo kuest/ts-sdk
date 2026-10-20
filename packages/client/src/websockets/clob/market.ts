@@ -1,7 +1,7 @@
 import {
   type MarketEvent,
   MarketEventSchema,
-} from '@market-sdk/bindings/subscriptions';
+} from '@kuest/bindings/subscriptions';
 import type {
   MarketSubscription,
   SubscriptionHandle,

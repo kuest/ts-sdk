@@ -1,4 +1,4 @@
-import { createPublicClient, OrderSide } from '@market-sdk/client';
+import { createPublicClient, OrderSide } from '@kuest/sdk';
 import { never } from './lib/assert';
 
 const client = createPublicClient();

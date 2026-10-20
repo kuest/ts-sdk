@@ -23,8 +23,8 @@ Operator bundles can supply the established `.sdk/site-config.json` overlay. Dir
 The public repository has no operator wallet or `.sdk` folder. An operator ZIP may add `.sdk/site-config.json` using the established CLOB bundle schema. In Node.js, load it and pass it to the client:
 
 ```ts
-import { createPublicClient, forkEnvironmentConfig } from '@market-sdk/client';
-import { loadSiteConfig } from '@market-sdk/client/node';
+import { createPublicClient, forkEnvironmentConfig } from '@kuest/sdk';
+import { loadSiteConfig } from '@kuest/sdk/node';
 
 const siteConfig = loadSiteConfig(); // Empty defaults when the overlay is absent.
 const environment = forkEnvironmentConfig({
@@ -43,7 +43,7 @@ Pass the same `siteConfig` to `createSecureClient` for trading. A nonempty `buil
 ## Read-only example
 
 ```ts
-import { createPublicClient, forkEnvironmentConfig } from '@market-sdk/client';
+import { createPublicClient, forkEnvironmentConfig } from '@kuest/sdk';
 
 const environment = forkEnvironmentConfig({
   name: 'operator',

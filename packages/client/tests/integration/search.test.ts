@@ -1,12 +1,12 @@
-import { toPaginationCursor } from '@market-sdk/bindings';
+import { toPaginationCursor } from '@kuest/bindings';
 import {
   type Page,
   PaginationLimitError,
   SearchError,
   SearchSort,
   UserInputError,
-} from '@market-sdk/client';
-import type { SearchResults } from '@market-sdk/client/actions';
+} from '@kuest/sdk';
+import type { SearchResults } from '@kuest/sdk/actions';
 import { afterEach, vi } from 'vitest';
 import { describe, expect, it } from './fixtures';
 

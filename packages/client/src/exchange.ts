@@ -1,5 +1,5 @@
-import { OrderSide, type PositionId, type TokenId } from '@market-sdk/bindings';
-import { SignatureType } from '@market-sdk/bindings/clob';
+import { OrderSide, type PositionId, type TokenId } from '@kuest/bindings';
+import { SignatureType } from '@kuest/bindings/clob';
 import {
   type Erc1271Signature,
   type EvmAddress,
@@ -7,7 +7,7 @@ import {
   expectErc1271Signature,
   expectHexString,
   type HexString,
-} from '@market-sdk/types';
+} from '@kuest/types';
 import { AbiParameters, Bytes, Hash } from 'ox';
 import type { TypedDataField, TypedDataPayload } from './types';
 

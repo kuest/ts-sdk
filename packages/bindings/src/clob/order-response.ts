@@ -1,4 +1,4 @@
-import { never, type TxHash } from '@market-sdk/types';
+import { never, type TxHash } from '@kuest/types';
 import { z } from 'zod';
 import {
   type DecimalString,

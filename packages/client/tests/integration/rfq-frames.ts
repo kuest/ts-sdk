@@ -1,6 +1,6 @@
-import { SignatureType } from '@market-sdk/bindings/clob';
-import { RfqExecutionStatus } from '@market-sdk/bindings/combos';
-import { invariant } from '@market-sdk/types';
+import { SignatureType } from '@kuest/bindings/clob';
+import { RfqExecutionStatus } from '@kuest/bindings/combos';
+import { invariant } from '@kuest/types';
 
 export const RFQ_ID = 'rfq-1';
 export const QUOTE_ID = 'quote-1';

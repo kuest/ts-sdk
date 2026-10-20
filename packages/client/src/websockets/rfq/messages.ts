@@ -1,4 +1,4 @@
-import type { ApiKeyCreds } from '@market-sdk/bindings/clob';
+import type { ApiKeyCreds } from '@kuest/bindings/clob';
 import type {
   RfqAuthMessage,
   RfqConfirmationDecision,
@@ -8,7 +8,7 @@ import type {
   RfqQuoteId,
   RfqQuoteMessage,
   RfqQuoteRequest,
-} from '@market-sdk/bindings/combos';
+} from '@kuest/bindings/combos';
 import type { AccountIdentity } from '../../wallet';
 import { resolveOrderIdentity } from '../../wallet';
 import type { RfqQuote } from './quote';

@@ -7,13 +7,13 @@ import {
   type PaginationCursor,
   PaginationCursorSchema,
   type SeriesId,
-} from '@market-sdk/bindings';
+} from '@kuest/bindings';
 import {
   type Comment,
   ListCommentsKeysetResponseSchema,
   ListCommentsResponseSchema,
   SeriesIdSchema,
-} from '@market-sdk/bindings/gamma';
+} from '@kuest/bindings/gamma';
 import { z } from 'zod';
 import type { BaseClient } from '../clients';
 import {

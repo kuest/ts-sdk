@@ -1,5 +1,5 @@
-import { MarketSchema, WalletType } from '@market-sdk/bindings/gamma';
-import { expectEvmAddress } from '@market-sdk/types';
+import { MarketSchema, WalletType } from '@kuest/bindings/gamma';
+import { expectEvmAddress } from '@kuest/types';
 import { AbiFunction, AbiParameters } from 'ox';
 import { describe, expect, it, vi } from 'vitest';
 import type { BaseSecureClient } from '../clients';

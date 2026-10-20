@@ -1,8 +1,5 @@
-import { ApiKeyCredsSchema } from '@market-sdk/bindings/clob';
-import {
-  KnownPriceSource,
-  PriceProvider,
-} from '@market-sdk/bindings/subscriptions';
+import { ApiKeyCredsSchema } from '@kuest/bindings/clob';
+import { KnownPriceSource, PriceProvider } from '@kuest/bindings/subscriptions';
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 import type { PriceSubscription } from '../../actions/subscriptions';
 import { TransportError } from '../../errors';

@@ -1,4 +1,4 @@
-import type { EvmAddress, EvmSignature, HexString } from '@market-sdk/types';
+import type { EvmAddress, EvmSignature, HexString } from '@kuest/types';
 import { CancelledSigningError, makeErrorGuard, SigningError } from './errors';
 import type {
   Signer,

@@ -1,8 +1,8 @@
 import {
   type PerpsMarketDataEvent,
   PerpsMarketDataEventSchema,
-} from '@market-sdk/bindings/subscriptions';
-import { invariant } from '@market-sdk/types';
+} from '@kuest/bindings/subscriptions';
+import { invariant } from '@kuest/types';
 import type {
   PerpsMarketDataSubscription,
   SubscriptionHandle,

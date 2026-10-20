@@ -10,7 +10,7 @@ import type {
   PerpsPublicTrade,
   PerpsTicker,
   PerpsWithdrawalId,
-} from '@market-sdk/bindings/perps';
+} from '@kuest/bindings/perps';
 import {
   type DepositToPerpsRequest,
   depositToPerps,
@@ -533,14 +533,14 @@ export type {
   PerpsChase,
   PerpsChaseAccepted,
   PerpsChaseId,
-} from '@market-sdk/bindings/perps';
+} from '@kuest/bindings/perps';
 /** @experimental This API may change in a breaking way in any release, including patch releases. */
 export {
   type PerpsTwap,
   type PerpsTwapAccepted,
   type PerpsTwapId,
   PerpsTwapStatus,
-} from '@market-sdk/bindings/perps';
+} from '@kuest/bindings/perps';
 /** @experimental This API may change in a breaking way in any release, including patch releases. */
 export {
   CancelPerpsChaseError,

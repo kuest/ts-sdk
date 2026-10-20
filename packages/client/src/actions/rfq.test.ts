@@ -1,12 +1,12 @@
-import { OrderSide } from '@market-sdk/bindings';
+import { OrderSide } from '@kuest/bindings';
 import {
   ComboAcceptFailureReason,
   ComboQuoteUnavailableReason,
   RfqRejectionCode,
   RfqStatus,
-} from '@market-sdk/bindings/combos';
-import { WalletType } from '@market-sdk/bindings/gamma';
-import { expectEvmAddress } from '@market-sdk/types';
+} from '@kuest/bindings/combos';
+import { WalletType } from '@kuest/bindings/gamma';
+import { expectEvmAddress } from '@kuest/types';
 import { describe, expect, it, vi } from 'vitest';
 import type { BaseSecureClient } from '../clients';
 import { production } from '../environments';

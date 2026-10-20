@@ -1,4 +1,4 @@
-import { toPaginationCursor } from '@market-sdk/bindings';
+import { toPaginationCursor } from '@kuest/bindings';
 import { describe, expect, it, vi } from 'vitest';
 import {
   PaginationLimitError,

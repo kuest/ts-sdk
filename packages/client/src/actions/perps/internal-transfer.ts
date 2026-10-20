@@ -1,5 +1,5 @@
-import type { PerpsInternalTransferId } from '@market-sdk/bindings/perps';
-import type { EvmAddress, EvmSignature } from '@market-sdk/types';
+import type { PerpsInternalTransferId } from '@kuest/bindings/perps';
+import type { EvmAddress, EvmSignature } from '@kuest/types';
 
 /** @internal */
 export type PerpsCollateralTransferOperation = {

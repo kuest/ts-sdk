@@ -1,4 +1,4 @@
-import { NegRiskEventIdSchema } from '@market-sdk/bindings';
+import { NegRiskEventIdSchema } from '@kuest/bindings';
 import { z } from 'zod';
 
 const ExplicitAmountSchema = z

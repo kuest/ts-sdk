@@ -1,11 +1,11 @@
-import { toDecimalString, toEpochMilliseconds } from '@market-sdk/bindings';
+import { toDecimalString, toEpochMilliseconds } from '@kuest/bindings';
 import {
   type CryptoPriceEvent,
   type EquityTwapPriceEvent,
   KnownPriceSource,
   type PriceSource,
   RealtimeKnownErrorCode,
-} from '@market-sdk/bindings/subscriptions';
+} from '@kuest/bindings/subscriptions';
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 import {
   ConnectionLostError,

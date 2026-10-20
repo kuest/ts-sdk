@@ -6,7 +6,7 @@ import {
   isPrivateKey,
   type PrivateKey,
   type TxHash,
-} from '@market-sdk/types';
+} from '@kuest/types';
 import {
   type Account,
   type Chain,

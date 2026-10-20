@@ -1,9 +1,9 @@
-import { PaginationCursorSchema } from '@market-sdk/bindings';
+import { PaginationCursorSchema } from '@kuest/bindings';
 import {
   ListSeriesResponseSchema,
   type Series,
   SeriesSchema,
-} from '@market-sdk/bindings/gamma';
+} from '@kuest/bindings/gamma';
 import { z } from 'zod';
 import type { BaseClient } from '../clients';
 import {

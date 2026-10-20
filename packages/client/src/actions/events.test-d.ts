@@ -1,6 +1,6 @@
-import type { Event } from '@market-sdk/bindings/gamma';
-import { ProtocolVersion, type PublicClient } from '@market-sdk/client';
-import { type ListEventsRequest, listEvents } from '@market-sdk/client/actions';
+import type { Event } from '@kuest/bindings/gamma';
+import { ProtocolVersion, type PublicClient } from '@kuest/sdk';
+import { type ListEventsRequest, listEvents } from '@kuest/sdk/actions';
 import { describe, expectTypeOf, it } from 'vitest';
 import type { Paginated } from '../pagination';
 

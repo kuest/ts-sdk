@@ -3,15 +3,15 @@ import {
   type DecimalString,
   OrderSide,
   type PositionId,
-} from '@market-sdk/bindings';
+} from '@kuest/bindings';
 import {
   RfqDirection,
   type RfqQuoteRequest,
   type RfqRequestedSize,
   RfqRequestedSizeUnit,
   type RfqSignedOrder,
-} from '@market-sdk/bindings/combos';
-import type { EvmAddress } from '@market-sdk/types';
+} from '@kuest/bindings/combos';
+import type { EvmAddress } from '@kuest/types';
 import { z } from 'zod';
 import type { RfqQuoteResponse, RfqQuoteSource } from '../../actions/rfq';
 import { UserInputError } from '../../errors';

@@ -1,7 +1,4 @@
-import {
-  type PublicProfile,
-  PublicProfileSchema,
-} from '@market-sdk/bindings/gamma';
+import { type PublicProfile, PublicProfileSchema } from '@kuest/bindings/gamma';
 import { z } from 'zod';
 import type { BaseClient } from '../clients';
 import {

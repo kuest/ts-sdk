@@ -4,7 +4,7 @@ import {
   expectTxHash,
   type HexString,
   type TxHash,
-} from '@market-sdk/types';
+} from '@kuest/types';
 import { ethers } from 'ethers-v5';
 import {
   CancelledSigningError,

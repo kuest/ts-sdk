@@ -1,5 +1,5 @@
 {
-  "name": "@market-sdk/bindings",
+  "name": "@kuest/bindings",
   "version": "0.13.0",
   "description": "Internal API bindings for the unified SDK",
   "type": "module",
@@ -72,7 +72,7 @@
   ],
   "sideEffects": false,
   "dependencies": {
-    "@market-sdk/types": "workspace:*",
+    "@kuest/types": "workspace:*",
     "zod": "^4.3.6"
   },
   "scripts": {

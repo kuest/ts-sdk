@@ -1,5 +1,5 @@
-import { toPaginationCursor } from '@market-sdk/bindings';
-import type { PerpsInternalTransfer } from '@market-sdk/bindings/perps';
+import { toPaginationCursor } from '@kuest/bindings';
+import type { PerpsInternalTransfer } from '@kuest/bindings/perps';
 import { UnexpectedResponseError } from '../../../errors';
 import type { Page } from '../../../pagination';
 

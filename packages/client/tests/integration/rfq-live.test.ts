@@ -2,7 +2,7 @@ import {
   RfqExecutionStatus,
   RfqKnownErrorCode,
   RfqQuoteRejectedError,
-} from '@market-sdk/client';
+} from '@kuest/sdk';
 import { describe, expect, it, runMeteredTests } from './fixtures';
 
 const MAX_IN_FLIGHT_QUOTES = 8;

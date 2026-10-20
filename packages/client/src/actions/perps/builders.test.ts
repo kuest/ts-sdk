@@ -1,5 +1,5 @@
-import { toDecimalString, toEpochMilliseconds } from '@market-sdk/bindings';
-import { expectEvmAddress, expectEvmSignature } from '@market-sdk/types';
+import { toDecimalString, toEpochMilliseconds } from '@kuest/bindings';
+import { expectEvmAddress, expectEvmSignature } from '@kuest/types';
 import { describe, expect, it } from 'vitest';
 import { minPerpsBuilderFeeRate } from '../../websockets/perps/actions/builder-terms';
 import {

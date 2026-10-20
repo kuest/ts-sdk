@@ -1,4 +1,4 @@
-import type { PerpsKlineInterval } from '@market-sdk/bindings/perps';
+import type { PerpsKlineInterval } from '@kuest/bindings/perps';
 import type {
   CommentsEvent,
   CryptoPriceEvent,
@@ -30,8 +30,8 @@ import type {
   SportsEvent,
   StandardMarketEvent,
   UserEvent,
-} from '@market-sdk/bindings/subscriptions';
-import { invariant, type Prettify } from '@market-sdk/types';
+} from '@kuest/bindings/subscriptions';
+import { invariant, type Prettify } from '@kuest/types';
 import merge from 'it-merge';
 import { z } from 'zod';
 import type {
@@ -67,11 +67,11 @@ export type {
   EquityTwapPriceEvent,
   EquityTwapPriceSnapshotEvent,
   PriceSource,
-} from '@market-sdk/bindings/subscriptions';
+} from '@kuest/bindings/subscriptions';
 export {
   KnownPriceSource,
   PriceProvider,
-} from '@market-sdk/bindings/subscriptions';
+} from '@kuest/bindings/subscriptions';
 // Event types — re-exported from bindings for consumer convenience.
 /** @experimental This API may change in a breaking way in any release, including patch releases. */
 export type {

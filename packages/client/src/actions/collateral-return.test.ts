@@ -1,5 +1,5 @@
-import { WalletType } from '@market-sdk/bindings/gamma';
-import { expectEvmAddress, type HexString } from '@market-sdk/types';
+import { WalletType } from '@kuest/bindings/gamma';
+import { expectEvmAddress, type HexString } from '@kuest/types';
 import { describe, expect, it, type MockInstance, vi } from 'vitest';
 import { encodeProxyCall } from '../abis';
 import type { BaseSecureClient } from '../clients';

@@ -1,5 +1,5 @@
-import type { EvmSignature, PrivateKey } from '@market-sdk/types';
-import { expectEvmSignature, invariant } from '@market-sdk/types';
+import type { EvmSignature, PrivateKey } from '@kuest/types';
+import { expectEvmSignature, invariant } from '@kuest/types';
 import { encode } from '@msgpack/msgpack';
 import { Hash, Secp256k1, Signature, TypedData } from 'ox';
 import type { TypedDataPayload } from '../../types';

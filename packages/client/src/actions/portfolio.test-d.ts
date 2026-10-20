@@ -1,4 +1,4 @@
-import { ComboPositionStatus } from '@market-sdk/bindings/data';
+import { ComboPositionStatus } from '@kuest/bindings/data';
 import { describe, expectTypeOf, it } from 'vitest';
 import type {
   ActivityBase,

@@ -1,4 +1,4 @@
-import type { PriceProvider } from '@market-sdk/bindings/subscriptions';
+import type { PriceProvider } from '@kuest/bindings/subscriptions';
 import type { PriceSubscription } from '../../actions/subscriptions';
 
 /** @internal A single canonical price subscription shared by listeners. */

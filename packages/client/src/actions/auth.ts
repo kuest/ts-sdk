@@ -1,4 +1,4 @@
-import type { ApiKey } from '@market-sdk/bindings';
+import type { ApiKey } from '@kuest/bindings';
 import {
   type ApiKeyCreds,
   ApiKeyCredsSchema,
@@ -7,8 +7,8 @@ import {
   type BuilderApiKeyCreds,
   BuilderApiKeyCredsSchema,
   BuilderApiKeysResponseSchema,
-} from '@market-sdk/bindings/clob';
-import type { EvmAddress, EvmSignature } from '@market-sdk/types';
+} from '@kuest/bindings/clob';
+import type { EvmAddress, EvmSignature } from '@kuest/types';
 import { z } from 'zod';
 import type { BaseClient, BaseSecureClient } from '../clients';
 import {

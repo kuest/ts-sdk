@@ -1,7 +1,7 @@
 import {
   type SportsEvent,
   SportsResultEventSchema,
-} from '@market-sdk/bindings/subscriptions';
+} from '@kuest/bindings/subscriptions';
 import type {
   SportsSubscription,
   SubscriptionHandle,

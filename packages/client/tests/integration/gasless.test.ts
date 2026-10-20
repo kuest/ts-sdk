@@ -3,7 +3,7 @@ import {
   type SecureClient,
   type TransactionOutcome,
   WalletType,
-} from '@market-sdk/client';
+} from '@kuest/sdk';
 import { describe, expect, it } from './fixtures';
 
 describe('Gasless', () => {

@@ -1,9 +1,6 @@
-import { TradeStatus, type TxHash, TxHashSchema } from '@market-sdk/bindings';
-import type {
-  AcceptedOrderResponse,
-  ClobTrade,
-} from '@market-sdk/bindings/clob';
-import { delay } from '@market-sdk/types';
+import { TradeStatus, type TxHash, TxHashSchema } from '@kuest/bindings';
+import type { AcceptedOrderResponse, ClobTrade } from '@kuest/bindings/clob';
+import { delay } from '@kuest/types';
 import { z } from 'zod';
 import type { BaseSecureClient } from '../../clients';
 import {

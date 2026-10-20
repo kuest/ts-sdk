@@ -1,6 +1,6 @@
-import { SignatureType } from '@market-sdk/bindings/clob';
-import { WalletType } from '@market-sdk/bindings/gamma';
-import type { HexString } from '@market-sdk/types';
+import { SignatureType } from '@kuest/bindings/clob';
+import { WalletType } from '@kuest/bindings/gamma';
+import type { HexString } from '@kuest/types';
 import {
   type Erc1271Signature,
   type EvmAddress,
@@ -11,7 +11,7 @@ import {
   isSameEvmAddress,
   type SessionSignerSignature,
   ZERO_ADDRESS,
-} from '@market-sdk/types';
+} from '@kuest/types';
 import { AbiParameters, Bytes, ContractAddress, Hash } from 'ox';
 import type { EnvironmentConfig, WalletDerivationConfig } from './environments';
 import { UserInputError } from './errors';

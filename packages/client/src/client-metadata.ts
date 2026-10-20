@@ -24,7 +24,7 @@ type RuntimeGlobals = {
  * @internal
  */
 export function createClientMetadata(): string {
-  return `@market-sdk/client@${packageVersion}:${detectRuntime()}`;
+  return `@kuest/sdk@${packageVersion}:${detectRuntime()}`;
 }
 
 function detectRuntime(): string {

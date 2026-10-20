@@ -1,10 +1,10 @@
-import type { BuilderTrade } from '@market-sdk/bindings/clob';
+import type { BuilderTrade } from '@kuest/bindings/clob';
 import type {
   BiggestWinner,
   BuilderStanding,
   BuilderVolumePoint,
   TraderLeaderboardEntry,
-} from '@market-sdk/bindings/data';
+} from '@kuest/bindings/data';
 import {
   type FetchBuilderVolumeRequest,
   fetchBuilderVolume,

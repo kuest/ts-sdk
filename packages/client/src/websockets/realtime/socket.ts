@@ -1,4 +1,4 @@
-import type { ApiKeyCreds } from '@market-sdk/bindings/clob';
+import type { ApiKeyCreds } from '@kuest/bindings/clob';
 import {
   PolyboltAckOp,
   PolyboltAckSchema,
@@ -6,8 +6,8 @@ import {
   PolyboltEnvelopeSchema,
   type PolyboltSubscription,
   parsePolyboltEvent,
-} from '@market-sdk/bindings/subscriptions';
-import { setNonBlockingTimeout } from '@market-sdk/types';
+} from '@kuest/bindings/subscriptions';
+import { setNonBlockingTimeout } from '@kuest/types';
 import {
   ConnectionLostError,
   RequestRejectedError,

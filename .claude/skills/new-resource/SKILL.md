@@ -31,10 +31,10 @@ Creates a resource module in `packages/bindings` by investigating a source repo 
 - Use `PascalCaseSchema` for exported Zod schemas
 - Export the inferred TypeScript type with the plain `PascalCase` name
 - Export named reusable nested schemas and their inferred types too
-- For every implemented schema with an `id` field, including the top-level resource and named nested resource/reference schemas, use the corresponding branded type from `@market-sdk/types`
+- For every implemented schema with an `id` field, including the top-level resource and named nested resource/reference schemas, use the corresponding branded type from `@kuest/types`
 - If a branded ID type does not exist, add it to `packages/types/src/ids.ts`, export a matching `to<TypeName>` constructor there, ensure it is re-exported from `packages/types/src/index.ts`, then use that constructor from the Zod schema transform
 - Follow the `to<TypeName>` naming pattern for branded constructors so they are easy to discover and consistent across the SDK
-- Do not inline `value as SomeId` casts inside bindings schemas; always route branding through the `to<TypeName>` constructor from `@market-sdk/types`
+- Do not inline `value as SomeId` casts inside bindings schemas; always route branding through the `to<TypeName>` constructor from `@kuest/types`
 - When a branded type is string-backed or integer-backed and has no extra invariant yet, follow the existing constructor helpers in `packages/types/src/ids.ts` so future tightening happens in one place
 - Move overlapping shared schemas to `packages/bindings/src/common.ts`
 - Use `common.ts` for shared primitives, shared nested objects, shared reference schemas, and shared branded ID schemas
@@ -49,7 +49,7 @@ Creates a resource module in `packages/bindings` by investigating a source repo 
 
 ## Validation
 
-- Run `pnpm --filter @market-sdk/types build` if `packages/types` changed
-- Run `pnpm --filter @market-sdk/bindings build`
-- Run `pnpm --filter @market-sdk/bindings typecheck`
-- If the resource is consumed by another workspace package in the same task, build `@market-sdk/bindings` before validating that dependent package. If multiple workspace packages changed or the dependency chain is unclear, prefer `pnpm build` from the repo root first.
+- Run `pnpm --filter @kuest/types build` if `packages/types` changed
+- Run `pnpm --filter @kuest/bindings build`
+- Run `pnpm --filter @kuest/bindings typecheck`
+- If the resource is consumed by another workspace package in the same task, build `@kuest/bindings` before validating that dependent package. If multiple workspace packages changed or the dependency chain is unclear, prefer `pnpm build` from the repo root first.

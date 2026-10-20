@@ -1,4 +1,4 @@
-import type { BuilderTrade } from '@market-sdk/bindings/clob';
+import type { BuilderTrade } from '@kuest/bindings/clob';
 import type { BaseClient } from '../clients';
 import {
   makeErrorGuard,

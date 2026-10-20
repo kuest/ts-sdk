@@ -1,7 +1,4 @@
-import {
-  setNonBlockingInterval,
-  setNonBlockingTimeout,
-} from '@market-sdk/types';
+import { setNonBlockingInterval, setNonBlockingTimeout } from '@kuest/types';
 import {
   TransportError,
   type WebSocketCloseCode,

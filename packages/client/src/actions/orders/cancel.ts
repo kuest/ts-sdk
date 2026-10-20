@@ -1,7 +1,7 @@
 import {
   type CancelOrdersResponse,
   CancelOrdersResponseSchema,
-} from '@market-sdk/bindings/clob';
+} from '@kuest/bindings/clob';
 
 import { z } from 'zod';
 import type { BaseSecureClient } from '../../clients';

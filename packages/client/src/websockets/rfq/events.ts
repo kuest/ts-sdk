@@ -9,7 +9,7 @@ import {
   type RfqQuoteId,
   type RfqQuoteRequest,
   type RfqTrade,
-} from '@market-sdk/bindings/combos';
+} from '@kuest/bindings/combos';
 import type {
   RfqCancelQuoteAck,
   RfqConfirmationAck,

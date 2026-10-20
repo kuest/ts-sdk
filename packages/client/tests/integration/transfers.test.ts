@@ -1,5 +1,5 @@
-import { WalletType } from '@market-sdk/bindings/gamma';
-import { createSecureClient } from '@market-sdk/client';
+import { WalletType } from '@kuest/bindings/gamma';
+import { createSecureClient } from '@kuest/sdk';
 import { describe, expect, it } from './fixtures';
 
 describe('Transfers', () => {

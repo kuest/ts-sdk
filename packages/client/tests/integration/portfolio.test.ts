@@ -7,8 +7,8 @@ import {
   UserInputError,
   UserPnlFidelity,
   UserPnlInterval,
-} from '@market-sdk/client';
-import { expectPresent, isSameEvmAddress } from '@market-sdk/types';
+} from '@kuest/sdk';
+import { expectPresent, isSameEvmAddress } from '@kuest/types';
 import { afterEach, type MockInstance, vi } from 'vitest';
 import { describe, expect, it } from './fixtures';
 import { expectNonEmptyPage, expectPageWindow } from './helpers';

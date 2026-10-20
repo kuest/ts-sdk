@@ -1,4 +1,4 @@
-import type { HexString } from '@market-sdk/types';
+import type { HexString } from '@kuest/types';
 import { UserInputError } from '../../errors';
 import { ExchangeOrderProtocolVersion } from '../../exchange';
 import { isV2PositionId } from '../../protocol';

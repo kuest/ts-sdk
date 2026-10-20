@@ -1,4 +1,4 @@
-import { expectEvmAddress } from '@market-sdk/types';
+import { expectEvmAddress } from '@kuest/types';
 import { describe, expect, it, vi } from 'vitest';
 import type { NegRiskWorkflow } from './actions/neg-risk';
 import { SigningError } from './errors';

@@ -1,10 +1,6 @@
-import {
-  type OrderSide,
-  type PositionId,
-  toBaseUnits,
-} from '@market-sdk/bindings';
-import type { RfqSignedOrder } from '@market-sdk/bindings/combos';
-import type { EvmAddress, EvmSignature, HexString } from '@market-sdk/types';
+import { type OrderSide, type PositionId, toBaseUnits } from '@kuest/bindings';
+import type { RfqSignedOrder } from '@kuest/bindings/combos';
+import type { EvmAddress, EvmSignature, HexString } from '@kuest/types';
 import { SigningError } from '../../errors';
 import {
   calculateExchangeOrderMakerAmount,

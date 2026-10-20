@@ -1,5 +1,5 @@
-import type { BuilderCode } from '@market-sdk/bindings';
-import type { HexString } from '@market-sdk/types';
+import type { BuilderCode } from '@kuest/bindings';
+import type { HexString } from '@kuest/types';
 
 /** Public settings from a downloader-generated `.sdk/site-config.json`. */
 export type SiteConfig = {

@@ -1,4 +1,4 @@
-import { OrderSide, type TickSizeValue } from '@market-sdk/bindings';
+import { OrderSide, type TickSizeValue } from '@kuest/bindings';
 import { describe, expect, it } from 'vitest';
 import { computeLimitOrderAmounts, computeMarketOrderAmounts } from './amounts';
 import { validatePriceOnTickGrid } from './context';

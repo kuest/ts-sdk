@@ -23,7 +23,7 @@ body:
     attributes:
       label: SDK package and version
       description: Include this if your question depends on a specific package version.
-      placeholder: "@market-sdk/client@0.1.0"
+      placeholder: "@kuest/sdk@0.1.0"
     validations:
       required: false
   - type: textarea

@@ -1,4 +1,4 @@
-import { EventIdSchema } from '@market-sdk/bindings';
+import { EventIdSchema } from '@kuest/bindings';
 import { z } from 'zod';
 
 export const ClosedFilterSchema = z.union([z.boolean(), z.literal('any')]);

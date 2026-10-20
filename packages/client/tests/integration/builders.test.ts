@@ -3,8 +3,8 @@ import {
   createSecureClient,
   OrderSide,
   type PublicClient,
-} from '@market-sdk/client';
-import { delay, expectPresent } from '@market-sdk/types';
+} from '@kuest/sdk';
+import { delay, expectPresent } from '@kuest/types';
 import { describe, expect, it, runMeteredTests } from './fixtures';
 import { findHighVolumeLowPriceMarket } from './markets';
 

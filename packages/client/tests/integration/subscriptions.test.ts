@@ -1,7 +1,7 @@
-import { OrderSide } from '@market-sdk/bindings';
-import { UserOrderEventType } from '@market-sdk/bindings/subscriptions';
-import { OrderPostStatus, type SecureClient } from '@market-sdk/client';
-import { expectPresent } from '@market-sdk/types';
+import { OrderSide } from '@kuest/bindings';
+import { UserOrderEventType } from '@kuest/bindings/subscriptions';
+import { OrderPostStatus, type SecureClient } from '@kuest/sdk';
+import { expectPresent } from '@kuest/types';
 import {
   describe,
   expect,

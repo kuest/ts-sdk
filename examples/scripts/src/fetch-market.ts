@@ -1,4 +1,4 @@
-import { createPublicClient } from '@market-sdk/client';
+import { createPublicClient } from '@kuest/sdk';
 import { never } from './lib/assert';
 
 const client = createPublicClient();

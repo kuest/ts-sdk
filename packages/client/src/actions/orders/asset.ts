@@ -1,4 +1,4 @@
-import { ClobAssetIdSchema } from '@market-sdk/bindings';
+import { ClobAssetIdSchema } from '@kuest/bindings';
 import { z } from 'zod';
 
 /** @internal */

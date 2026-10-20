@@ -1,8 +1,8 @@
 import {
   PerpsInternalTransferIdSchema,
   PerpsKlineInterval,
-} from '@market-sdk/bindings/perps';
-import { expectEvmAddress, expectEvmSignature } from '@market-sdk/types';
+} from '@kuest/bindings/perps';
+import { expectEvmAddress, expectEvmSignature } from '@kuest/types';
 import { HttpResponse, http } from 'msw';
 import { setupServer } from 'msw/node';
 import {

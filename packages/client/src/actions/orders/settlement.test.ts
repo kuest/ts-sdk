@@ -1,10 +1,10 @@
-import { TradeStatus, TxHashSchema, toOrderId } from '@market-sdk/bindings';
+import { TradeStatus, TxHashSchema, toOrderId } from '@kuest/bindings';
 import {
   type AcceptedOrderResponse,
   type ClobTrade,
   ClobTradeSchema,
   OrderPostStatus,
-} from '@market-sdk/bindings/clob';
+} from '@kuest/bindings/clob';
 import { afterEach, describe, expect, it, vi } from 'vitest';
 import type { BaseSecureClient } from '../../clients';
 import { TimeoutError, TransactionFailedError } from '../../errors';

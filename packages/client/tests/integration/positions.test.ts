@@ -1,11 +1,7 @@
-import {
-  type PositionId,
-  type TokenId,
-  toPositionId,
-} from '@market-sdk/bindings';
-import { ProtocolVersion } from '@market-sdk/bindings/gamma';
-import type { SecureClient } from '@market-sdk/client';
-import { type EvmAddress, expectPresent } from '@market-sdk/types';
+import { type PositionId, type TokenId, toPositionId } from '@kuest/bindings';
+import { ProtocolVersion } from '@kuest/bindings/gamma';
+import type { SecureClient } from '@kuest/sdk';
+import { type EvmAddress, expectPresent } from '@kuest/types';
 import { vi } from 'vitest';
 import {
   decodeErc1155BalanceOfBatchResult,

@@ -1,5 +1,5 @@
-import { OrderSide } from '@market-sdk/bindings';
-import { RelayerRevokeSessionSignerResponseSchema } from '@market-sdk/bindings/relayer';
+import { OrderSide } from '@kuest/bindings';
+import { RelayerRevokeSessionSignerResponseSchema } from '@kuest/bindings/relayer';
 import {
   createSecureClient,
   OrderPostStatus,
@@ -8,10 +8,10 @@ import {
   SignerType,
   TransferPerpsCollateralError,
   UserInputError,
-} from '@market-sdk/client';
-import { GaslessTransactionHandle } from '@market-sdk/client/actions';
-import { privateKey } from '@market-sdk/client/viem';
-import { delay, expectPresent } from '@market-sdk/types';
+} from '@kuest/sdk';
+import { GaslessTransactionHandle } from '@kuest/sdk/actions';
+import { privateKey } from '@kuest/sdk/viem';
+import { delay, expectPresent } from '@kuest/types';
 import { http } from 'viem';
 import { generatePrivateKey } from 'viem/accounts';
 import { vi } from 'vitest';

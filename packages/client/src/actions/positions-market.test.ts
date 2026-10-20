@@ -2,7 +2,7 @@ import {
   type Market,
   MarketSchema,
   ProtocolVersion,
-} from '@market-sdk/bindings/gamma';
+} from '@kuest/bindings/gamma';
 import { describe, expect, it } from 'vitest';
 import { UnexpectedResponseError } from '../errors';
 import {

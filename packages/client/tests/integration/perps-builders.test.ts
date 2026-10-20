@@ -1,4 +1,4 @@
-import type { Page, Paginated, PerpsBuilderEarning } from '@market-sdk/client';
+import type { Page, Paginated, PerpsBuilderEarning } from '@kuest/sdk';
 import { describe, expect, it, runMeteredTests } from './fixtures';
 
 const builderAddress = process.env.POLYMARKET_PERPS_BUILDER_ADDRESS;

@@ -2,8 +2,8 @@ import {
   EvmAddressSchema,
   type PaginationCursor,
   PaginationCursorSchema,
-} from '@market-sdk/bindings';
-import { WalletType } from '@market-sdk/bindings/gamma';
+} from '@kuest/bindings';
+import { WalletType } from '@kuest/bindings/gamma';
 import {
   FetchPerpsCandlesResponseSchema,
   FetchPerpsFeesResponseSchema,
@@ -36,7 +36,7 @@ import {
   PerpsTradeIdSchema,
   type PerpsWithdrawalId,
   PerpsWithdrawResponseSchema,
-} from '@market-sdk/bindings/perps';
+} from '@kuest/bindings/perps';
 import {
   type EvmAddress,
   type EvmSignature,
@@ -46,7 +46,7 @@ import {
   isPrivateKey,
   isSameEvmAddress,
   type PrivateKey,
-} from '@market-sdk/types';
+} from '@kuest/types';
 import { Address, Secp256k1, TypedData } from 'ox';
 import { z } from 'zod';
 import { MAX_UINT256, perpsDepositCall } from '../abis';
@@ -1863,14 +1863,14 @@ export type {
   PerpsChase,
   PerpsChaseAccepted,
   PerpsChaseId,
-} from '@market-sdk/bindings/perps';
+} from '@kuest/bindings/perps';
 /** @experimental This API may change in a breaking way in any release, including patch releases. */
 export {
   type PerpsTwap,
   type PerpsTwapAccepted,
   type PerpsTwapId,
   PerpsTwapStatus,
-} from '@market-sdk/bindings/perps';
+} from '@kuest/bindings/perps';
 /** @experimental This API may change in a breaking way in any release, including patch releases. */
 export {
   CancelPerpsChaseError,

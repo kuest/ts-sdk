@@ -1,4 +1,4 @@
-import { EvmAddressSchema, toPaginationCursor } from '@market-sdk/bindings';
+import { EvmAddressSchema, toPaginationCursor } from '@kuest/bindings';
 import {
   FetchPerpsBuilderApprovalsResponseSchema,
   ListPerpsBuilderEarningsResponseSchema,
@@ -6,7 +6,7 @@ import {
   type PerpsBuilderEarning,
   type PerpsBuilderEarningsSummary,
   PerpsBuilderEarningsSummarySchema,
-} from '@market-sdk/bindings/perps';
+} from '@kuest/bindings/perps';
 import { z } from 'zod';
 import { snakeCase, toSearchParams } from '../../../actions/params';
 import {

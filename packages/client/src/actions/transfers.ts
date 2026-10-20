@@ -1,6 +1,6 @@
-import { type EvmAddress, EvmAddressSchema } from '@market-sdk/bindings';
-import { WalletType } from '@market-sdk/bindings/gamma';
-import type { EvmSignature } from '@market-sdk/types';
+import { type EvmAddress, EvmAddressSchema } from '@kuest/bindings';
+import { WalletType } from '@kuest/bindings/gamma';
+import type { EvmSignature } from '@kuest/types';
 import { z } from 'zod';
 import { erc20TransferCall } from '../abis';
 import type { BaseSecureClient } from '../clients';

@@ -1,4 +1,4 @@
-import type { DecimalString } from '@market-sdk/bindings';
+import type { DecimalString } from '@kuest/bindings';
 import type {
   LastTradePrice,
   LastTradePriceForAsset,
@@ -6,7 +6,7 @@ import type {
   OrderBook,
   Prices,
   Spreads,
-} from '@market-sdk/bindings/clob';
+} from '@kuest/bindings/clob';
 import type {
   LiveVolume,
   MetaHolder,
@@ -15,7 +15,7 @@ import type {
   Resolution,
   TokenReference,
   Trade,
-} from '@market-sdk/bindings/data';
+} from '@kuest/bindings/data';
 import {
   type EstimateMarketPriceRequest,
   estimateMarketPrice,

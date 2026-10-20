@@ -1,7 +1,4 @@
-import {
-  type PaginationCursor,
-  toPaginationCursor,
-} from '@market-sdk/bindings';
+import { type PaginationCursor, toPaginationCursor } from '@kuest/bindings';
 import { z } from 'zod';
 import {
   PaginationLimitError,

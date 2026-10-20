@@ -1,7 +1,4 @@
-import type {
-  PriceEvent,
-  PriceProvider,
-} from '@market-sdk/bindings/subscriptions';
+import type { PriceEvent, PriceProvider } from '@kuest/bindings/subscriptions';
 import { pushable } from 'it-pushable';
 import type {
   PriceSubscription,

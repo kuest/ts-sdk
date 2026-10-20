@@ -1,4 +1,4 @@
-import { expectEvmAddress } from '@market-sdk/types';
+import { expectEvmAddress } from '@kuest/types';
 import { HttpResponse, http } from 'msw';
 import { setupServer } from 'msw/node';
 import {

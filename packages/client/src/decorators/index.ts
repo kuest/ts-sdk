@@ -1,4 +1,4 @@
-import type { Prettify } from '@market-sdk/types';
+import type { Prettify } from '@kuest/types';
 import type {
   BaseClient,
   BasePublicClient,

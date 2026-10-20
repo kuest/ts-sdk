@@ -7,7 +7,7 @@ import type {
   PriceEvent,
   SportsEvent,
   UserEvent,
-} from '@market-sdk/bindings/subscriptions';
+} from '@kuest/bindings/subscriptions';
 import type {
   CommentsSubscription,
   CryptoPricesChainlinkTwapSubscription,

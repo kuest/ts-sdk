@@ -1,12 +1,12 @@
-import { OrderType } from '@market-sdk/bindings';
+import { OrderType } from '@kuest/bindings';
 import {
   type OrderResponse,
   OrderResponseSchema,
   type OrderResponses,
   OrderResponsesSchema,
   SignatureType,
-} from '@market-sdk/bindings/clob';
-import { invariant } from '@market-sdk/types';
+} from '@kuest/bindings/clob';
+import { invariant } from '@kuest/types';
 import { z } from 'zod';
 import type { BaseSecureClient } from '../../clients';
 import {

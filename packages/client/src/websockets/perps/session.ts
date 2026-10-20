@@ -1,5 +1,5 @@
-import { EvmAddressSchema } from '@market-sdk/bindings';
-import type { PerpsPositionSnapshots } from '@market-sdk/bindings/perps';
+import { EvmAddressSchema } from '@kuest/bindings';
+import type { PerpsPositionSnapshots } from '@kuest/bindings/perps';
 import {
   type PerpsAccountConfig,
   type PerpsAccountFill,
@@ -30,13 +30,13 @@ import {
   type PerpsUpdateLeverageBatchResult,
   type PerpsUpdateLeverageResult,
   type PerpsWithdrawal,
-} from '@market-sdk/bindings/perps';
+} from '@kuest/bindings/perps';
 import {
   PerpsNotificationsResyncFrameSchema,
   type PerpsSessionEvent,
   PerpsSessionUpdateEventSchema,
-} from '@market-sdk/bindings/subscriptions';
-import { invariant, setNonBlockingTimeout } from '@market-sdk/types';
+} from '@kuest/bindings/subscriptions';
+import { invariant, setNonBlockingTimeout } from '@kuest/types';
 import { type Pushable, pushable } from 'it-pushable';
 import { z } from 'zod';
 import {
@@ -229,12 +229,12 @@ export type {
   PerpsUpdateLeverageBatchResult,
   PerpsUpdateLeverageRejection,
   PerpsUpdateLeverageResult,
-} from '@market-sdk/bindings/perps';
+} from '@kuest/bindings/perps';
 /** @experimental This API may change in a breaking way in any release, including patch releases. */
 export type {
   PerpsBuilderFillUpdateEvent,
   PerpsSessionEvent,
-} from '@market-sdk/bindings/subscriptions';
+} from '@kuest/bindings/subscriptions';
 export type {
   FetchPerpsAccountConfigRequest,
   FetchPerpsOpenOrdersRequest,

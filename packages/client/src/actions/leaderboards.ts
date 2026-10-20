@@ -1,4 +1,4 @@
-import { EvmAddressSchema, PaginationCursorSchema } from '@market-sdk/bindings';
+import { EvmAddressSchema, PaginationCursorSchema } from '@kuest/bindings';
 import {
   type BiggestWinner,
   type BuilderStanding,
@@ -13,7 +13,7 @@ import {
   type TraderLeaderboardEntry,
   TraderLeaderboardSortSchema,
   type TraderLeaderboardStanding,
-} from '@market-sdk/bindings/data';
+} from '@kuest/bindings/data';
 import { z } from 'zod';
 import type { BaseClient } from '../clients';
 import {
@@ -35,7 +35,7 @@ export {
   BuilderVolumeInterval,
   LeaderboardWindow,
   TraderLeaderboardSort,
-} from '@market-sdk/bindings/data';
+} from '@kuest/bindings/data';
 
 const ListBuilderLeaderboardRequestSchema = z.object({
   cursor: PaginationCursorSchema.optional(),

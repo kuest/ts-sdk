@@ -1,5 +1,5 @@
-import { type PositionId, type TokenId, toTokenId } from '@market-sdk/bindings';
-import type * as BindingExports from '@market-sdk/bindings/subscriptions';
+import { type PositionId, type TokenId, toTokenId } from '@kuest/bindings';
+import type * as BindingExports from '@kuest/bindings/subscriptions';
 import type {
   CryptoPriceEvent,
   CryptoPricesChainlinkTwapSixtyEvent,
@@ -13,7 +13,7 @@ import type {
   SportsEvent,
   StandardMarketEvent,
   UserEvent,
-} from '@market-sdk/bindings/subscriptions';
+} from '@kuest/bindings/subscriptions';
 import { describe, expectTypeOf, it } from 'vitest';
 import type {
   ConnectionLostError,

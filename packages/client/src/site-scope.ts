@@ -1,4 +1,4 @@
-import type { Market } from '@market-sdk/bindings/gamma';
+import type { Market } from '@kuest/bindings/gamma';
 import { UserInputError } from './errors';
 
 const TTL_MS = 5 * 60 * 1000;

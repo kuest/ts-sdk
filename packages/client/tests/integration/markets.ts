@@ -1,4 +1,4 @@
-import type { Market, PublicClient } from '@market-sdk/client';
+import type { Market, PublicClient } from '@kuest/sdk';
 
 export async function findHighVolumeLowPriceMarket(
   publicClient: PublicClient,
