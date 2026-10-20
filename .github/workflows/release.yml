@@ -1,0 +1,53 @@
+# Publish only after an explicitly authorized GitHub release. First establish
+# all three @kuest npm packages and configure one trusted publisher per package
+# for this workflow and the `npm` environment.
+name: Publish npm packages
+
+on:
+  release:
+    types: [published]
+
+permissions: {}
+
+jobs:
+  publish:
+    if: github.repository == 'kuest/ts-sdk' && !github.event.release.prerelease
+    runs-on: ubuntu-latest
+    environment: npm
+    permissions:
+      contents: read
+      id-token: write
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: pnpm/action-setup@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "24"
+          registry-url: https://registry.npmjs.org
+      - run: pnpm install --frozen-lockfile
+      - run: pnpm lint
+      - run: pnpm typecheck
+      - run: pnpm test
+      - run: pnpm build
+      - name: Pack and publish in dependency order
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p "$RUNNER_TEMP/publish"
+          for package in types bindings client; do
+            pnpm --dir "packages/$package" pack --pack-destination "$RUNNER_TEMP/publish"
+          done
+          for package in types bindings sdk; do
+            case "$package" in
+              types) version=$(node -p "require('./packages/types/package.json').version") ;;
+              bindings) version=$(node -p "require('./packages/bindings/package.json').version") ;;
+              sdk) version=$(node -p "require('./packages/client/package.json').version") ;;
+            esac
+            if npm view "@kuest/$package@$version" version >/dev/null 2>&1; then
+              echo "@kuest/$package@$version already published; skipping"
+              continue
+            fi
+            npm publish "$RUNNER_TEMP/publish/kuest-$package-$version.tgz" --access public
+          done
