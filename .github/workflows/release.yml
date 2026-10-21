@@ -26,6 +26,11 @@ jobs:
         with:
           node-version: "24"
           registry-url: https://registry.npmjs.org
+      - name: Verify npm supports trusted publishing
+        shell: bash
+        run: |
+          version=$(npm --version)
+          node -e 'const [major, minor, patch] = process.argv[1].split(".").map(Number); if (major < 11 || (major === 11 && (minor < 5 || (minor === 5 && patch < 1)))) process.exit(1)' "$version"
       - run: pnpm install --frozen-lockfile
       - run: pnpm lint
       - run: pnpm typecheck
@@ -45,9 +50,13 @@ jobs:
               bindings) version=$(node -p "require('./packages/bindings/package.json').version") ;;
               sdk) version=$(node -p "require('./packages/client/package.json').version") ;;
             esac
-            if npm view "@kuest/$package@$version" version >/dev/null 2>&1; then
+            if npm view "@kuest/$package@$version" version >/dev/null 2>"$RUNNER_TEMP/npm-view-error"; then
               echo "@kuest/$package@$version already published; skipping"
               continue
+            fi
+            if ! grep -q 'E404' "$RUNNER_TEMP/npm-view-error"; then
+              cat "$RUNNER_TEMP/npm-view-error" >&2
+              exit 1
             fi
             npm publish "$RUNNER_TEMP/publish/kuest-$package-$version.tgz" --access public
           done

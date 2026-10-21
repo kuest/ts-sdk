@@ -90,15 +90,6 @@ export type SecureTradingActions = {
    *   side: OrderSide.BUY,
    * });
    * ```
-   *
-   * @example Polymarket V2 market buy
-   * ```ts
-   * const order = await client.createMarketOrder({
-   *   assetId: '0x0122…0000',
-   *   amount: 10,
-   *   side: OrderSide.BUY,
-   * });
-   * ```
    */
   createMarketOrder(request: PrepareMarketOrderRequest): Promise<SignedOrder>;
   /**
@@ -162,17 +153,6 @@ export type SecureTradingActions = {
    * Thrown on failure.
    *
    * @example CTF limit order
-   * ```ts
-   * const order = await client.createLimitOrder({
-   *   assetId: '0x0122…0000',
-   *   postOnly: true,
-   *   price: 0.52,
-   *   side: OrderSide.BUY,
-   *   size: 10,
-   * });
-   * ```
-   *
-   * @example Polymarket V2 limit order
    * ```ts
    * const order = await client.createLimitOrder({
    *   assetId: '0x0122…0000',

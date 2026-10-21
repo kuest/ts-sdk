@@ -1,6 +1,6 @@
 {
   "name": "@kuest/bindings",
-  "version": "0.13.0",
+  "version": "0.13.1",
   "description": "Internal API bindings for the unified SDK",
   "repository": {
     "type": "git",

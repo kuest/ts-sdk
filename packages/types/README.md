@@ -6,4 +6,4 @@
 import type { MarketId } from '@kuest/types';
 ```
 
-Build locally with `pnpm --filter @kuest/types build`. See [UPSTREAM.md](../../UPSTREAM.md) and [LICENSE](../../LICENSE) for source attribution and MIT terms.
+Build from the source repository with `pnpm --filter @kuest/types build`. The included [LICENSE](./LICENSE) retains the upstream MIT terms; the repository's `UPSTREAM.md` records the source revision and adaptation.

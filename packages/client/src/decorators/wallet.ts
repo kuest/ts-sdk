@@ -313,17 +313,6 @@ export type SecureWalletActions = {
    *
    * // outcome.transactionHash: TxHash
    * ```
-   *
-   * @example Redeem a Polymarket V2 position by position ID.
-   * ```ts
-   * const handle = await client.redeemPositions({
-   *   positionId: '123',
-   * });
-   *
-   * const outcome = await handle.wait();
-   *
-   * // outcome.transactionHash: TxHash
-   * ```
    */
   redeemPositions(
     request: PrepareRedeemPositionsRequest,
