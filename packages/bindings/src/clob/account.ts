@@ -51,13 +51,13 @@ export type OpenOrder = {
   tokenId: TokenId | PositionId;
   /** Condition ID for the market associated with this order. */
   conditionId: ConditionId;
-  owner: string;
+  owner: string | null;
   makerAddress: string;
   side: string;
-  price: DecimalString;
+  price: DecimalString | null;
   originalSize: DecimalString;
   sizeMatched: DecimalString;
-  outcome: string;
+  outcome: string | null;
   orderType: string;
   status: string;
   associateTrades: string[];
@@ -76,9 +76,9 @@ export const OpenOrderSchema = z
     market: ConditionIdSchema,
     order_type: z.string(),
     original_size: DecimalStringSchema,
-    outcome: z.string(),
-    owner: z.string(),
-    price: DecimalStringSchema,
+    outcome: z.string().nullable(),
+    owner: z.string().nullable(),
+    price: DecimalStringSchema.nullable(),
     side: z.string(),
     size_matched: DecimalStringSchema,
     status: z.string(),
@@ -127,7 +127,7 @@ export type MakerOrder = {
   makerAddress: string;
   matchedAmount: DecimalString;
   orderId: string;
-  outcome: string;
+  outcome: string | null;
   owner: string;
   price: DecimalString;
   side: string;
@@ -146,7 +146,7 @@ const MakerOrderSchema = z
     maker_address: z.string(),
     matched_amount: DecimalStringSchema,
     order_id: z.string(),
-    outcome: z.string(),
+    outcome: z.string().nullable(),
     owner: z.string(),
     price: DecimalStringSchema,
     side: z.string(),
@@ -185,7 +185,7 @@ export type ClobTrade = {
   traderSide: 'TAKER' | 'MAKER';
   price: DecimalString;
   size: DecimalString;
-  outcome: string;
+  outcome: string | null;
   status: string;
   feeRateBps: DecimalString;
   bucketIndex: number;
@@ -210,19 +210,27 @@ export const ClobTradeSchema = z
     maker_orders: z.array(MakerOrderSchema),
     market: ConditionIdSchema,
     match_time: EpochLikeToIsoDateTimeStringSchema,
-    outcome: z.string(),
+    outcome: z.string().nullable(),
     owner: z.string(),
     price: DecimalStringSchema,
     side: z.string(),
     size: DecimalStringSchema,
     status: TradeStatusSchema,
     taker_order_id: z.string(),
-    trader_side: z.enum(['TAKER', 'MAKER']),
+    trader_side: z.enum(['TAKER', 'MAKER']).optional(),
+    type: z.enum(['TAKER', 'MAKER']).optional(),
     transaction_hash: z.preprocess(
       emptyStringToUndefined,
       z.string().optional(),
     ),
   })
+  .refine(
+    ({ trader_side, type }) => trader_side !== undefined || type !== undefined,
+    {
+      path: ['type'],
+      message: 'Missing trade perspective',
+    },
+  )
   .transform(
     ({
       asset_id,
@@ -235,6 +243,7 @@ export const ClobTradeSchema = z
       match_time,
       taker_order_id,
       trader_side,
+      type,
       transaction_hash,
       ...rest
     }) => ({
@@ -249,7 +258,7 @@ export const ClobTradeSchema = z
       makerOrders: maker_orders,
       matchedAt: match_time,
       takerOrderId: taker_order_id,
-      traderSide: trader_side,
+      traderSide: (type ?? trader_side) as 'TAKER' | 'MAKER',
       transactionHash: transaction_hash,
     }),
   ) satisfies z.ZodType<ClobTrade>;

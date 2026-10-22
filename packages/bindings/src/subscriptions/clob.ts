@@ -19,6 +19,7 @@ import {
   type TokenId,
   type TradeStatus,
   TradeStatusSchema,
+  toEpochMilliseconds,
   toIsoDateTimeString,
 } from '../shared';
 
@@ -528,7 +529,10 @@ export const UserOrderEventSchema = z
     order_type: OrderTypeSchema.nullish(),
     status: UserOrderStatusSchema.nullish(),
     maker_address: z.string().nullish(),
-    timestamp: EpochMillisecondsStringSchema,
+    timestamp: z
+      .string()
+      .regex(/^\d+$/)
+      .transform((value) => toEpochMilliseconds(Number(value) * 1000)),
   })
   .transform(
     ({
@@ -671,7 +675,10 @@ export const UserTradeEventSchema = z
     bucket_index: z.number().int().nullish(),
     maker_orders: z.array(TradeMakerOrderSchema).nullish(),
     trader_side: z.union([z.literal('TAKER'), z.literal('MAKER')]).nullish(),
-    timestamp: EpochMillisecondsStringSchema,
+    timestamp: z
+      .string()
+      .regex(/^\d+$/)
+      .transform((value) => toEpochMilliseconds(Number(value) * 1000)),
   })
   .transform(
     ({

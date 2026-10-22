@@ -140,7 +140,10 @@ export class ClobUserWebSocketManager
     const events = Array.isArray(message) ? message : [message];
     for (const eventData of events) {
       const parsed = UserEventSchema.safeParse(eventData);
-      if (!parsed.success) continue;
+      if (!parsed.success) {
+        console.error('Discarding invalid CLOB user WebSocket event');
+        continue;
+      }
       this.#subscriptions.dispatch(parsed.data);
     }
   }
