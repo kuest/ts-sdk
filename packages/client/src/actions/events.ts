@@ -42,8 +42,10 @@ import {
   readCursorPayload,
 } from '../pagination';
 import { parseRequestOptions, type RequestOptions } from '../request-options';
+import { resolveCreatorQuery } from '../site-creator';
 import {
   ClosedFilterSchema,
+  CreatorFilterSchema,
   PositiveInt32EventIdSchema,
   snakeCase,
   toDataSearchParams,
@@ -61,6 +63,7 @@ export {
 const ListEventsRequestSchema = z.object({
   ascending: z.boolean().optional(),
   closed: ClosedFilterSchema.default(false),
+  creator: CreatorFilterSchema.optional(),
   cursor: PaginationCursorSchema.optional(),
   pageSize: PageSizeSchema.optional(),
   cyom: z.boolean().optional(),
@@ -112,6 +115,7 @@ export type ListEventsRequest = z.input<typeof ListEventsRequestSchema>;
 const FetchEventRequestSchema = z.union([
   z.object({
     id: z.string(),
+    creator: CreatorFilterSchema.optional(),
     includeBestLines: z.boolean().optional(),
     includeChat: z.boolean().optional(),
     includeTemplate: z.boolean().optional(),
@@ -119,6 +123,7 @@ const FetchEventRequestSchema = z.union([
   }),
   z.object({
     slug: z.string(),
+    creator: CreatorFilterSchema.optional(),
     includeBestLines: z.boolean().optional(),
     includeChat: z.boolean().optional(),
     includeTemplate: z.boolean().optional(),
@@ -126,6 +131,7 @@ const FetchEventRequestSchema = z.union([
   }),
   z.object({
     url: z.string(),
+    creator: CreatorFilterSchema.optional(),
     includeBestLines: z.boolean().optional(),
     includeChat: z.boolean().optional(),
     includeTemplate: z.boolean().optional(),
@@ -161,6 +167,8 @@ export const ListEventsError = makeErrorGuard(
 
 /**
  * Lists events.
+ * Pass `creator` as a wallet, site URL, comma-separated string, or array to filter results.
+ * A configured operator site applies its wallet filter automatically and cannot be overridden.
  *
  * Defaults to open events. Pass `closed: true` for closed events or
  * `closed: 'any'` for either state; no identifier filter is required.
@@ -220,29 +228,34 @@ export function listEvents(
     ...query
   } = parseUserInput(request, ListEventsRequestSchema);
 
-  return paginate(
-    (cursor) =>
-      client.gamma
-        .get('/events/keyset', {
-          schema: ListEventsKeysetResponseSchema,
-          ...requestOptions,
-          params: toEventsSearchParams({
-            ...query,
-            pageSize,
-            cursor:
-              cursor === undefined ? undefined : toEventsCursor(cursor, query),
-          }),
-        })
-        .then((response) => ({
-          items: response.items,
-          hasMore: response.nextCursor !== undefined,
-          nextCursor:
-            response.nextCursor === undefined
-              ? undefined
-              : encodeKeysetCursor(response.nextCursor, query),
-        })),
-    initialCursor,
-  );
+  return paginate(async (cursor) => {
+    const creator = await resolveCreatorQuery(
+      client.siteConfig?.site_url,
+      query.creator,
+      requestOptions.signal,
+    );
+    const scopedQuery = { ...query, creator };
+    const response = await client.gamma.get('/events/keyset', {
+      schema: ListEventsKeysetResponseSchema,
+      ...requestOptions,
+      params: toEventsSearchParams({
+        ...scopedQuery,
+        pageSize,
+        cursor:
+          cursor === undefined
+            ? undefined
+            : toEventsCursor(cursor, scopedQuery),
+      }),
+    });
+    return {
+      items: response.items,
+      hasMore: response.nextCursor !== undefined,
+      nextCursor:
+        response.nextCursor === undefined
+          ? undefined
+          : encodeKeysetCursor(response.nextCursor, scopedQuery),
+    };
+  }, initialCursor);
 }
 
 // Cursors minted before query binding are raw service tokens; they continue
@@ -274,6 +287,8 @@ export const FetchEventError = makeErrorGuard(
 
 /**
  * Fetches an event.
+ * Pass `creator` as a wallet, site URL, comma-separated string, or array to filter results.
+ * A configured operator site applies its wallet filter automatically and cannot be overridden.
  *
  * @remarks
  * This is a low-level function. Most SDK consumers should prefer the client instance API.
@@ -305,12 +320,17 @@ export async function fetchEvent(
 ): Promise<Event> {
   const requestOptions = parseRequestOptions(options);
   const params = parseUserInput(request, FetchEventRequestSchema);
+  const creator = await resolveCreatorQuery(
+    client.siteConfig?.site_url,
+    params.creator,
+    requestOptions.signal,
+  );
 
   if ('id' in params) {
     return client.gamma.get(`events/${params.id}`, {
       schema: EventSchema,
       ...requestOptions,
-      params: toFetchEventByIdSearchParams(params),
+      params: toFetchEventByIdSearchParams({ ...params, creator }),
     });
   }
 
@@ -320,7 +340,7 @@ export async function fetchEvent(
   return client.gamma.get(`events/slug/${slug}`, {
     schema: EventSchema,
     ...requestOptions,
-    params: toFetchEventBySlugSearchParams(params),
+    params: toFetchEventBySlugSearchParams({ ...params, creator }),
   });
 }
 
@@ -578,6 +598,7 @@ function toFetchEventByIdSearchParams(
 ): URLSearchParams {
   return toSearchParams(
     {
+      creator: params.creator,
       includeBestLines: params.includeBestLines,
       includeChat: params.includeChat,
       includeTemplate: params.includeTemplate,
@@ -595,6 +616,7 @@ function toFetchEventBySlugSearchParams(
 ): URLSearchParams {
   return toSearchParams(
     {
+      creator: params.creator,
       includeBestLines: params.includeBestLines,
       includeChat: params.includeChat,
       includeTemplate: params.includeTemplate,

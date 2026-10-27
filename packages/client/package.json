@@ -1,6 +1,6 @@
 {
   "name": "@kuest/sdk",
-  "version": "0.14.0",
+  "version": "0.14.1",
   "description": "Unified Polygon prediction-market client",
   "repository": {
     "type": "git",

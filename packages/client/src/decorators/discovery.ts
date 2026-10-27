@@ -69,6 +69,8 @@ import type { RequestOptions } from '../request-options';
 export type DiscoveryActions = {
   /**
    * Lists events.
+   * Pass `creator` as a wallet, site URL, comma-separated string, or array to filter results.
+   * A configured operator site applies its wallet filter automatically and cannot be overridden.
    *
    * Defaults to open events. Pass `closed: true` for closed events or
    * `closed: 'any'` for either state; no identifier filter is required.
@@ -119,6 +121,8 @@ export type DiscoveryActions = {
 
   /**
    * Fetches an event.
+   * Pass `creator` as a wallet, site URL, comma-separated string, or array to filter results.
+   * A configured operator site applies its wallet filter automatically and cannot be overridden.
    *
    * @throws {@link FetchEventError}
    * Thrown on failure.
@@ -163,6 +167,8 @@ export type DiscoveryActions = {
 
   /**
    * Lists markets.
+   * Pass `creator` as a wallet, site URL, comma-separated string, or array to filter results.
+   * A configured operator site applies its wallet filter automatically and cannot be overridden.
    *
    * Defaults to open markets. Pass `closed: true` for closed markets or
    * `closed: 'any'` for either state. The latter requires a non-empty `ids`,
@@ -264,6 +270,8 @@ export type DiscoveryActions = {
 
   /**
    * Fetches a market.
+   * Pass `creator` as a wallet, site URL, comma-separated string, or array to filter results.
+   * A configured operator site applies its wallet filter automatically and cannot be overridden.
    *
    * @remarks
    * Legacy multi-outcome markets cannot be represented by the binary

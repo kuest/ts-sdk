@@ -3,6 +3,17 @@ import { z } from 'zod';
 
 export const ClosedFilterSchema = z.union([z.boolean(), z.literal('any')]);
 
+/** A creator wallet, site, or comma-separated collection of either. */
+export const CreatorFilterSchema = z
+  .union([
+    z.string().trim().min(1),
+    z.array(z.string().trim().min(1)).nonempty(),
+  ])
+  .transform((value) => (Array.isArray(value) ? value.join(',') : value))
+  .refine((value) => value.split(',').every((part) => part.trim().length > 0), {
+    message: 'creator must contain non-empty wallets or sites',
+  });
+
 export type SearchParamPrimitive = boolean | number | string;
 
 export type SearchParamValue =

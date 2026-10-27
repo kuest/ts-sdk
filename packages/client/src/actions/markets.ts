@@ -45,9 +45,10 @@ import { parseUserInput } from '../input';
 import { parseMarketSlugUrl } from '../market-url';
 import { PageSizeSchema, type Paginated, paginate } from '../pagination';
 import { parseRequestOptions, type RequestOptions } from '../request-options';
-import { filterSiteMarkets, getSiteMarketScope } from '../site-scope';
+import { resolveCreatorQuery } from '../site-creator';
 import {
   ClosedFilterSchema,
+  CreatorFilterSchema,
   distinctIdList,
   EpochSecondsLikeSchema,
   snakeCase,
@@ -62,6 +63,7 @@ const ListMarketsRequestSchema = z
   .object({
     ascending: z.boolean().optional(),
     closed: ClosedFilterSchema.optional(),
+    creator: CreatorFilterSchema.optional(),
     clobTokenIds: z.array(z.string()).optional(),
     cursor: PaginationCursorSchema.optional(),
     pageSize: PageSizeSchema.optional(),
@@ -124,18 +126,21 @@ export type ListMarketsRequest = z.input<typeof ListMarketsRequestSchema>;
 
 const FetchMarketByIdRequestSchema = z.object({
   id: z.string(),
+  creator: CreatorFilterSchema.optional(),
   includeTag: z.boolean().optional(),
   locale: z.string().optional(),
 });
 
 const FetchMarketBySlugRequestSchema = z.object({
   slug: z.string(),
+  creator: CreatorFilterSchema.optional(),
   includeTag: z.boolean().optional(),
   locale: z.string().optional(),
 });
 
 const FetchMarketByUrlRequestSchema = z.object({
   url: z.string(),
+  creator: CreatorFilterSchema.optional(),
   includeTag: z.boolean().optional(),
   locale: z.string().optional(),
 });
@@ -176,6 +181,8 @@ export const ListMarketsError = makeErrorGuard(
 
 /**
  * Lists markets.
+ * Pass `creator` as a wallet, site URL, comma-separated string, or array to filter results.
+ * A configured operator site applies its wallet filter automatically and cannot be overridden.
  *
  * Defaults to open markets. Pass `closed: true` for closed markets or
  * `closed: 'any'` for either state. The latter requires a non-empty `ids`,
@@ -234,33 +241,25 @@ export function listMarkets(
   const params = parseUserInput(request, ListMarketsRequestSchema);
 
   return paginate(async (cursor) => {
-    let next = cursor ?? params.cursor;
-    while (true) {
-      const response = await client.gamma.get('/markets/keyset', {
-        schema: ListMarketsKeysetResponseSchema,
-        ...requestOptions,
-        params: toMarketsSearchParams({
-          ...params,
-          cursor: next,
-        }),
-      });
-      const siteUrl = client.siteConfig?.site_url.trim();
-      const items = siteUrl
-        ? filterSiteMarkets(response.items, await getSiteMarketScope(siteUrl))
-        : response.items;
-      if (
-        items.length > 0 ||
-        response.nextCursor === undefined ||
-        response.nextCursor === next
-      ) {
-        return {
-          items,
-          hasMore: response.nextCursor !== undefined,
-          nextCursor: response.nextCursor,
-        };
-      }
-      next = response.nextCursor;
-    }
+    const creator = await resolveCreatorQuery(
+      client.siteConfig?.site_url,
+      params.creator,
+      requestOptions.signal,
+    );
+    const response = await client.gamma.get('/markets/keyset', {
+      schema: ListMarketsKeysetResponseSchema,
+      ...requestOptions,
+      params: toMarketsSearchParams({
+        ...params,
+        creator,
+        cursor: cursor ?? params.cursor,
+      }),
+    });
+    return {
+      items: response.items,
+      hasMore: response.nextCursor !== undefined,
+      nextCursor: response.nextCursor,
+    };
   }, params.cursor);
 }
 
@@ -369,6 +368,8 @@ export const FetchMarketError = makeErrorGuard(
 
 /**
  * Fetches a market.
+ * Pass `creator` as a wallet, site URL, comma-separated string, or array to filter results.
+ * A configured operator site applies its wallet filter automatically and cannot be overridden.
  *
  * @remarks
  * This is a low-level function. Most SDK consumers should prefer the client instance API.
@@ -404,15 +405,21 @@ export async function fetchMarket(
 ): Promise<Market> {
   const requestOptions = parseRequestOptions(options);
   const params = parseUserInput(request, FetchMarketRequestSchema);
+  const creator = await resolveCreatorQuery(
+    client.siteConfig?.site_url,
+    params.creator,
+    requestOptions.signal,
+  );
 
   if ('id' in params) {
-    return fetchMarketById(client, params, requestOptions);
+    return fetchMarketById(client, { ...params, creator }, requestOptions);
   }
 
   if ('url' in params) {
     return fetchMarketBySlug(
       client,
       {
+        creator,
         includeTag: params.includeTag,
         locale: params.locale,
         slug: parseMarketSlugUrl(params.url, 'market'),
@@ -421,7 +428,7 @@ export async function fetchMarket(
     );
   }
 
-  return fetchMarketBySlug(client, params, requestOptions);
+  return fetchMarketBySlug(client, { ...params, creator }, requestOptions);
 }
 
 export type FetchMarketTagsError =
@@ -879,6 +886,7 @@ async function fetchMarketBySlug(
     ...requestOptions,
     params: toSearchParams(
       {
+        creator: params.creator,
         includeTag: params.includeTag,
         locale: params.locale,
       },
@@ -898,6 +906,7 @@ async function fetchMarketById(
     ...requestOptions,
     params: toSearchParams(
       {
+        creator: params.creator,
         includeTag: params.includeTag,
         locale: params.locale,
       },
