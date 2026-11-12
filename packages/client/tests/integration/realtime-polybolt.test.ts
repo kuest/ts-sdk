@@ -312,8 +312,7 @@ describe.runIf(runMeteredTests)('realtime price transport', () => {
     }
   });
 
-  it('rejects missing filters and public access before opening a socket', async ({
-    publicClient,
+  it('rejects missing filters before opening a socket', async ({
     secureClientWithDepositWallet: client,
   }) => {
     vi.stubGlobal('WebSocket', ObservedWebSocket);
@@ -322,12 +321,6 @@ describe.runIf(runMeteredTests)('realtime price transport', () => {
     ).rejects.toBeInstanceOf(UserInputError);
     await expect(
       client.subscribe([{ topic: 'prices.crypto' } as never]),
-    ).rejects.toBeInstanceOf(UserInputError);
-    await expect(
-      publicClient.subscribe([
-        // @ts-expect-error Price subscriptions require a secure client.
-        { topic: 'prices.crypto', symbols: ['btcusd'] },
-      ]),
     ).rejects.toBeInstanceOf(UserInputError);
     expect(ObservedWebSocket.connections).toHaveLength(0);
   });

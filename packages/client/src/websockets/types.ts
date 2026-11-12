@@ -1,7 +1,5 @@
 import type {
   CommentsEvent,
-  CryptoPricesEvent,
-  EquityPricesEvent,
   MarketEvent,
   PerpsMarketDataEvent,
   PriceEvent,
@@ -10,9 +8,6 @@ import type {
 } from '@kuest/bindings/subscriptions';
 import type {
   CommentsSubscription,
-  CryptoPricesChainlinkTwapSubscription,
-  CryptoPricesSubscription,
-  EquityPricesSubscription,
   MarketSubscription,
   PerpsMarketDataSubscription,
   PriceSubscription,
@@ -66,6 +61,11 @@ export interface WebSocketSubscriptionManager<TSpec, TEvent> {
 
 // Surfaces available on the public client.
 export type PublicWebSocketManagers = {
+  readonly realtime: WebSocketSubscriptionManager<
+    PriceSubscription,
+    PriceEvent
+  >;
+
   readonly clobMarket: WebSocketSubscriptionManager<
     MarketSubscription,
     MarketEvent
@@ -74,13 +74,9 @@ export type PublicWebSocketManagers = {
     SportsSubscription,
     SportsEvent
   >;
-  /** @deprecated Compatibility transport for legacy topics. */
   readonly rtds: WebSocketSubscriptionManager<
-    | CommentsSubscription
-    | CryptoPricesSubscription
-    | CryptoPricesChainlinkTwapSubscription
-    | EquityPricesSubscription,
-    CommentsEvent | CryptoPricesEvent | EquityPricesEvent
+    CommentsSubscription,
+    CommentsEvent
   >;
   /**
    * @experimental This API may change in a breaking way in any release, including patch releases.
@@ -93,10 +89,6 @@ export type PublicWebSocketManagers = {
 
 // Secure client additionally exposes the user surface.
 export type SecureWebSocketManagers = PublicWebSocketManagers & {
-  readonly realtime: WebSocketSubscriptionManager<
-    PriceSubscription,
-    PriceEvent
-  >;
   readonly clobUser: WebSocketSubscriptionManager<UserSubscription, UserEvent>;
   /**
    * @experimental This API may change in a breaking way in any release, including patch releases.
