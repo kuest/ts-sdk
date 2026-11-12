@@ -6,6 +6,8 @@ import { TransportError } from '../../errors';
 import { PolyboltWebSocketHeartbeat } from '../heartbeat';
 import { SocketPool } from './pool';
 import { polyboltReconnectDelay } from './protocol';
+import { PriceSubscriptionOperation } from './session';
+import { PolyboltConnection } from './socket';
 
 afterEach(() => {
   vi.useRealTimers();
@@ -30,6 +32,7 @@ class TestWebSocket extends EventTarget {
   static CLOSING = 2;
   static CLOSED = 3;
   static connections: TestWebSocket[] = [];
+  static reverseAcks = false;
   static servedProvider: (
     subscription: SentSubscription,
   ) => string | undefined = () => undefined;
@@ -52,11 +55,14 @@ class TestWebSocket extends EventTarget {
       this.receive({ op: op === 'auth' ? 'authed' : 'pong', rid });
       return;
     }
-    for (const subscription of subscriptions ?? [])
+    for (const subscription of TestWebSocket.reverseAcks
+      ? [...(subscriptions ?? [])].reverse()
+      : (subscriptions ?? []))
       this.receive({
         op: op === 'subscribe' ? 'subscribed' : 'unsubscribed',
         rid,
         channel: subscription.channel,
+        filter: subscription.filter,
         provider:
           op === 'subscribe'
             ? TestWebSocket.servedProvider(subscription)
@@ -89,6 +95,7 @@ describe('price channel lifecycle', () => {
     vi.useFakeTimers();
     vi.spyOn(Math, 'random').mockReturnValue(0.5);
     TestWebSocket.connections = [];
+    TestWebSocket.reverseAcks = false;
     TestWebSocket.servedProvider = () => undefined;
     vi.stubGlobal('WebSocket', TestWebSocket);
     pool = new SocketPool({
@@ -115,6 +122,70 @@ describe('price channel lifecycle', () => {
     await vi.advanceTimersByTimeAsync(250);
     return pending;
   }
+
+  it('subscribes anonymously and resolves same-channel filters', async () => {
+    await pool.close();
+    pool = new SocketPool({ url: 'wss://example.test/prices' });
+    TestWebSocket.reverseAcks = true;
+    const handle = await subscribe({
+      topic: 'prices.crypto',
+      symbols: ['btcusd', 'ethusd'],
+    });
+    expect(
+      TestWebSocket.connections
+        .flatMap((socket) => socket.operations)
+        .some((op) => op.op === 'auth'),
+    ).toBe(false);
+    expect(
+      TestWebSocket.connections
+        .flatMap((socket) => socket.operations)
+        .filter((op) => op.op === 'subscribe')
+        .flatMap((op) => op.subscriptions ?? []),
+    ).toHaveLength(2);
+    await handle.close();
+  });
+
+  it('correlates reversed ACKs by provider and symbol', async () => {
+    TestWebSocket.reverseAcks = true;
+    TestWebSocket.servedProvider = (subscription) =>
+      subscription.filter.provider;
+    const connection = new PolyboltConnection({
+      url: 'wss://example.test/prices',
+    });
+    const subscribed = vi.fn();
+    await connection.open({
+      subscribed,
+      event: vi.fn(),
+      dropped: vi.fn(),
+      disconnected: vi.fn(),
+    });
+    const pending = connection.change(PriceSubscriptionOperation.Subscribe, [
+      {
+        key: 'chainlink',
+        topic: 'prices.crypto',
+        symbol: 'btcusd',
+        provider: PriceProvider.Chainlink,
+      },
+      {
+        key: 'pyth',
+        topic: 'prices.crypto',
+        symbol: 'btcusd',
+        provider: PriceProvider.Pyth,
+      },
+    ]);
+    await vi.advanceTimersByTimeAsync(250);
+    expect(await pending).toEqual([]);
+    expect(
+      subscribed.mock.calls.map(([key, confirmation]) => [
+        key.key,
+        confirmation.provider,
+      ]),
+    ).toEqual([
+      ['pyth', 'pyth'],
+      ['chainlink', 'chainlink'],
+    ]);
+    await connection.close();
+  });
 
   describe.each([
     undefined,

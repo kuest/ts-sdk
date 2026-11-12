@@ -17,22 +17,11 @@ export type {
   CryptoPriceEvent,
   CryptoPriceSnapshotEvent,
   CryptoPriceSubscription,
-  CryptoPricesBinanceEvent,
-  CryptoPricesChainlinkEvent,
-  CryptoPricesChainlinkTwapEvent,
-  CryptoPricesChainlinkTwapSixtyEvent,
-  CryptoPricesChainlinkTwapSubscription,
-  CryptoPricesChainlinkTwapThirtyEvent,
-  CryptoPricesChainlinkTwapWindowSeconds,
-  CryptoPricesEvent,
-  CryptoPricesSubscription,
   CryptoTwapPriceEvent,
   CryptoTwapPriceSnapshotEvent,
   CryptoTwapPriceSubscription,
   EquityPriceEvent,
   EquityPriceSubscription,
-  EquityPricesEvent,
-  EquityPricesSubscription,
   EquityTwapPriceEvent,
   EquityTwapPriceSnapshotEvent,
   EquityTwapPriceSubscription,
@@ -73,13 +62,12 @@ export type SecureSubscriptionsActions = {
    * The `prices.crypto`, `prices.crypto.twap`, `prices.equity`, and
    * `prices.equity.twap` topics
    * require explicit filters and include history snapshots and live updates.
-   * Legacy source-named topics retain their existing filter and event behavior.
    * These four topics include `source`, identifying the source of the update
    * or entire history batch, including empty batches. Unknown source names remain
    * strings. Crypto sources are constant; equity sources may change across
    * reconnects. Cached history starts fresh whenever the source changes.
    * These four topics accept an optional `provider` pin. Omit it to follow the
-   * default. A pin may fall back or be ignored when selection is disabled;
+   * default. An unavailable provider pin is rejected;
    * `source` always identifies the actual producer. Different provider choices,
    * including omission, use separate connections, even if they serve the same source.
    * An optional `onSubscribed` callback reports the provider the server confirms,
