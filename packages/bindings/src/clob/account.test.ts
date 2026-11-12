@@ -114,7 +114,6 @@ describe('ClobTradeSchema', () => {
 
 const baseOpenOrder = {
   asset_id: '8501497',
-  associate_trades: [],
   created_at: 1700000000,
   expiration: '0',
   id: 'order-1',
