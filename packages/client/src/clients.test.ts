@@ -351,6 +351,15 @@ describe('secure client gasless wallet setup', () => {
 
     expect(submit.called).toBe(true);
     expect(submit.transactionFetches).toBe(2);
+    const orderRequests = vi.fn(() =>
+      HttpResponse.json({ data: [], next_cursor: 'LTE=' }),
+    );
+    server.use(http.get(`${environment.predictions.rest}/data/orders`, orderRequests));
+    expect(() => {
+      // @ts-expect-error JavaScript callers can omit the required condition ID.
+      client.listOpenOrders({ assetId: '123' });
+    }).toThrow(UserInputError);
+    expect(orderRequests).not.toHaveBeenCalled();
     expect(client.account).toEqual({
       signer: signerAddress,
       signerType: SignerType.OWNER,
