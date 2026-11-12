@@ -354,7 +354,9 @@ describe('secure client gasless wallet setup', () => {
     const orderRequests = vi.fn(() =>
       HttpResponse.json({ data: [], next_cursor: 'LTE=' }),
     );
-    server.use(http.get(`${environment.predictions.rest}/data/orders`, orderRequests));
+    server.use(
+      http.get(`${environment.predictions.rest}/data/orders`, orderRequests),
+    );
     expect(() => {
       // @ts-expect-error JavaScript callers can omit the required condition ID.
       client.listOpenOrders({ assetId: '123' });
