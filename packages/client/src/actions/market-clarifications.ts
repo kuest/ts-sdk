@@ -24,9 +24,11 @@ import {
   paginate,
 } from '../pagination';
 import { parseRequestOptions, type RequestOptions } from '../request-options';
-import { snakeCase, toSearchParams } from './params';
+import { resolveCreatorQuery } from '../site-creator';
+import { CreatorFilterSchema, snakeCase, toSearchParams } from './params';
 
 const ListMarketClarificationsRequestSchema = z.object({
+  creator: CreatorFilterSchema.optional(),
   marketId: z.union([z.string(), z.array(z.string())]).optional(),
   eventId: z.union([z.string(), z.array(z.string())]).optional(),
   questionId: z.union([z.string(), z.array(z.string())]).optional(),
@@ -71,6 +73,7 @@ export const ListMarketClarificationsError = makeErrorGuard(
  *
  * @remarks
  * This is a low-level function. Most SDK consumers should prefer the client instance API.
+ * A configured operator site applies its wallet filter automatically and cannot be overridden.
  *
  * @throws {@link ListMarketClarificationsError}
  * Thrown on failure.
@@ -109,40 +112,43 @@ export function listMarketClarifications(
   options: RequestOptions = {},
 ): Paginated<MarketClarification[]> {
   const requestOptions = parseRequestOptions(options);
-  const { cursor, pageSize, ...params } = parseUserInput(
-    request,
-    ListMarketClarificationsRequestSchema,
-  );
+  const {
+    cursor,
+    pageSize,
+    creator: requestedCreator,
+    ...params
+  } = parseUserInput(request, ListMarketClarificationsRequestSchema);
 
-  return paginate((cursor) => {
+  return paginate(async (cursor) => {
     const decoded = decodeOffsetCursor(cursor, pageSize);
-
-    return client.gamma
-      .get('/market-clarifications', {
-        schema: ListMarketClarificationsResponseSchema,
-        ...requestOptions,
-        params: toSearchParams(
-          {
-            ...params,
-            limit: decoded.pageSize,
-            offset: decoded.offset,
-          },
-          snakeCase(),
-        ),
-      })
-      .then((clarifications) => {
-        const hasMore = clarifications.length >= decoded.pageSize;
-
-        return {
-          items: clarifications,
-          hasMore,
-          nextCursor: hasMore
-            ? encodeOffsetCursor({
-                offset: decoded.offset + decoded.pageSize,
-                pageSize: decoded.pageSize,
-              })
-            : undefined,
-        };
-      });
+    const creator = await resolveCreatorQuery(
+      client.siteConfig?.site_url,
+      requestedCreator,
+      requestOptions.signal,
+    );
+    const clarifications = await client.gamma.get('/market-clarifications', {
+      schema: ListMarketClarificationsResponseSchema,
+      ...requestOptions,
+      params: toSearchParams(
+        {
+          ...params,
+          creator,
+          limit: decoded.pageSize,
+          offset: decoded.offset,
+        },
+        snakeCase(),
+      ),
+    });
+    const hasMore = clarifications.length >= decoded.pageSize;
+    return {
+      items: clarifications,
+      hasMore,
+      nextCursor: hasMore
+        ? encodeOffsetCursor({
+            offset: decoded.offset + decoded.pageSize,
+            pageSize: decoded.pageSize,
+          })
+        : undefined,
+    };
   }, cursor);
 }

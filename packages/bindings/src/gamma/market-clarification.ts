@@ -1,5 +1,6 @@
 import { z } from 'zod';
 import {
+  ConditionIdSchema,
   EventIdSchema,
   EvmAddressSchema,
   IsoDateTimeStringSchema,
@@ -26,6 +27,8 @@ const MarketIdFromWireSchema = z
 export const MarketClarificationSchema = z.object({
   id: z.number().int(),
   marketId: MarketIdFromWireSchema.nullish(),
+  conditionId: ConditionIdSchema.optional(),
+  source: z.enum(['kuest', 'polymarket']).optional(),
   eventId: EventIdSchema.nullish(),
   questionId: QuestionIdSchema.nullish(),
   content: z.string().nullish(),

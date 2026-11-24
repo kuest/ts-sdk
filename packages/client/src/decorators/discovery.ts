@@ -379,6 +379,9 @@ export type DiscoveryActions = {
    * Lists market clarifications — notes that resolve ambiguity in how a market
    * settles.
    *
+   * @remarks
+   * A configured operator site applies its wallet filter automatically and cannot be overridden.
+   *
    * @throws {@link ListMarketClarificationsError}
    * Thrown on failure.
    *

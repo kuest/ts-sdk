@@ -20,6 +20,7 @@ export { ActivityType, TokenModule } from '@kuest/bindings/data';
 export type * from '@kuest/bindings/gamma';
 export {
   ComboKnownStatus,
+  MarketClarificationState,
   MarketResolutionStatus,
   ProtocolVersion,
   TeamOrdering,
