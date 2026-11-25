@@ -146,6 +146,18 @@ it('filters published clarifications by operator and keeps native market identit
         state: 'success',
         showInFrontend: true,
       },
+      {
+        id: 9,
+        marketId: 512038,
+        eventId: 28,
+        source: 'polymarket',
+        sourceMarketId: 5710779,
+        sourceEventId: 203,
+        sourceQuestionId: `0x${'b'.repeat(64)}`,
+        content: 'Mirrored market note',
+        state: 'success',
+        showInFrontend: true,
+      },
     ]);
   });
   const scoped = createPublicClient({
@@ -170,6 +182,12 @@ it('filters published clarifications by operator and keeps native market identit
 
   expect(page.items).toEqual([
     expect.objectContaining({ marketId: null, conditionId, source: 'kuest' }),
+    expect.objectContaining({
+      marketId: '512038',
+      sourceMarketId: '5710779',
+      sourceEventId: '203',
+      sourceQuestionId: `0x${'b'.repeat(64)}`,
+    }),
   ]);
   expect(gammaRequests.map((url) => url.searchParams.get('creator'))).toEqual([
     [one, two].join(','),
