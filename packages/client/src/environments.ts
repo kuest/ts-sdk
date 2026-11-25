@@ -82,7 +82,7 @@ export type EnvironmentConfig = {
   perps: PerpsEndpoints;
   /** @internal */
   realtime: WebSocketEndpoint;
-  /** @internal @deprecated Retained temporarily for legacy RTDS streams. */
+  /** @internal Local comment stream endpoint. */
   rtds: WebSocketEndpoint;
   /** @internal */
   sports: WebSocketEndpoint;
@@ -114,7 +114,7 @@ export type EnvironmentConfigFork = {
   };
   perps?: EnvironmentConfigForkEndpoint;
   realtime?: Partial<WebSocketEndpoint>;
-  /** @deprecated Retained temporarily for legacy RTDS streams. */
+  /** Local comment stream endpoint. */
   rtds?: Partial<WebSocketEndpoint>;
   sports?: Partial<WebSocketEndpoint>;
   relayerMaxPolls?: number;

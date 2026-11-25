@@ -1,16 +1,10 @@
 import {
   type CommentsEvent,
-  type CryptoPricesChainlinkTwapWindowSeconds,
-  type CryptoPricesEvent,
-  type EquityPricesEvent,
   RealtimeEventSchema,
 } from '@kuest/bindings/subscriptions';
 import { invariant } from '@kuest/types';
 import type {
   CommentsSubscription,
-  CryptoPricesChainlinkTwapSubscription,
-  CryptoPricesSubscription,
-  EquityPricesSubscription,
   SubscriptionHandle,
 } from '../actions/subscriptions';
 import { createSubscriptionHandle } from './handle';
@@ -27,13 +21,8 @@ import {
 } from './registry';
 import type { WebSocketSubscriptionManager } from './types';
 
-type RtdsSpec =
-  | CommentsSubscription
-  | CryptoPricesSubscription
-  | CryptoPricesChainlinkTwapSubscription
-  | EquityPricesSubscription;
-
-type RtdsEvent = CommentsEvent | CryptoPricesEvent | EquityPricesEvent;
+type RtdsSpec = CommentsSubscription;
+type RtdsEvent = CommentsEvent;
 
 type RtdsSubscriptionEntry = SubscriptionRegistryEntry<RtdsSpec, RtdsEvent>;
 
@@ -53,7 +42,7 @@ export type RtdsWebSocketManagerOptions = {
 /**
  * Realtime Data Service (RTDS) WebSocket manager.
  *
- * @deprecated Retained temporarily for legacy price and comment streams.
+ * Local comment streams.
  *
  * Implements {@link WebSocketSubscriptionManager} for the comments, crypto prices, and
  * equity prices topics multiplexed over a single shared upstream socket
@@ -261,51 +250,8 @@ function serverSubscriptionsFor(
       return (subscription.types ?? ['comment_created']).map((type) =>
         serverSubscription('comments', type),
       );
-    case 'prices.crypto.binance':
-      // Subscribe broadly and filter client-side. Sending a second subscribe
-      // frame with a different `filters` value on the same socket causes the
-      // server to replace the prior subscription rather than add one, so
-      // multiple subscribers on the same manager cannot share a socket while
-      // using server-side filters. See docs/api-boundary-notes.md.
-      return [serverSubscription('crypto_prices', 'update')];
-    case 'prices.crypto.chainlink':
-      // RTDS tracks one filter per topic per connection, so a second subscribe
-      // with a different filter replaces the first. Subscribe broadly and
-      // filter client-side — see docs/api-boundary-notes.md.
-      return [serverSubscription('crypto_prices_chainlink', 'update')];
-    case 'prices.crypto.chainlink.twap':
-      // Each TWAP window is a distinct RTDS topic. Subscribe broadly within
-      // the requested window and narrow symbols client-side so subscribers for
-      // the same window can safely share a socket.
-      return [
-        serverSubscription(
-          twapServerTopic(subscription.windowSeconds),
-          'update',
-        ),
-      ];
-    case 'prices.equity.pyth':
-      // Same per-topic replace-on-resubscribe constraint as crypto_prices. A
-      // single unfiltered subscribe covers every active equity symbol; the
-      // client-side matcher narrows to the caller's requested symbol.
-      return [serverSubscription('equity_prices', 'update')];
     default: {
-      const neverSpec: never = subscription;
-      invariant(false, `Unknown RTDS topic: ${String(neverSpec)}`);
-    }
-  }
-}
-
-function twapServerTopic(
-  windowSeconds: CryptoPricesChainlinkTwapWindowSeconds,
-): string {
-  switch (windowSeconds) {
-    case 30:
-      return 'crypto_prices_twap_thirty';
-    case 60:
-      return 'crypto_prices_twap_sixty';
-    default: {
-      const neverWindow: never = windowSeconds;
-      invariant(false, `Unknown TWAP window: ${String(neverWindow)}`);
+      invariant(false, `Unknown comments topic: ${String(subscription)}`);
     }
   }
 }
@@ -363,39 +309,8 @@ function matcherFor(subscription: RtdsSpec): (event: RtdsEvent) => boolean {
         }
         return true;
       };
-    case 'prices.crypto.binance':
-      return (event) =>
-        event.topic === 'prices.crypto.binance' &&
-        (subscription.symbols === undefined ||
-          subscription.symbols.length === 0 ||
-          subscription.symbols.includes(event.payload.symbol));
-    case 'prices.crypto.chainlink':
-      return (event) =>
-        event.topic === 'prices.crypto.chainlink' &&
-        (subscription.symbols === undefined ||
-          subscription.symbols.length === 0 ||
-          subscription.symbols.includes(event.payload.symbol));
-    case 'prices.crypto.chainlink.twap':
-      return (event) =>
-        event.topic === 'prices.crypto.chainlink.twap' &&
-        event.payload.windowSeconds === subscription.windowSeconds &&
-        (subscription.symbols === undefined ||
-          subscription.symbols.length === 0 ||
-          subscription.symbols.includes(event.payload.symbol));
-    case 'prices.equity.pyth':
-      // RTDS emits every event kind for a topic regardless of the `type` value
-      // in the subscribe frame, so the caller's `types` filter must be
-      // enforced client-side here.
-      return (event) =>
-        event.topic === 'prices.equity.pyth' &&
-        event.payload.symbol.toLowerCase() ===
-          subscription.symbol.toLowerCase() &&
-        (subscription.types === undefined ||
-          subscription.types.length === 0 ||
-          subscription.types.includes(event.type));
     default: {
-      const neverSpec: never = subscription;
-      invariant(false, `Unknown RTDS topic: ${String(neverSpec)}`);
+      invariant(false, `Unknown comments topic: ${String(subscription)}`);
     }
   }
 }

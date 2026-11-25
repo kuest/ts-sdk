@@ -396,6 +396,10 @@ class BasePublicClient<
           headers: config.environment.sports.headers,
           url: config.environment.sports.ws,
         }),
+        realtime: new RealtimeWebSocketManager({
+          url: config.environment.realtime.ws,
+          headers: config.environment.realtime.headers,
+        }),
         rtds: new RtdsWebSocketManager({
           headers: config.environment.rtds.headers,
           url: config.environment.rtds.ws,
@@ -451,6 +455,7 @@ class BasePublicClient<
   async closeSubscriptions(): Promise<void> {
     await Promise.all([
       this.webSockets.clobMarket.close(),
+      this.webSockets.realtime.close(),
       this.webSockets.rtds.close(),
       this.webSockets.sports.close(),
       this.webSockets.perpsSubscriptions.close(),
@@ -599,7 +604,6 @@ class BaseSecureClient<
     const realtime = new RealtimeWebSocketManager({
       url: config.environment.realtime.ws,
       headers: config.environment.realtime.headers,
-      credentials: config.credentials,
     });
     super({
       account: config.account,

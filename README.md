@@ -12,9 +12,11 @@ This SDK combines market discovery, CLOB data and orders, and Deposit Wallet rel
 - Relayer submissions use builder credentials and `WALLET` or `WALLET-CREATE` payloads. Nonce and transaction reads use `/nonce` and `/transaction`.
 - Standard and NegRisk CTF split, merge, and redeem use the deployed Conditional Tokens and NegRiskAdapter contracts. NegRisk redeem uses the adapter's YES/NO amount ABI. These calls require the caller's relevant USDC allowance or CTF operator approval; trading approvals for the exchanges do not grant those permissions.
 - RFQ is intentionally disabled for this product, including the ordinary RFQ supported by the CLOB backend. Specialized session-key management and upstream protocol V2 Router position operations reject locally.
-- Position-backed V3 orders, combo RFQ, collateral return, and Safe/Proxy relayer submissions fail locally. Perps, realtime, sports, bridge, and other upstream-only services are not configured.
+- Position-backed V3 orders, combo RFQ, collateral return, and Safe/Proxy relayer submissions fail locally. Perps, sports, bridge, and other upstream-only services are not configured.
 - Builder-attributed trade listing fails locally because the current CLOB ignores `builder_code`; see [COMPATIBILITY.md](./COMPATIBILITY.md).
 - All network endpoints default to `unconfigured.invalid`. An integrator must supply approved HTTPS/WSS service URLs and a Polygon RPC URL explicitly.
+
+Realtime prices use the configured live-data WebSocket without API credentials, canonical USD symbols such as `btcusd`, and a 60-second TWAP window.
 
 Operator bundles can supply the established `.sdk/site-config.json` overlay. Direct GitHub users supply their own endpoint configuration and presentation.
 

@@ -2,8 +2,6 @@ import { type PositionId, type TokenId, toTokenId } from '@kuest/bindings';
 import type * as BindingExports from '@kuest/bindings/subscriptions';
 import type {
   CryptoPriceEvent,
-  CryptoPricesChainlinkTwapSixtyEvent,
-  CryptoPricesChainlinkTwapThirtyEvent,
   CryptoTwapPriceEvent,
   CustomMarketEvent,
   EquityPriceEvent,
@@ -52,62 +50,6 @@ declare const secureClient: SecureClient;
 const ASSET_ID = toTokenId('123');
 
 describe('price subscription contracts', () => {
-  it('exports provider selection only for the four vendor-neutral price topics', () => {
-    expectTypeOf<PriceProvider>().toEqualTypeOf<BindingExports.PriceProvider>();
-    expectTypeOf<BindingExports.PolyboltAck>()
-      .toHaveProperty('provider')
-      .toEqualTypeOf<PriceSource | undefined>();
-    expectTypeOf<PriceProvider>().toEqualTypeOf<
-      PriceProvider.Pyth | PriceProvider.Chainlink
-    >();
-    expectTypeOf<KnownPriceSource.Massive>().not.toExtend<PriceProvider>();
-    expectTypeOf<ClientExports.CryptoPriceSubscription>()
-      .toHaveProperty('provider')
-      .toEqualTypeOf<PriceProvider | undefined>();
-    expectTypeOf<ClientExports.CryptoTwapPriceSubscription>()
-      .toHaveProperty('provider')
-      .toEqualTypeOf<PriceProvider | undefined>();
-    expectTypeOf<ClientExports.EquityPriceSubscription>()
-      .toHaveProperty('provider')
-      .toEqualTypeOf<PriceProvider | undefined>();
-    expectTypeOf<ClientExports.EquityTwapPriceSubscription>()
-      .toHaveProperty('provider')
-      .toEqualTypeOf<PriceProvider | undefined>();
-    expectTypeOf<ClientExports.CryptoPricesSubscription>().not.toHaveProperty(
-      'provider',
-    );
-    expectTypeOf<ClientExports.CryptoPricesChainlinkTwapSubscription>().not.toHaveProperty(
-      'provider',
-    );
-    expectTypeOf<ClientExports.EquityPricesSubscription>().not.toHaveProperty(
-      'provider',
-    );
-    expectTypeOf<MarketSubscription>().not.toHaveProperty('provider');
-    expectTypeOf<PriceSubscriptionConfirmation>().toEqualTypeOf<{
-      symbol: string;
-      provider?: PriceSource;
-    }>();
-    expectTypeOf<ClientExports.EquityPriceSubscription>()
-      .toHaveProperty('onSubscribed')
-      .toEqualTypeOf<
-        | ((
-            confirmation: PriceSubscriptionConfirmation,
-          ) => void | Promise<void>)
-        | undefined
-      >();
-    void secureClient.subscribe([
-      {
-        topic: 'prices.crypto',
-        symbols: ['btcusd'],
-        onSubscribed(confirmation) {
-          expectTypeOf(
-            confirmation,
-          ).toEqualTypeOf<PriceSubscriptionConfirmation>();
-        },
-      },
-    ]);
-  });
-
   it('exports known price sources while accepting future source names', () => {
     expectTypeOf<KnownPriceSource>().toEqualTypeOf<BindingExports.KnownPriceSource>();
     expectTypeOf<PriceSource>().toEqualTypeOf<BindingExports.PriceSource>();
@@ -225,7 +167,7 @@ describe('price subscription contracts', () => {
     }
   });
 
-  it('exports equity TWAP types only for secure subscriptions', () => {
+  it('exports equity TWAP types for public subscriptions', () => {
     expectTypeOf<EquityTwapPriceSubscription>().toEqualTypeOf<{
       topic: 'prices.equity.twap';
       symbol: string;
@@ -238,63 +180,7 @@ describe('price subscription contracts', () => {
     expectTypeOf<RootEquityTwapPriceSnapshotEvent>().toEqualTypeOf<EquityTwapPriceSnapshotEvent>();
     expectTypeOf<
       Extract<PublicSubscriptionSpec, { topic: 'prices.equity.twap' }>
-    >().toEqualTypeOf<never>();
-  });
-
-  it('requires authentication and explicit symbols while preserving deprecated topics', () => {
-    const publicClient = createPublicClient();
-    // @ts-expect-error Crypto prices require a secure client.
-    publicClient.subscribe([{ topic: 'prices.crypto', symbols: ['btcusd'] }]);
-    publicClient.subscribe([
-      // @ts-expect-error TWAP prices require a secure client.
-      { topic: 'prices.crypto.twap', symbols: ['btcusd'] },
-    ]);
-    // @ts-expect-error Equity prices require a secure client.
-    publicClient.subscribe([{ topic: 'prices.equity', symbol: 'aapl' }]);
-    // @ts-expect-error Crypto prices require explicit symbols.
-    secureClient.subscribe([{ topic: 'prices.crypto' }]);
-    // @ts-expect-error TWAP prices require explicit symbols.
-    secureClient.subscribe([{ topic: 'prices.crypto.twap' }]);
-    expectTypeOf<BindingExports.CommentsEvent>();
-    expectTypeOf<ClientExports.CryptoPricesChainlinkTwapEvent>();
-    // @ts-expect-error Managers are implementation details, not root exports.
-    expectTypeOf<ClientExports.RealtimeWebSocketManager>();
-    // @ts-expect-error Managers are implementation details, not root exports.
-    expectTypeOf<ClientExports.RtdsWebSocketManager>();
-    publicClient.subscribe([
-      { topic: 'prices.crypto.binance', symbols: ['btcusdt'] },
-      { topic: 'prices.crypto.chainlink', symbols: ['btc/usd'] },
-      {
-        topic: 'prices.crypto.chainlink.twap',
-        symbols: ['btc/usd'],
-        windowSeconds: 60,
-      },
-      { topic: 'prices.equity.pyth', symbol: 'aapl', types: ['update'] },
-      { topic: 'comments' },
-    ]);
-  });
-
-  it('preserves deprecated RTDS TWAP window narrowing', () => {
-    type ThirtySecond = EventForSubscriptionSpecs<
-      [
-        {
-          topic: 'prices.crypto.chainlink.twap';
-          symbols: ['btc/usd'];
-          windowSeconds: 30;
-        },
-      ]
-    >;
-    type SixtySecond = EventForSubscriptionSpecs<
-      [
-        {
-          topic: 'prices.crypto.chainlink.twap';
-          symbols: ['btc/usd'];
-          windowSeconds: 60;
-        },
-      ]
-    >;
-    expectTypeOf<ThirtySecond>().toEqualTypeOf<CryptoPricesChainlinkTwapThirtyEvent>();
-    expectTypeOf<SixtySecond>().toEqualTypeOf<CryptoPricesChainlinkTwapSixtyEvent>();
+    >().toEqualTypeOf<EquityTwapPriceSubscription>();
   });
 });
 
