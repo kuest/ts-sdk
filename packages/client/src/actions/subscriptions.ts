@@ -2,20 +2,9 @@ import type { PerpsKlineInterval } from '@kuest/bindings/perps';
 import type {
   CommentsEvent,
   CryptoPriceEvent,
-  CryptoPricesBinanceEvent,
-  CryptoPricesChainlinkEvent,
-  CryptoPricesChainlinkTwapEvent,
-  CryptoPricesChainlinkTwapSixtyEvent,
-  CryptoPricesChainlinkTwapThirtyEvent,
-  CryptoPricesChainlinkTwapTopic,
-  CryptoPricesChainlinkTwapWindowSeconds,
-  CryptoPricesEvent,
-  CryptoPricesTopic,
   CryptoTwapPriceEvent,
   CustomMarketEvent,
   EquityPriceEvent,
-  EquityPricesEvent,
-  EquityPricesTopic,
   EquityTwapPriceEvent,
   MarketEvent,
   PerpsBboEvent,
@@ -53,17 +42,9 @@ export type {
   CommentsEvent,
   CryptoPriceEvent,
   CryptoPriceSnapshotEvent,
-  CryptoPricesBinanceEvent,
-  CryptoPricesChainlinkEvent,
-  CryptoPricesChainlinkTwapEvent,
-  CryptoPricesChainlinkTwapSixtyEvent,
-  CryptoPricesChainlinkTwapThirtyEvent,
-  CryptoPricesChainlinkTwapWindowSeconds,
-  CryptoPricesEvent,
   CryptoTwapPriceEvent,
   CryptoTwapPriceSnapshotEvent,
   EquityPriceEvent,
-  EquityPricesEvent,
   EquityTwapPriceEvent,
   EquityTwapPriceSnapshotEvent,
   PriceSource,
@@ -94,8 +75,6 @@ export type MarketEventType = MarketEvent['type'];
 export type UserEventType = UserEvent['type'];
 export type SportsEventType = SportsEvent['type'];
 export type CommentsEventType = CommentsEvent['type'];
-export type CryptoPricesEventType = CryptoPricesEvent['type'];
-export type EquityPricesEventType = EquityPricesEvent['type'];
 /**
  * @experimental This API may change in a breaking way in any release, including patch releases.
  */
@@ -147,119 +126,12 @@ export type SportsSubscription = {
   topic: 'sports';
 };
 
-/**
- * @deprecated The comments stream is being discontinued.
- * Use `client.listComments()` to retrieve comments. This method does not
- * provide live comment or reaction events.
- *
- * @example
- * ```ts
- * const pages = client.listComments({
- *   parentEntityId: '123',
- *   parentEntityType: CommentParentEntityType.Event,
- *   pageSize: 20,
- * });
- * const page = await pages.firstPage();
- *
- * for (const comment of page.items) {
- *   console.log(comment);
- * }
- * ```
- */
+/** Subscribe to local comment and reaction events. */
 export type CommentsSubscription = {
   topic: 'comments';
   types?: readonly CommentsEventType[];
   parentEntityId?: number;
   parentEntityType?: 'Event' | 'Market';
-};
-
-/**
- * @deprecated Use `prices.crypto` with a secure client and explicit canonical
- * USD symbols. Events include history snapshots. Removal is planned one month
- * after the 0.11.0 release.
- *
- * Binance USDT prices and PolyBolt USD prices have different quote currencies
- * and feed sources; this is not a like-for-like replacement. Chainlink spot
- * consumers must also assess the change in feed source.
- *
- * @example
- * ```ts
- * // Before: Chainlink USD or Binance USDT prices.
- * const legacyPrices = await publicClient.subscribe([
- *   { topic: 'prices.crypto.chainlink', symbols: ['btc/usd'] },
- *   { topic: 'prices.crypto.binance', symbols: ['btcusdt'] },
- * ]);
- *
- * // After: secureClient is already authenticated; choose USD prices explicitly.
- * const prices = await secureClient.subscribe([
- *   { topic: 'prices.crypto', symbols: ['btcusd'] },
- * ]);
- * for await (const event of prices) {
- *   if (event.type !== 'update') continue;
- *   console.log(event.payload.symbol, event.payload.value);
- * }
- * ```
- */
-export type CryptoPricesSubscription = {
-  topic: CryptoPricesTopic;
-  symbols?: readonly string[];
-};
-
-/**
- * @deprecated Use `prices.crypto.twap` with a secure client and explicit
- * canonical USD symbols. The replacement provides 60-second TWAP prices and
- * history snapshots. There is no replacement for the 30-second window.
- * Removal is planned one month after the 0.11.0 release.
- *
- * @example
- * ```ts
- * // Before
- * const legacyPrices = await publicClient.subscribe([
- *   {
- *     topic: 'prices.crypto.chainlink.twap',
- *     symbols: ['btc/usd'],
- *     windowSeconds: 60,
- *   },
- * ]);
- *
- * // After: secureClient is already authenticated.
- * const prices = await secureClient.subscribe([
- *   { topic: 'prices.crypto.twap', symbols: ['btcusd'] },
- * ]);
- * for await (const event of prices) {
- *   if (event.type !== 'update') continue;
- *   console.log(event.payload.symbol, event.payload.value);
- * }
- * ```
- */
-export type CryptoPricesChainlinkTwapSubscription = {
-  topic: CryptoPricesChainlinkTwapTopic;
-  windowSeconds: CryptoPricesChainlinkTwapWindowSeconds;
-  symbols?: readonly string[];
-};
-
-/**
- * @deprecated Use `prices.equity` with a secure client. The existing symbol
- * and event-type filters remain available. Removal is planned one month after
- * the 0.11.0 release.
- *
- * @example
- * ```ts
- * // Before
- * const legacyPrices = await publicClient.subscribe([
- *   { topic: 'prices.equity.pyth', symbol: 'aapl', types: ['update'] },
- * ]);
- *
- * // After: secureClient is already authenticated.
- * const prices = await secureClient.subscribe([
- *   { topic: 'prices.equity', symbol: 'aapl', types: ['update'] },
- * ]);
- * ```
- */
-export type EquityPricesSubscription = {
-  topic: EquityPricesTopic;
-  symbol: string;
-  types?: readonly EquityPricesEventType[];
 };
 
 /**
@@ -326,9 +198,7 @@ export type PublicSubscriptionSpec =
   | MarketSubscription
   | SportsSubscription
   | CommentsSubscription
-  | CryptoPricesSubscription
-  | CryptoPricesChainlinkTwapSubscription
-  | EquityPricesSubscription
+  | PriceSubscription
   | PerpsMarketDataSubscription;
 
 /** Confirmation of one price subscription, refreshed after every reconnect. */
@@ -336,21 +206,20 @@ export type PriceSubscriptionConfirmation = {
   /** Canonical lowercase symbol the confirmation is for. */
   symbol: string;
   /**
-   * The provider actually served, including fallback. Undefined when the
+   * The provider actually served. Undefined when the
    * server does not confirm provider selection; never inferred from the pin.
    */
   provider?: PriceSource;
 };
 
 /**
- * Symbol-filtered cryptocurrency updates and recent history. Requires a secure
- * client and canonical lowercase USD pairs such as `btcusd`.
+ * Symbol-filtered cryptocurrency updates and recent history. Uses canonical lowercase USD pairs such as `btcusd`.
  * Slash-separated symbols and USDT pairs are rejected.
  */
 export type CryptoPriceSubscription = {
   topic: 'prices.crypto';
   symbols: readonly string[];
-  /** Requested vendor. Omit to follow the default; an unavailable pin may fall back. */
+  /** Requested vendor. Omit to follow the default; an unavailable pin is rejected. */
   provider?: PriceProvider;
   /**
    * Called once per symbol on acceptance and every reconnect, or immediately
@@ -362,14 +231,14 @@ export type CryptoPriceSubscription = {
   ) => void | Promise<void>;
 };
 /**
- * 60-second time-weighted prices and recent history. Requires a secure client
+ * 60-second time-weighted prices and recent history. Uses explicit filters;
  * and canonical lowercase USD pairs such as `btcusd`. The window is fixed;
  * returned events include `windowSeconds: 60` as metadata.
  */
 export type CryptoTwapPriceSubscription = {
   topic: 'prices.crypto.twap';
   symbols: readonly string[];
-  /** Requested vendor. Omit to follow the default; an unavailable pin may fall back. */
+  /** Requested vendor. Omit to follow the default; an unavailable pin is rejected. */
   provider?: PriceProvider;
   /**
    * Called once per symbol on acceptance and every reconnect, or immediately
@@ -380,12 +249,12 @@ export type CryptoTwapPriceSubscription = {
     confirmation: PriceSubscriptionConfirmation,
   ) => void | Promise<void>;
 };
-/** Equity updates and recent history. Requires a secure client. */
+/** Equity updates and recent history. Public subscriptions. */
 export type EquityPriceSubscription = {
   topic: 'prices.equity';
   symbol: string;
   types?: readonly ('subscribe' | 'update')[];
-  /** Requested vendor. Omit to follow the default; an unavailable pin may fall back. */
+  /** Requested vendor. Omit to follow the default; an unavailable pin is rejected. */
   provider?: PriceProvider;
   /**
    * Called once per symbol on acceptance and every reconnect, or immediately
@@ -397,14 +266,13 @@ export type EquityPriceSubscription = {
   ) => void | Promise<void>;
 };
 /**
- * 60-second time-weighted equity prices and recent history. Requires a secure
- * client. Symbols such as `eurusd` and `usdjpy` are case-insensitive; prices
+ * 60-second time-weighted equity prices and recent history. Public subscriptions. Symbols such as `eurusd` and `usdjpy` are case-insensitive; prices
  * use the symbol's quote currency. Returned events include `windowSeconds: 60`.
  */
 export type EquityTwapPriceSubscription = {
   topic: 'prices.equity.twap';
   symbol: string;
-  /** Requested vendor. Omit to follow the default; an unavailable pin may fall back. */
+  /** Requested vendor. Omit to follow the default; an unavailable pin is rejected. */
   provider?: PriceProvider;
   /**
    * Called once per symbol on acceptance and every reconnect, or immediately
@@ -430,8 +298,10 @@ export type PublicRealtimeEvent =
   | MarketEvent
   | SportsEvent
   | CommentsEvent
-  | CryptoPricesEvent
-  | EquityPricesEvent
+  | CryptoPriceEvent
+  | CryptoTwapPriceEvent
+  | EquityPriceEvent
+  | EquityTwapPriceEvent
   | PerpsMarketDataEvent;
 
 export type SecureRealtimeEvent =
@@ -460,10 +330,6 @@ type EventByTopic = {
   'prices.equity': EquityPriceEvent;
   'prices.equity.twap': EquityTwapPriceEvent;
   comments: CommentsEvent;
-  'prices.crypto.binance': CryptoPricesBinanceEvent;
-  'prices.crypto.chainlink': CryptoPricesChainlinkEvent;
-  'prices.crypto.chainlink.twap': CryptoPricesChainlinkTwapEvent;
-  'prices.equity.pyth': EquityPricesEvent;
   user: UserEvent;
   sports: SportsEvent;
   'perps.trades': PerpsTradeEvent;
@@ -481,22 +347,12 @@ type EventForMarketSubscription<TSpec extends MarketSubscription> =
       : StandardMarketEvent
     : StandardMarketEvent;
 
-type EventForCryptoPricesChainlinkTwapSubscription<
-  TSpec extends CryptoPricesChainlinkTwapSubscription,
-> = TSpec extends { windowSeconds: 30 }
-  ? CryptoPricesChainlinkTwapThirtyEvent
-  : TSpec extends { windowSeconds: 60 }
-    ? CryptoPricesChainlinkTwapSixtyEvent
-    : CryptoPricesChainlinkTwapEvent;
-
 export type EventForSubscriptionSpec<TSpec extends SecureSubscriptionSpec> =
   TSpec extends MarketSubscription
     ? EventForMarketSubscription<TSpec>
-    : TSpec extends CryptoPricesChainlinkTwapSubscription
-      ? EventForCryptoPricesChainlinkTwapSubscription<TSpec>
-      : TSpec extends { topic: infer TTopic extends keyof EventByTopic }
-        ? EventByTopic[TTopic]
-        : never;
+    : TSpec extends { topic: infer TTopic extends keyof EventByTopic }
+      ? EventByTopic[TTopic]
+      : never;
 
 export type EventForSubscriptionSpecs<
   TSubscriptions extends readonly SecureSubscriptionSpec[],
@@ -532,10 +388,6 @@ enum SubscriptionTopic {
   Equity = 'prices.equity',
   EquityTwap = 'prices.equity.twap',
   Comments = 'comments',
-  LegacyBinance = 'prices.crypto.binance',
-  LegacyChainlink = 'prices.crypto.chainlink',
-  LegacyTwap = 'prices.crypto.chainlink.twap',
-  LegacyEquity = 'prices.equity.pyth',
   PerpsTrades = 'perps.trades',
   PerpsBbo = 'perps.bbo',
   PerpsBook = 'perps.book',
@@ -544,11 +396,6 @@ enum SubscriptionTopic {
   PerpsStatistics = 'perps.statistics',
 }
 const SubscriptionTopicSchema = z.object({ topic: z.enum(SubscriptionTopic) });
-const LegacyTwapSubscriptionSchema = z.object({
-  topic: z.literal('prices.crypto.chainlink.twap'),
-  windowSeconds: z.union([z.literal(30), z.literal(60)]),
-  symbols: z.array(z.string()).optional(),
-});
 
 const MarketSubscriptionSchema = z.union([
   z.object({
@@ -570,14 +417,14 @@ const MarketSubscriptionSchema = z.union([
  *
  * The `prices.crypto`, `prices.crypto.twap`, `prices.equity`, and
  * `prices.equity.twap` topics
- * require a secure client and explicit filters, and include history snapshots
- * and live updates. Legacy source-named topics retain their existing behavior.
+ * require explicit filters, and include history snapshots
+ * and live updates.
  * These four topics include `source`, identifying the source of the update
  * or entire history batch, including empty batches. Unknown source names remain
  * strings. Crypto sources are constant; equity sources may change across
  * reconnects. Cached history starts fresh whenever the source changes.
  * These four topics accept an optional `provider` pin. Omit it to follow the
- * default. A pin may fall back or be ignored when selection is disabled;
+ * default. An unavailable provider pin is rejected;
  * `source` always identifies the actual producer. Different provider choices,
  * including omission, use separate connections, even if they serve the same source.
  * An optional `onSubscribed` callback reports the provider the server confirms,
@@ -626,14 +473,7 @@ export async function subscribe(
       case 'prices.crypto.twap':
       case 'prices.equity':
       case 'prices.equity.twap':
-        if (!client.isSecureClient())
-          throw new UserInputError(
-            'This subscription requires a secure client.',
-          );
         return parsePriceSubscription(subscription);
-      case 'prices.crypto.chainlink.twap':
-        parseUserInput(subscription, LegacyTwapSubscriptionSchema);
-        break;
       case 'market':
         parseUserInput(subscription, MarketSubscriptionSchema);
         break;
@@ -668,14 +508,8 @@ function subscribeOne(
     case 'prices.crypto.twap':
     case 'prices.equity':
     case 'prices.equity.twap':
-      if (!client.isSecureClient())
-        throw new UserInputError('This subscription requires a secure client.');
       return client.webSockets.realtime.subscribe(spec);
     case 'comments':
-    case 'prices.crypto.binance':
-    case 'prices.crypto.chainlink':
-    case 'prices.crypto.chainlink.twap':
-    case 'prices.equity.pyth':
       return client.webSockets.rtds.subscribe(spec);
     case 'perps.trades':
     case 'perps.bbo':

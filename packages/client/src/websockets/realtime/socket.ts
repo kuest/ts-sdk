@@ -37,7 +37,7 @@ type PendingOp = {
 export type PolyboltConnectionOptions = {
   url: string;
   headers?: Record<string, string>;
-  credentials: ApiKeyCreds;
+  credentials?: ApiKeyCreds;
 };
 
 /** @internal Adapts price operations and events to the PolyBolt wire protocol. */
@@ -80,6 +80,7 @@ export class PolyboltConnection implements PriceSessionConnection {
   }
 
   async authorize(): Promise<void> {
+    if (this.#options.credentials === undefined) return;
     const { key, secret, passphrase } = this.#options.credentials;
     await this.#request(
       { op: 'auth', auth: { apiKey: key, secret, passphrase } },
@@ -154,10 +155,10 @@ export class PolyboltConnection implements PriceSessionConnection {
             this.#pending.delete(rid);
             reject(
               new TransportError(
-                'Realtime acknowledgement timed out after 10 seconds.',
+                'Realtime acknowledgement timed out after 45 seconds.',
               ),
             );
-          }, 10_000);
+          }, 45_000);
           this.#lastSent = Date.now();
           try {
             if (!this.#connection.send({ ...frame, rid }))
@@ -185,7 +186,11 @@ export class PolyboltConnection implements PriceSessionConnection {
           { status: 200, code },
         );
         const matches = pending.channels.flatMap((pendingChannel, index) =>
-          pendingChannel === channel ? [index] : [],
+          pendingChannel === channel &&
+          (ack.data.filter === undefined ||
+            pending.subscriptions[index]?.symbol === ack.data.filter.symbol)
+            ? [index]
+            : [],
         );
         if (channel === undefined || matches.length !== 1) {
           pending.reject(error);
@@ -204,9 +209,21 @@ export class PolyboltConnection implements PriceSessionConnection {
         }
       } else if (op === pending.op) {
         if (pending.channels.length > 0) {
-          // Batch acknowledgements arrive in request order and omit symbols.
           const index = pending.channels.findIndex(
-            (pendingChannel) => pendingChannel !== undefined,
+            (pendingChannel, candidate) => {
+              if (pendingChannel !== channel) return false;
+              const filter = ack.data.filter;
+              const subscription = pending.subscriptions[candidate];
+              return (
+                filter === undefined ||
+                (subscription !== undefined &&
+                  subscription.symbol === filter.symbol &&
+                  subscription.provider === filter.provider &&
+                  ('windowSeconds' in subscription
+                    ? subscription.windowSeconds
+                    : undefined) === filter.window_seconds)
+              );
+            },
           );
           if (index < 0 || pending.channels[index] !== channel) return;
           pending.channels[index] = undefined;

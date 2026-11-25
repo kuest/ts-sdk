@@ -77,6 +77,13 @@ export const PolyboltAckSchema = z.object({
   channel: z.string().optional(),
   rid: z.string().optional(),
   provider: PriceSourceSchema.optional(),
+  filter: z
+    .object({
+      symbol: z.string(),
+      window_seconds: z.number().optional(),
+      provider: PriceSourceSchema.optional(),
+    })
+    .optional(),
   code: z
     .string()
     .transform((value): RealtimeErrorCode => value)
@@ -113,6 +120,7 @@ const PricePayloadSchema = z
     timestamp: EpochMillisecondsSchema,
     value: DecimalishSchema,
     full_accuracy_value: DecimalStringSchema,
+    market_status: z.unknown().optional(),
     received_at: EpochMillisecondsSchema.optional(),
     is_carried_forward: z.boolean().optional(),
   })
@@ -124,6 +132,7 @@ const PricePayloadSchema = z
       full_accuracy_value,
       received_at,
       is_carried_forward,
+      market_status,
     }) => ({
       symbol,
       source,
@@ -131,14 +140,24 @@ const PricePayloadSchema = z
       value: full_accuracy_value,
       receivedAt: received_at,
       isCarriedForward: is_carried_forward,
+      ...(market_status === undefined ? {} : { marketStatus: market_status }),
     }),
   );
 
-const SnapshotPayloadSchema = z.object({
+const RawSnapshotPayloadSchema = z.object({
   symbol: z.string(),
   source: PriceSourceSchema,
   data: z.array(PricePointSchema),
+  market_status: z.unknown().optional(),
 });
+const SnapshotPayloadSchema = RawSnapshotPayloadSchema.transform(
+  ({ symbol, source, data, market_status }) => ({
+    symbol,
+    source,
+    data,
+    ...(market_status === undefined ? {} : { marketStatus: market_status }),
+  }),
+);
 const TwapWindowSchema = z.literal(60);
 const TwapPayloadSchema = z
   .object({
@@ -148,23 +167,33 @@ const TwapPayloadSchema = z
     value: DecimalishSchema,
     full_accuracy_value: DecimalStringSchema,
     window_seconds: TwapWindowSchema,
+    market_status: z.unknown().optional(),
   })
   .transform(
-    ({ symbol, source, timestamp, full_accuracy_value, window_seconds }) => ({
+    ({
+      symbol,
+      source,
+      timestamp,
+      full_accuracy_value,
+      window_seconds,
+      market_status,
+    }) => ({
       symbol,
       source,
       timestamp,
       value: full_accuracy_value,
       windowSeconds: window_seconds,
+      ...(market_status === undefined ? {} : { marketStatus: market_status }),
     }),
   );
-const TwapSnapshotSchema = SnapshotPayloadSchema.extend({
+const TwapSnapshotSchema = RawSnapshotPayloadSchema.extend({
   window_seconds: TwapWindowSchema,
-}).transform(({ symbol, source, data, window_seconds }) => ({
+}).transform(({ symbol, source, data, window_seconds, market_status }) => ({
   symbol,
   source,
   data,
   windowSeconds: window_seconds,
+  ...(market_status === undefined ? {} : { marketStatus: market_status }),
 }));
 const EventMetadataSchema = z.object({
   timestamp: EpochMillisecondsSchema,

@@ -460,7 +460,21 @@ function refreshSnapshot(
         source,
         data,
         windowSeconds: event.payload.windowSeconds,
+        ...(event.payload.marketStatus === undefined
+          ? {}
+          : { marketStatus: event.payload.marketStatus }),
       },
     };
-  return { ...event, type: 'subscribe', payload: { symbol, source, data } };
+  return {
+    ...event,
+    type: 'subscribe',
+    payload: {
+      symbol,
+      source,
+      data,
+      ...(event.payload.marketStatus === undefined
+        ? {}
+        : { marketStatus: event.payload.marketStatus }),
+    },
+  };
 }
