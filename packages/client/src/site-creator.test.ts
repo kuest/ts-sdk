@@ -1,5 +1,6 @@
 import { afterEach, expect, it, vi } from 'vitest';
 import { createPublicClient } from './clients';
+import { MarketClarificationState } from './index';
 import { DEFAULT_SITE_CONFIG } from './site-config';
 import { resolveCreatorQuery } from './site-creator';
 
@@ -121,4 +122,85 @@ it('applies an operator manifest to market and event list and detail reads', asy
     [one, two].join(','),
   ]);
   expect(manifest).toHaveBeenCalledTimes(2);
+});
+
+it('filters published clarifications by operator and keeps native market identity', async () => {
+  const conditionId = `0x${'a'.repeat(64)}`;
+  const manifest = vi.fn(async () => Response.json({ wallets: [two, one] }));
+  vi.stubGlobal('fetch', manifest);
+  const gammaRequests: URL[] = [];
+  const gammaFetch = vi.fn<typeof fetch>(async (input) => {
+    const url = new URL(new Request(input).url);
+    gammaRequests.push(url);
+    if (!url.pathname.endsWith('/market-clarifications')) {
+      return new Response(null, { status: 404 });
+    }
+    return Response.json([
+      {
+        id: 8,
+        marketId: null,
+        conditionId,
+        source: 'kuest',
+        eventId: 28,
+        content: 'Native market note',
+        state: 'success',
+        showInFrontend: true,
+      },
+      {
+        id: 9,
+        marketId: 512038,
+        eventId: 28,
+        source: 'polymarket',
+        sourceMarketId: 5710779,
+        sourceEventId: 203,
+        sourceQuestionId: `0x${'b'.repeat(64)}`,
+        content: 'Mirrored market note',
+        state: 'success',
+        showInFrontend: true,
+      },
+    ]);
+  });
+  const scoped = createPublicClient({
+    siteConfig: { ...DEFAULT_SITE_CONFIG, site_url: 'clarifications.example' },
+    fetch: gammaFetch,
+  });
+  const page = await scoped
+    .listMarketClarifications({
+      marketId: conditionId,
+      state: [
+        MarketClarificationState.Queued,
+        MarketClarificationState.Success,
+      ],
+      showInFrontend: true,
+    })
+    .firstPage();
+  await expect(
+    scoped.listMarketClarifications({ creator: three }).firstPage(),
+  ).rejects.toThrow('cannot override');
+  const base = createPublicClient({ fetch: gammaFetch });
+  await base.listMarketClarifications({ creator: [three] }).firstPage();
+
+  expect(page.items).toEqual([
+    expect.objectContaining({ marketId: null, conditionId, source: 'kuest' }),
+    expect.objectContaining({
+      marketId: '512038',
+      sourceMarketId: '5710779',
+      sourceEventId: '203',
+      sourceQuestionId: `0x${'b'.repeat(64)}`,
+    }),
+  ]);
+  expect(gammaRequests.map((url) => url.searchParams.get('creator'))).toEqual([
+    [one, two].join(','),
+    three,
+  ]);
+  expect(gammaRequests[0]?.searchParams.get('market_id')).toBe(conditionId);
+  expect(gammaRequests[0]?.searchParams.get('show_in_frontend')).toBe('true');
+  expect(gammaRequests[0]?.searchParams.getAll('state')).toEqual([
+    'queued',
+    'success',
+  ]);
+  expect(manifest).toHaveBeenCalledExactlyOnceWith(
+    'https://clarifications.example/api/allowed-market-creators',
+    expect.objectContaining({ signal: expect.any(AbortSignal) }),
+  );
 });
