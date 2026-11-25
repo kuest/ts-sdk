@@ -96,25 +96,38 @@ const ListOpenOrdersRequestFieldsSchema = z.object({
 
 const ListOpenOrdersRequestSchema = optionalExchangeAssetRequestSchema(
   ListOpenOrdersRequestFieldsSchema.shape,
-).default({});
+)
+  .refine(
+    (request) =>
+      (request.assetId === undefined && request.tokenId === undefined) ||
+      (request.market !== undefined && request.market.trim().length > 0),
+    {
+      message: 'market is required when filtering by asset ID',
+      path: ['market'],
+    },
+  )
+  .default({});
 
-export type ListOpenOrdersRequest =
+export type ListOpenOrdersRequest = {
+  cursor?: string;
+  id?: string;
+} & (
   | {
       /** Identifier for a CTF token or Polymarket V2 position. */
-      assetId?: string;
+      assetId: string;
       tokenId?: never;
-      cursor?: string;
-      id?: string;
-      market?: string;
+      /** Condition ID required when filtering by asset. */
+      market: string;
     }
   | {
       assetId?: never;
       /** @deprecated Use `assetId`. */
-      tokenId?: string;
-      cursor?: string;
-      id?: string;
-      market?: string;
-    };
+      tokenId: string;
+      /** Condition ID required when filtering by asset. */
+      market: string;
+    }
+  | { assetId?: never; tokenId?: never; market?: string }
+);
 export type ListOpenOrdersError =
   | RequestAbortedError
   | RateLimitError
@@ -135,6 +148,7 @@ export const ListOpenOrdersError = makeErrorGuard(
 
 /**
  * Lists open orders for the authenticated account across all pages.
+ * Asset filters require the market condition ID.
  *
  * @remarks
  * This is a low-level function. Most SDK consumers should prefer the client instance API.
