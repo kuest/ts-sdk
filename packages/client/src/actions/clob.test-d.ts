@@ -28,6 +28,7 @@ import type {
   fetchPrices,
   fetchSpread,
   fetchSpreads,
+  ListOpenOrdersRequest,
 } from './index';
 
 describe('public CLOB price read types', () => {
@@ -265,5 +266,32 @@ describe('rebate public types', () => {
     expectTypeOf<
       ReturnType<typeof import('./index').fetchCurrentRebates>
     >().toEqualTypeOf<Promise<import('../index').RebatedFee[]>>();
+  });
+});
+
+describe('open order filter types', () => {
+  it('requires the condition ID only with an asset filter', () => {
+    const all: ListOpenOrdersRequest = {};
+    const byId: ListOpenOrdersRequest = { id: 'order-1' };
+    const byMarket: ListOpenOrdersRequest = { market: 'condition-1' };
+    const byAsset: ListOpenOrdersRequest = {
+      assetId: '123',
+      market: 'condition-1',
+    };
+    const byToken: ListOpenOrdersRequest = {
+      tokenId: '123',
+      market: 'condition-1',
+    };
+    // @ts-expect-error Asset-filtered reads require a market condition ID.
+    const missingMarket: ListOpenOrdersRequest = { assetId: '123' };
+    // @ts-expect-error The tokenId alias has the same requirement.
+    const missingAliasMarket: ListOpenOrdersRequest = { tokenId: '123' };
+    expectTypeOf(all).toMatchTypeOf<ListOpenOrdersRequest>();
+    expectTypeOf(byId).toMatchTypeOf<ListOpenOrdersRequest>();
+    expectTypeOf(byMarket).toMatchTypeOf<ListOpenOrdersRequest>();
+    expectTypeOf(byAsset).toMatchTypeOf<ListOpenOrdersRequest>();
+    expectTypeOf(byToken).toMatchTypeOf<ListOpenOrdersRequest>();
+    void missingMarket;
+    void missingAliasMarket;
   });
 });
