@@ -60,7 +60,6 @@ export type OpenOrder = {
   outcome: string | null;
   orderType: string;
   status: string;
-  associateTrades: string[];
   createdAt: IsoDateTimeString;
   expiresAt?: IsoDateTimeString;
 };
@@ -68,7 +67,6 @@ export type OpenOrder = {
 export const OpenOrderSchema = z
   .object({
     asset_id: ClobAssetIdSchema,
-    associate_trades: z.array(z.string()),
     created_at: EpochLikeToIsoDateTimeStringSchema,
     expiration: OptionalEpochLikeToIsoDateTimeStringSchema,
     id: z.string(),
@@ -86,7 +84,6 @@ export const OpenOrderSchema = z
   .transform(
     ({
       asset_id,
-      associate_trades,
       created_at,
       expiration,
       maker_address,
@@ -101,7 +98,6 @@ export const OpenOrderSchema = z
         conditionId: market,
         assetId: asset_id,
         tokenId: asset_id,
-        associateTrades: associate_trades,
         createdAt: created_at,
         makerAddress: maker_address,
         orderType: order_type,
